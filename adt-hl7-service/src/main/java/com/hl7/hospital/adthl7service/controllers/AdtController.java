@@ -1,13 +1,12 @@
 package com.hl7.hospital.adthl7service.controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.hl7.hospital.adthl7service.events.EventProducer;
 
 @RestController
 @RequestMapping(path = "/adt")
@@ -21,6 +20,9 @@ public class AdtController {
 		HashMap<String,Object> supportedADTSMap = new HashMap<String, Object>();
 		supportedADTSMap.put("HL7-version" , "2.3");
 		supportedADTSMap.put("supported-adt", supported);
+		
+		EventProducer.getInstance().publishMessage("ADT-01", "Desde java te mando un mensaje");
+		
 		return supportedADTSMap;
 	}
 	
