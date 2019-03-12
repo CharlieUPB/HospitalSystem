@@ -1,4 +1,4 @@
-package utils;
+package com.hl7.hospital.adthl7service.utils;
 
 import java.io.IOException;
 
