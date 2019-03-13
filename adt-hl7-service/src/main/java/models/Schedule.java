@@ -1,31 +1,56 @@
 package models;
 
 import java.sql.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+
+@Entity(name="Schedule")
 public class Schedule {
 
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int cod;
 	
-	private int codPatient;
-	private int codDoctor;
+	@ManyToOne
+	@JoinColumn
+	private Patient codPatient;
+	
+	@ManyToOne
+	@JoinColumn
+	private MedicalStaff codDoctor;
 	private Date date;
 	private Date hour;
 
 	
-	public Schedule(int codPatient, int codDoctor, Date date, Date hour)
+	public Schedule(int cod, Patient codPatient, MedicalStaff codDoctor, Date date, Date hour)
 	{
+		this.cod = cod;
 		this.codPatient = codPatient;
 		this.codDoctor = codDoctor;
 		this.date = date;
 		this.hour = hour;
 	}
 	
+	public Schedule()
+	{
+		
+	}
 	
 	
-	public int getCodPatient()
+	public int getCod() 
+	{
+		return cod;
+	}
+	public Patient getCodPatient()
 	{
 		return this.codPatient;
 	}
-	public int getCodDoctor()
+	public MedicalStaff getCodDoctor()
 	{
 		return this.codDoctor;
 	}
@@ -40,11 +65,15 @@ public class Schedule {
 	
 	
 	
-	public void setCodPatient(int codPatient)
+	public void setCod(int cod) 
+	{
+		this.cod = cod;
+	}
+	public void setCodPatient(Patient codPatient)
 	{
 		this.codPatient = codPatient;
 	}
-	public void setCodDoctor(int codDoctor)
+	public void setCodDoctor(MedicalStaff codDoctor)
 	{
 		this.codDoctor = codDoctor;
 	}
@@ -56,4 +85,5 @@ public class Schedule {
 	{
 		this.hour = hour;
 	}
+
 }

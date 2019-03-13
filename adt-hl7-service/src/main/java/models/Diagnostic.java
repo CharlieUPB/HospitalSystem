@@ -1,29 +1,56 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+
+@Entity
 public class Diagnostic {
 	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int codDiagnostic;
 	
-	private int codPatient;
-	private int codDoctor;
+	@ManyToOne
+	@JoinColumn
+	private Patient patient;
+	
+	@ManyToOne
+	@JoinColumn
+	private MedicalStaff doctor;
 	private String description;
 
 	
-	public Diagnostic(int codPatient, int codDoctor, String description)
+	public Diagnostic(int codDiagnostic, Patient patient, MedicalStaff doctor, String description)
 	{
-		this.codPatient = codPatient;
-		this.codDoctor = codDoctor;
+		this.codDiagnostic =codDiagnostic;
+		this.setPatient(patient);
+		this.setDoctor(doctor);
 		this.description = description;
 	}
 	
-	
-	
-	public int getCodPatient()
+	public Diagnostic()
 	{
-		return this.codPatient;
+		
 	}
-	public int getCodDoctor()
+	
+	
+	public int getCodDiagnostic()
 	{
-		return this.codDoctor;
+		return this.codDiagnostic;
+	}
+	public Patient getPatient() 
+	{
+		return patient;
+	}
+	public MedicalStaff getDoctor() 
+	{
+		return doctor;
 	}
 	public String getDescription()
 	{
@@ -32,17 +59,23 @@ public class Diagnostic {
 	
 	
 	
-	public void setCodPatient(int codPatient)
+	public void setCodDiagnostic(int codDiagnostic)
 	{
-		this.codPatient = codPatient;
+		this.codDiagnostic = codDiagnostic;
 	}
-	public void setCodDoctor(int codDoctor)
+	public void setPatient(Patient patient) 
 	{
-		this.codDoctor = codDoctor;
+		this.patient = patient;
+	}
+	public void setDoctor(MedicalStaff doctor) 
+	{
+		this.doctor = doctor;
 	}
 	public void setDescription(String description)
 	{
 		this.description = description;
 	}
+
+
 
 }

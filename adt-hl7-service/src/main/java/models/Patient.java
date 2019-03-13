@@ -1,9 +1,24 @@
 package models;
 
 import java.sql.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+
+@Entity(name="Patient")
 public class Patient {
 
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cod;
 	private String name;
 	private String lastName;
@@ -16,10 +31,19 @@ public class Patient {
 	private String maritalStatus;
 	private String nationality;
 	private String city;
-	private int codSecure;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+	private HealthInsurance codSecure;
+	
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private Set<Diagnostic> diagnostics;
+	
+	@OneToMany(mappedBy = "codPatient", cascade = CascadeType.ALL)
+    private Set<Schedule> schedule;
 	
 	
-	public Patient(int cod, String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, int codSecure)
+	public Patient(int cod, String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure)
 	{
 		this.cod = cod;
 		this.name = name;
@@ -36,6 +60,10 @@ public class Patient {
 		this.codSecure = codSecure;
 	}
 	
+	public Patient()
+	{
+		
+	}
 	
 	
 	public int getCod()
@@ -86,7 +114,7 @@ public class Patient {
 	{
 		return this.city;
 	}
-	public int getCodSecure()
+	public HealthInsurance getCodSecure()
 	{
 		return this.codSecure;
 	}
@@ -140,7 +168,7 @@ public class Patient {
 	{
 		this.city = city;
 	}
-	public void setCOdSecure(int codSecure)
+	public void setCOdSecure(HealthInsurance codSecure)
 	{
 		this.codSecure = codSecure;
 	}

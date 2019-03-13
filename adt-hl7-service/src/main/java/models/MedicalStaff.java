@@ -1,14 +1,33 @@
 package models;
 
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+@Entity(name="MedicalStaff")
 public class MedicalStaff {
 	
-	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cod;
 	private String name;
 	private String lastName;
 	private int gender;
 	private String speciality;
 
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private Set<Diagnostic> diagnostics;
+	
+	@OneToMany(mappedBy = "codDoctor", cascade = CascadeType.ALL)
+    private Set<Schedule> schedule;
+	
 	
 	public MedicalStaff(int cod, String name, String lastName, int gender, String speciality)
 	{
@@ -17,6 +36,11 @@ public class MedicalStaff {
 		this.lastName = lastName;
 		this.gender = gender;
 		this.speciality = speciality;
+	}
+	
+	public MedicalStaff()
+	{
+		
 	}
 	
 	
