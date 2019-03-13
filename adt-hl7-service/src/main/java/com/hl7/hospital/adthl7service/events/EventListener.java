@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageListener implements Runnable{
+public class EventListener implements Runnable{
 
 	@Autowired
 	EventConsumer consumer;

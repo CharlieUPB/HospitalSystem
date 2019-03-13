@@ -1,12 +1,12 @@
-package services;
+package com.hl7.hospital.adthl7service.services;
 
 
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import models.HealthInsurance;
-import models.HealthInsuranceRepository;
+import com.hl7.hospital.adthl7service.models.HealthInsurance;
+import com.hl7.hospital.adthl7service.repositories.HealthInsuranceRepository;
 
 public class HealthInsuranceService {
 

@@ -1,11 +1,11 @@
-package services;
+package com.hl7.hospital.adthl7service.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import models.Diagnostic;
-import models.DiagnosticRepository;
-import models.MedicalStaff;
-import models.Patient;
+import com.hl7.hospital.adthl7service.models.Diagnostic;
+import com.hl7.hospital.adthl7service.models.MedicalStaff;
+import com.hl7.hospital.adthl7service.models.Patient;
+import com.hl7.hospital.adthl7service.repositories.DiagnosticRepository;
 
 public class DiagnosticService {
 	
