@@ -12,6 +12,7 @@ import ca.uhn.hl7v2.model.v24.group.ORM_O01_INSURANCE;
 import ca.uhn.hl7v2.model.v24.group.ORM_O01_OBSERVATION;
 import ca.uhn.hl7v2.model.v24.group.ORU_R01_OBSERVATION;
 import ca.uhn.hl7v2.model.v24.group.ORU_R01_ORDER_OBSERVATION;
+import ca.uhn.hl7v2.model.v24.group.RDE_O11_INSURANCE;
 import ca.uhn.hl7v2.model.v24.message.ACK;
 import ca.uhn.hl7v2.model.v24.message.ADT_A01;
 import ca.uhn.hl7v2.model.v24.message.ADT_A02;
@@ -19,6 +20,7 @@ import ca.uhn.hl7v2.model.v24.message.ADT_A03;
 import ca.uhn.hl7v2.model.v24.message.ADT_A05;
 import ca.uhn.hl7v2.model.v24.message.ORM_O01;
 import ca.uhn.hl7v2.model.v24.message.ORU_R01;
+import ca.uhn.hl7v2.model.v24.message.RDE_O11;
 import ca.uhn.hl7v2.model.v24.segment.MSH;
 import ca.uhn.hl7v2.model.v24.segment.OBR;
 import ca.uhn.hl7v2.model.v24.segment.OBX;
@@ -37,14 +39,14 @@ public String CreateADT_A01(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -94,14 +96,14 @@ public String CreateADT_A02(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -145,14 +147,14 @@ public String CreateADT_A03(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -197,14 +199,14 @@ public String CreateADT_A04(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -254,14 +256,14 @@ public String CreateADT_A05(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -305,14 +307,14 @@ public String CreateADT_A08(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -356,14 +358,14 @@ public String CreateADT_A11(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -407,14 +409,14 @@ public String CreateADT_A12(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -458,14 +460,14 @@ public String CreateADT_A13(String MSHmessageName, String MSHsequenceNumber, Str
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -510,14 +512,14 @@ public String CreateORU(String MSHmessageName, String MSHsequenceNumber, String 
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT_RESULT(0).getPATIENT().getPID();
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -558,14 +560,14 @@ public String CreateADT_ORM01(String MSHmessageName, String MSHsequenceNumber, S
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
-	          mshSegment.getSendingApplication().getNamespaceID().setValue("TestSendingSystem");
-	          mshSegment.getSequenceNumber().setValue("123");
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
 	          pid.getSetIDPID().setValue(PIDcodPatient);
-	          pid.getPatientName(0).getFamilyName().getSurname().setValue("Doe");
-	          pid.getPatientName(0).getGivenName().setValue("John");
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
 	          pid.getAdministrativeSex().setValue(PIDGender);
 	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
@@ -578,6 +580,55 @@ public String CreateADT_ORM01(String MSHmessageName, String MSHsequenceNumber, S
 	          
 	          
 	          ORM_O01_INSURANCE  in = adt.getPATIENT().getINSURANCE(0);
+	          in.getIN1().getSetIDIN1().setValue(codSecure);
+	          in.getIN1().getInsuranceCompanyName(0).getOrganizationName().setValue(nameOrganization);
+	          in.getIN1().getPlanExpirationDate().setValue(vecDate);
+	          
+	          TX tx = new TX(adt);
+	                  tx.setValue(diagnostic);
+	          ORC orc = adt.getORDER(0).getORC();
+	          orc.getOrderControl().setValue(ORCOrderControl);
+	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
+	          
+
+	          HapiContext context = new DefaultHapiContext();
+	          Parser parser = context.getPipeParser();
+	          String encodedMessage = parser.encode(adt);
+	          System.out.println("Printing ER7 Encoded Message:");
+	          System.out.println(encodedMessage);
+	
+	return encodedMessage;
+	
+	}
+
+public String CreateRDE_011(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic,
+		String ORCOrderControl, String ORCPlacerGroup) throws HL7Exception, IOException {
+	RDE_O11 adt = new RDE_O11();
+	          adt.initQuickstart("RDE", "011", "P");
+	          
+	          // Populate the MSH Segment
+	          MSH mshSegment = adt.getMSH();
+	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
+	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          
+	          // Populate the PID Segment
+	          PID pid = adt.getPATIENT().getPID();
+	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
+	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
+	          pid.getBirthOrder().setValue(birthDate);
+	          pid.getAdministrativeSex().setValue(PIDGender);
+	          pid.getPhoneNumberHome()[0].getPhoneNumber().setValue(phone);
+	          pid.getPhoneNumberBusiness()[0].getPhoneNumber().setValue(cellPhone);
+	          pid.getPatientAddress()[0].getStreetAddress().getStreetName().setValue(address);
+	          pid.getPatientDeathIndicator().setValue(deceased);
+	          pid.getMaritalStatus().getText().setValue(maritalStatus);
+	          pid.getNationality().getText().setValue(nationality);
+	          pid.getCitizenship(0).getText().setValue(city);
+	          
+	          
+	          RDE_O11_INSURANCE  in = adt.getPATIENT().getINSURANCE(0);
 	          in.getIN1().getSetIDIN1().setValue(codSecure);
 	          in.getIN1().getInsuranceCompanyName(0).getOrganizationName().setValue(nameOrganization);
 	          in.getIN1().getPlanExpirationDate().setValue(vecDate);
