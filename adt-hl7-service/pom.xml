@@ -69,9 +69,8 @@
 		<!-- Json manipulation in java library -->
 		
 		<dependency>
-    		<groupId>org.json</groupId>
-    		<artifactId>json</artifactId>
-    		<version>20180813</version>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
 		</dependency>
 		
 		<!-- HL7 protocol for java library -->

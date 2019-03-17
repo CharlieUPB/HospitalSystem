@@ -7,9 +7,14 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.google.gson.Gson;
+import com.hl7.hospital.adthl7service.models.Message;
+import com.hl7.hospital.adthl7service.utils.Create;
 
 @Component
 public class EventConsumer implements MqttCallback {
@@ -41,6 +46,68 @@ public class EventConsumer implements MqttCallback {
 		System.out.println("Message Arrived Topic: " + topic + "  Message: " + new String(message.getPayload()));
 		System.out.println("***********************************************************************");
 		System.out.println();
+	}
+	
+	private void handleMessage(String topic, MqttMessage message) throws Exception {
+		
+		Create createUtil = new Create();
+		String payload = new String(message.getPayload());
+		Message msgRecieved = new Gson().fromJson(payload, Message.class);
+		Message msgResponse = new Message();
+		
+		String hl7Message = msgRecieved.getData();
+		String guid = msgRecieved.getGUID();
+		String acknowledgment = createUtil.CreateACK();
+				
+		switch (topic) {
+		
+		case "ADT-A01":
+			//this.serviceadt.handleADT-A01(hl7Message);
+			
+			response.setGUID(guid);
+			response.setData(acknowledgment);
+			break;
+
+		case "ADT-A02":
+			
+			break;
+
+		case "ADT-A03":
+			
+			break;
+
+		case "ADT-A04":
+			
+			break;
+
+		case "ADT-A05":
+			
+			break;
+
+		case "ADT-A08":
+			
+			break;
+
+		case "ADT-A10":
+			
+			break;
+
+		case "ADT-A11":
+			
+			break;
+
+		case "ADT-A12":
+			
+			break;
+		case "ADT-A13":
+			
+			break;	
+
+		default:
+			
+			break;
+		}
+		
 	}
 
 	

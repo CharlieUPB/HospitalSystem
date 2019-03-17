@@ -2,6 +2,8 @@ package com.hl7.hospital.adthl7service.utils;
 
 import java.io.IOException;
 
+import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
+
 import ca.uhn.hl7v2.DefaultHapiContext;
  import ca.uhn.hl7v2.HL7Exception;
  import ca.uhn.hl7v2.HapiContext;
@@ -21,6 +23,7 @@ import ca.uhn.hl7v2.model.v24.message.ADT_A05;
 import ca.uhn.hl7v2.model.v24.message.ORM_O01;
 import ca.uhn.hl7v2.model.v24.message.ORU_R01;
 import ca.uhn.hl7v2.model.v24.message.RDE_O11;
+import ca.uhn.hl7v2.model.v24.segment.MSA;
 import ca.uhn.hl7v2.model.v24.segment.MSH;
 import ca.uhn.hl7v2.model.v24.segment.OBR;
 import ca.uhn.hl7v2.model.v24.segment.OBX;
@@ -650,16 +653,24 @@ public String CreateRDE_011(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-	public String CreateACK () throws HL7Exception, IOException {
+	//acknowledgeCode should be
+	// AA Application Accept
+	// AE Application Error
+	// AR Appilcation Reject
+
+	public String CreateACK (String acknowledgeCode) throws HL7Exception, IOException {
 		ACK ack = new ACK();
 		ack.initQuickstart("ACK", "ACK", "P");
 		MSH mshSegment = ack.getMSH();
 		mshSegment.getSecurity().setValue("ACK");
+		
+		MSA msaSegmentMsa = ack.getMSA();
+		msaSegmentMsa.getAcknowledgementCode().setValue(acknowledgeCode);
+		
 		HapiContext context = new DefaultHapiContext();
         Parser parser = context.getPipeParser();
         String encodedMessage = parser.encode(ack);
 		return encodedMessage;
-		
 	}
 }
 
