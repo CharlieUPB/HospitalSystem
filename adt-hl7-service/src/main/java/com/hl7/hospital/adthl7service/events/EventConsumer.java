@@ -1,7 +1,5 @@
 package com.hl7.hospital.adthl7service.events;
 
-import java.util.concurrent.ExecutionException;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -17,8 +15,7 @@ import com.google.gson.Gson;
 import com.hl7.hospital.adthl7service.models.Message;
 import com.hl7.hospital.adthl7service.utils.Create;
 import com.hl7.hospital.adthl7service.utils.Parse;
-
-import net.bytebuddy.asm.Advice.This;
+import com.hl7.hospital.adthl7service.services.ADTServices;
 
 import com.hl7.hospital.adthl7service.events.EventProducer;
 
@@ -35,6 +32,7 @@ public class EventConsumer implements MqttCallback {
 	
 	private Create createUtil = null;
 	private Parse parseUtil = null;
+	private ADTServices adtServices = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 	
@@ -80,42 +78,39 @@ public class EventConsumer implements MqttCallback {
 		msgResponse.setMessageControlID(msgControlID); //Response to the same Message Control ID
 		msgResponse.setData(acknowledgment); //Response  with the ackowledgment
 		
-		this.handleMessage(topic, message); //Does all the database interaction necessary.
+		this.handleMessage(topic, hl7Message); //Does all the database interaction necessary.
 	
 		EventProducer.getInstance().publishMessage("ACK", msgResponse.toString());
 	}
 	
-	private void handleMessage(String topic, MqttMessage message) throws Exception {
+	private void handleMessage(String topic, String message) throws Exception {
 		switch (topic) {
 		case "ADT-A01":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT01Handler(message);
 			break;
 		case "ADT-A02":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT02Handler(message);
 			break;
 		case "ADT-A03":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT03Handler(message);
 			break;
 		case "ADT-A04":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT04Handler(message);
 			break;
 		case "ADT-A05":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT05Handler(message);
 			break;
 		case "ADT-A08":
-			//this.serviceadt.handleADT-A01(hl7Message);
-			break;
-		case "ADT-A10":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT08Handler(message);
 			break;
 		case "ADT-A11":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT11Handler(message);
 			break;
 		case "ADT-A12":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT12Handler(message);
 			break;
 		case "ADT-A13":
-			//this.serviceadt.handleADT-A01(hl7Message);
+			this.adtServices.ADT13Handler(message);
 			break;	
 		default:
 			break;
@@ -127,6 +122,7 @@ public class EventConsumer implements MqttCallback {
 		
 		this.createUtil = new Create();
 		this.parseUtil = new Parse();
+		this.adtServices = new ADTServices();
 		
 		this.connectionOptions = new MqttConnectOptions();
 		this.persistence = new MemoryPersistence();

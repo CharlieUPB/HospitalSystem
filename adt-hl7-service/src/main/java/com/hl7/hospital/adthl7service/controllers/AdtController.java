@@ -36,7 +36,6 @@ public class AdtController {
 			value = "/a01" ,
 			method = RequestMethod.POST)
 	public @ResponseBody Message ADTA01Controller(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
-		System.out.println(genericMessage);
 		Message response = null;
 		Create create = new Create();
 		if (genericMessage.getEvn().equals("ADT-A01")) {
