@@ -4,6 +4,7 @@ public class Message {
 
 	private String Data;
 	private String MessageControlID;
+	private static final String HL7VERSION = "2.4";
 	
 	public Message() {
 		
