@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class In1Model {
 	
-	@JsonProperty(value = "In1ID")
+	@JsonProperty(value = "ID")
 	private String in1ID;
-	@JsonProperty(value = "insuranceCompanyName")
+	@JsonProperty(value = "insuranceCompName")
 	private String insuranceCompanyName;
-	@JsonProperty(value = "insuranceExpirationDate")
+	@JsonProperty(value = "insuranceExpDate")
 	private String insuranceExpirationDate;
 	
 	public String getIn1ID() {

@@ -1,9 +1,16 @@
 package com.hl7.hospital.adthl7service.models.adt;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class OrcModel {
+	
+	@JsonProperty(value = "ID")
 	private String orcID;
+	@JsonProperty(value = "diagnostic")
 	private String diagnostic;
+	@JsonProperty(value = "orcOrderControl")
 	private String orcOrderControl;
+	@JsonProperty(value = "placerGroupNumber")
 	private String palcerGroupNumber;
 	
 	public String getOrcID() {

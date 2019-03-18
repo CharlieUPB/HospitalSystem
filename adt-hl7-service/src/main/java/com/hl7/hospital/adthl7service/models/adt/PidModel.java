@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PidModel {
 	
 	//All this attributes belongs to patient
-	@JsonProperty(value = "idPID")
+	@JsonProperty(value = "ID")
 	private String idPID;
 	@JsonProperty(value = "surName")
 	private String surName; //Apellido

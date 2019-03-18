@@ -1,9 +1,16 @@
 package com.hl7.hospital.adthl7service.models.adt;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Pv1Model {
+	
+	@JsonProperty(value = "ID")
 	private String pv1ID;
+	@JsonProperty(value = "attendingDoctorName")
 	private String attendingDoctorName;
+	@JsonProperty(value = "attendingDoctorLastName")
 	private String attendingDoctorLastName;
+	
 	public String getPv1ID() {
 		return pv1ID;
 	}
