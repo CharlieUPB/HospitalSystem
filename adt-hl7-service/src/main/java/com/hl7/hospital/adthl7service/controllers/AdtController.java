@@ -33,9 +33,10 @@ public class AdtController {
 	}
 	
 	@RequestMapping(
-			value = "/a01" , 
+			value = "/a01" ,
 			method = RequestMethod.POST)
 	public @ResponseBody Message ADTA01Controller(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
+		System.out.println(genericMessage);
 		Message response = null;
 		Create create = new Create();
 		if (genericMessage.getEvn().equals("ADT-A01")) {
@@ -43,8 +44,15 @@ public class AdtController {
 		String data =create.CreateADT_A01(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
 					genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 					genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
-					genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-					genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+					genericMessage.getPidModel().getNationality(),
+					genericMessage.getPidModel().getCity(),
+					genericMessage.getIn1Model().getIn1ID(),
+					genericMessage.getIn1Model().getInsuranceCompanyName(),
+					genericMessage.getIn1Model().getInsuranceExpirationDate(), 
+					genericMessage.getObrModel().getObrID(),
+					genericMessage.getObrModel().getEntityIdentifier(),
+					genericMessage.getObrModel().getNameSpaceID(),
+					genericMessage.getObrModel().getDiagnostic()).toString();
 		response.setData(data);
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		}

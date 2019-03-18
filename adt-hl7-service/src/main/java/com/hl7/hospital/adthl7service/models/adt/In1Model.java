@@ -1,9 +1,16 @@
 package com.hl7.hospital.adthl7service.models.adt;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class In1Model {
+	
+	@JsonProperty(value = "In1ID")
 	private String in1ID;
+	@JsonProperty(value = "insuranceCompanyName")
 	private String insuranceCompanyName;
+	@JsonProperty(value = "insuranceExpirationDate")
 	private String insuranceExpirationDate;
+	
 	public String getIn1ID() {
 		return in1ID;
 	}
