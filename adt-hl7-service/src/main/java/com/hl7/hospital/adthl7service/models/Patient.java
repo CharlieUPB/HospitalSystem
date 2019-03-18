@@ -168,7 +168,7 @@ public class Patient {
 	{
 		this.city = city;
 	}
-	public void setCOdSecure(HealthInsurance codSecure)
+	public void setCodSecure(HealthInsurance codSecure)
 	{
 		this.codSecure = codSecure;
 	}
