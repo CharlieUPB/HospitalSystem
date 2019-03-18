@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MshModel {
 	@JsonProperty(value = "sendingApplication")
 	private String sendinAplication;
-	@JsonProperty(value = "mshControlGUID")
+	@JsonProperty(value = "mshControlID")
 	private String mshControlID;
 	
 	

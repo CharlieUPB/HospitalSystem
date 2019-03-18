@@ -7,7 +7,7 @@ public class PidModel {
 	//All this attributes belongs to patient
 	@JsonProperty(value = "ID")
 	private String idPID;
-	@JsonProperty(value = "surName")
+	@JsonProperty(value = "lastName")
 	private String surName; //Apellido
 	@JsonProperty(value = "name")
 	private String name;
