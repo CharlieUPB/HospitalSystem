@@ -14,6 +14,8 @@ import ca.uhn.hl7v2.HapiContext;
   import ca.uhn.hl7v2.parser.GenericModelClassFactory;
   import ca.uhn.hl7v2.parser.PipeParser;
   import ca.uhn.hl7v2.util.Terser;
+import ca.uhn.hl7v2.validation.ValidationContext;
+import ca.uhn.hl7v2.validation.impl.ValidationContextFactory;
 
 
 public class Parse {
@@ -254,7 +256,21 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  	    map.put("diagnostic", diagnostic);
  	    System.out.println(map.toString());
 	    return map;
-	}	
+	}
+
+	public boolean isHL7SyntaxValid(String hl7Message) {
+        HapiContext context = new DefaultHapiContext();
+        context.setValidationContext((ValidationContext)ValidationContextFactory.defaultValidation());
+        try {
+            PipeParser parser = context.getPipeParser();
+            parser.parse(hl7Message);
+            System.out.println("Validation SUCCESSFULL during parsing:");
+            return true;
+        } catch (HL7Exception e) {
+            System.out.println("Validation FAILED during parsing:" + e.getMessage());
+            return false;
+        }
+	}
 	
 
 }

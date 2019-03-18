@@ -12,15 +12,15 @@ public class EventListener implements Runnable{
 	@Override
 	public void run() {
 		while(true) {
-			consumer.subscribeMessage("ADT-01");
-			consumer.subscribeMessage("ADT-02");
-			consumer.subscribeMessage("ADT-03");
-			consumer.subscribeMessage("ADT-04");
-			consumer.subscribeMessage("ADT-05");
-			consumer.subscribeMessage("ADT-08");
-			consumer.subscribeMessage("ADT-11");
-			consumer.subscribeMessage("ADT-12");
-			consumer.subscribeMessage("ADT-13");
+			consumer.subscribeMessage("ADT-A01");
+			consumer.subscribeMessage("ADT-A02");
+			consumer.subscribeMessage("ADT-A03");
+			consumer.subscribeMessage("ADT-A04");
+			consumer.subscribeMessage("ADT-A05");
+			consumer.subscribeMessage("ADT-A08");
+			consumer.subscribeMessage("ADT-A11");
+			consumer.subscribeMessage("ADT-A12");
+			consumer.subscribeMessage("ADT-A13");
 		}
 		
 	}
