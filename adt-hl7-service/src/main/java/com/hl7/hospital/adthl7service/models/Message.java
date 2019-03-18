@@ -3,7 +3,7 @@ package com.hl7.hospital.adthl7service.models;
 public class Message {
 
 	private String Data;
-	private String GUID;
+	private String MessageControlID;
 	
 	public Message() {
 		
@@ -17,12 +17,12 @@ public class Message {
 		Data = data;
 	}
 
-	public String getGUID() {
-		return GUID;
+	public String getMessageControlID() {
+		return MessageControlID;
 	}
 
-	public void setGUID(String gUID) {
-		GUID = gUID;
+	public void setMessageControlID(String gUID) {
+		MessageControlID = gUID;
 	}
 	
 	
