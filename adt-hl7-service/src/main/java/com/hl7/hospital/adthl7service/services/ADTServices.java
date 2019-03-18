@@ -20,7 +20,7 @@ public class ADTServices {
 		MedicalStaff medical = new MedicalStaff();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -47,7 +47,7 @@ public class ADTServices {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -66,7 +66,7 @@ public class ADTServices {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -87,7 +87,7 @@ public class ADTServices {
 		MedicalStaff medical = new MedicalStaff();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -115,7 +115,7 @@ public class ADTServices {
 		MedicalStaff medical = new MedicalStaff();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -138,7 +138,7 @@ public class ADTServices {
 	}
 	
 	public void ADT08Handler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK();
+		
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
@@ -171,7 +171,7 @@ public class ADTServices {
 		MedicalStaff medical = new MedicalStaff();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -197,7 +197,7 @@ public class ADTServices {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -216,7 +216,7 @@ public class ADTServices {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		String ack = create.CreateACK();
+		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
@@ -231,15 +231,15 @@ public class ADTServices {
 		//insertamos en la base de datos, los datos del paciente
 	}
 	public void RDEHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK();
+		String ack = create.CreateACK("","");
 	}
 	
 	public void ORMHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK();
+		String ack = create.CreateACK("","");
 	}
 	
 	public void OMLHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK();
+		String ack = create.CreateACK("","");
 	}
 
 }
