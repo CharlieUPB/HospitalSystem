@@ -21,6 +21,9 @@ public class EventListener implements Runnable{
 			consumer.subscribeMessage("ADT-A11");
 			consumer.subscribeMessage("ADT-A12");
 			consumer.subscribeMessage("ADT-A13");
+			consumer.subscribeMessage("OML-O21");
+			consumer.subscribeMessage("ORM-O01");
+			consumer.subscribeMessage("RDE-O11");
 		}
 		
 	}
