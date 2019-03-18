@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hl7.hospital.adthl7service.errors.BadRequestError;
 import com.hl7.hospital.adthl7service.models.Message;
 import com.hl7.hospital.adthl7service.models.adt.GenericMessage;
 import com.hl7.hospital.adthl7service.utils.Create;
@@ -35,10 +36,9 @@ public class OrmController {
 			value = "/orm-o01",
 			method = RequestMethod.POST)
 	public @ResponseBody Message ORMController(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
-		Message response = null;
 		Create create = new Create();
 		if (genericMessage.getEvn().equals("ORM-O01")) {
-			response = new Message();
+			Message response = new Message();
 		String data =create.CreateADT_ORM01(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
 				genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 				genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), 
@@ -49,8 +49,11 @@ public class OrmController {
 				genericMessage.getObrModel().getDiagnostic(), genericMessage.getOrcModel().getOrcOrderControl(), genericMessage.getOrcModel().getPalcerGroupNumber()).toString();
 		response.setData(data);
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
-		}
 		return response;
+		} else {
+			throw new BadRequestError();
+		}
+		
 	}
 	
 }
