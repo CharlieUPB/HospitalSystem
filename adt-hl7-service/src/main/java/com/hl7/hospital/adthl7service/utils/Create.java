@@ -2,6 +2,8 @@ package com.hl7.hospital.adthl7service.utils;
 
 import java.io.IOException;
 
+import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
+
 import ca.uhn.hl7v2.DefaultHapiContext;
  import ca.uhn.hl7v2.HL7Exception;
  import ca.uhn.hl7v2.HapiContext;
@@ -21,6 +23,7 @@ import ca.uhn.hl7v2.model.v24.message.ADT_A05;
 import ca.uhn.hl7v2.model.v24.message.ORM_O01;
 import ca.uhn.hl7v2.model.v24.message.ORU_R01;
 import ca.uhn.hl7v2.model.v24.message.RDE_O11;
+import ca.uhn.hl7v2.model.v24.segment.MSA;
 import ca.uhn.hl7v2.model.v24.segment.MSH;
 import ca.uhn.hl7v2.model.v24.segment.OBR;
 import ca.uhn.hl7v2.model.v24.segment.OBX;
@@ -32,7 +35,7 @@ import ca.uhn.hl7v2.parser.Parser;
 public class Create {
 	
 
-public String CreateADT_A01(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A01(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
@@ -40,7 +43,7 @@ public String CreateADT_A01(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -89,7 +92,7 @@ public String CreateADT_A01(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A02(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A02(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A02 adt = new ADT_A02();
 	          adt.initQuickstart("ADT", "A02", "P");
@@ -97,7 +100,7 @@ public String CreateADT_A02(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -140,7 +143,7 @@ public String CreateADT_A02(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A03(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A03(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 			  ADT_A03 adt = new ADT_A03();
 	          adt.initQuickstart("ADT", "A03", "P");
@@ -148,7 +151,7 @@ public String CreateADT_A03(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -192,7 +195,7 @@ public String CreateADT_A03(String MSHmessageName, String MSHsequenceNumber, Str
 	}
 
 
-public String CreateADT_A04(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A04(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
@@ -200,7 +203,7 @@ public String CreateADT_A04(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -249,7 +252,7 @@ public String CreateADT_A04(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A05(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A05(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
@@ -257,7 +260,7 @@ public String CreateADT_A05(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -300,7 +303,7 @@ public String CreateADT_A05(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A08(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A08(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
@@ -308,7 +311,7 @@ public String CreateADT_A08(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -351,7 +354,7 @@ public String CreateADT_A08(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A11(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A11(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
@@ -359,7 +362,7 @@ public String CreateADT_A11(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -402,7 +405,7 @@ public String CreateADT_A11(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A12(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A12(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
@@ -410,7 +413,7 @@ public String CreateADT_A12(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -453,7 +456,7 @@ public String CreateADT_A12(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateADT_A13(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_A13(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
@@ -461,7 +464,7 @@ public String CreateADT_A13(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -504,7 +507,7 @@ public String CreateADT_A13(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-public String CreateORU(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateORU(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic,
 		String ORCOrderControl, String ORCPlacerGroup) throws HL7Exception, IOException {
 	ORU_R01 adt = new ORU_R01();
@@ -513,7 +516,7 @@ public String CreateORU(String MSHmessageName, String MSHsequenceNumber, String 
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT_RESULT(0).getPATIENT().getPID();
@@ -552,7 +555,7 @@ public String CreateORU(String MSHmessageName, String MSHsequenceNumber, String 
 	
 	}
 
-public String CreateADT_ORM01(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateADT_ORM01(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic,
 		String ORCOrderControl, String ORCPlacerGroup) throws HL7Exception, IOException {
 	ORM_O01 adt = new ORM_O01();
@@ -561,7 +564,7 @@ public String CreateADT_ORM01(String MSHmessageName, String MSHsequenceNumber, S
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
@@ -601,7 +604,7 @@ public String CreateADT_ORM01(String MSHmessageName, String MSHsequenceNumber, S
 	
 	}
 
-public String CreateRDE_011(String MSHmessageName, String MSHsequenceNumber, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
+public String CreateRDE_011(String MSHmessageName, String MSHControlID, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic,
 		String ORCOrderControl, String ORCPlacerGroup) throws HL7Exception, IOException {
 	RDE_O11 adt = new RDE_O11();
@@ -610,7 +613,7 @@ public String CreateRDE_011(String MSHmessageName, String MSHsequenceNumber, Str
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(MSHmessageName);
-	          mshSegment.getSequenceNumber().setValue(MSHsequenceNumber);
+	          mshSegment.getMessageControlID().setValue(MSHControlID);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
@@ -650,16 +653,25 @@ public String CreateRDE_011(String MSHmessageName, String MSHsequenceNumber, Str
 	
 	}
 
-	public String CreateACK () throws HL7Exception, IOException {
+	//acknowledgeCode should be
+	// AA Application Accept
+	// AE Application Error
+	// AR Appilcation Reject
+
+	public String CreateACK (String MSHControlID, String acknowledgeCode) throws HL7Exception, IOException {
 		ACK ack = new ACK();
 		ack.initQuickstart("ACK", "ACK", "P");
 		MSH mshSegment = ack.getMSH();
 		mshSegment.getSecurity().setValue("ACK");
+		mshSegment.getMessageControlID().setValue(MSHControlID);
+		
+		MSA msaSegmentMsa = ack.getMSA();
+		msaSegmentMsa.getAcknowledgementCode().setValue(acknowledgeCode);
+		
 		HapiContext context = new DefaultHapiContext();
         Parser parser = context.getPipeParser();
         String encodedMessage = parser.encode(ack);
 		return encodedMessage;
-		
 	}
 }
 
