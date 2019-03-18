@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hl7.hospital.adthl7service.events.EventProducer;
+import com.hl7.hospital.adthl7service.models.adt.GenericMessage;
 
 @RestController
 @RequestMapping(path = "/adt")
@@ -90,5 +91,9 @@ public class AdtController {
 			method = RequestMethod.POST)
 	public String createA13() {
 		return "Preparing to parse a13";
+	}
+	
+	public String ADTA01Controller(@RequestBody GenericMessage genericMessage) {
+		return "";
 	}
 }

@@ -36,7 +36,7 @@ public class Parse {
 		
 	}
 	
-	public Map<String, Object> ADT(String msg) throws HL7Exception {
+	public HashMap<String, Object> ADT(String msg) throws HL7Exception {
 		
 		HapiContext context = new DefaultHapiContext();
         context.setModelClassFactory(new GenericModelClassFactory());
