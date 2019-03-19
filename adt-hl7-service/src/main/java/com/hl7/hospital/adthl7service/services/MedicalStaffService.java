@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.MedicalStaff;
 import com.hl7.hospital.adthl7service.repositories.MedicalStaffRepository;
 
@@ -15,7 +16,7 @@ public class MedicalStaffService {
 	private MedicalStaffRepository medicalStaffRepository;
 
 	
-	public String addNewMedicalStaff (String name, String lastName, int gender, String speciality) 
+	public String createNewMedicalStaff (String name, String lastName, int gender, String speciality) 
 	{
 		MedicalStaff medicalStaff = new MedicalStaff();
 		
@@ -24,6 +25,14 @@ public class MedicalStaffService {
 		medicalStaff.setGender(gender);
 		medicalStaff.setSpeciality(speciality);
 		medicalStaffRepository.save(medicalStaff);
+		
+		return "Saved";
+	}
+	
+	
+	public String addNewMedicalStaff(MedicalStaff medicalStaffCreatedCreated)
+	{
+		medicalStaffRepository.save(medicalStaffCreatedCreated);
 		
 		return "Saved";
 	}

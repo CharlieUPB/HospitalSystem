@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.HealthInsurance;
 import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.repositories.PatientRepository;
@@ -17,7 +18,7 @@ public class PatientService {
 	private PatientRepository patientRepository;
 
 	
-	public String addNewPatient (String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure) 
+	public String createNewPatient (String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure) 
 	{
 		Patient patient = new Patient();
 		
@@ -38,9 +39,12 @@ public class PatientService {
 		return "Saved";
 	}
 	
-	public String addNewPatient(Patient patient) {
-		patientRepository.save(patient);
-		return "saved";
+	
+	public String addNewPatient(Patient patientCreated)
+	{
+		patientRepository.save(patientCreated);
+		
+		return "Saved";
 	}
 	
 	

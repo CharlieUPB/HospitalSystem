@@ -1,4 +1,5 @@
 package com.hl7.hospital.adthl7service.services;
+import java.awt.color.ICC_ColorSpace;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public class DiagnosticService {
 	private DiagnosticRepository diagnosticRepository;
 
 	
-	public String addNewDiagnostic (Patient codPatient, MedicalStaff codDoctor, String description) 
+	public String createNewDiagnostic (Patient codPatient, MedicalStaff codDoctor, String description) 
 	{
 		Diagnostic diagnostic = new Diagnostic();
 		
@@ -24,6 +25,14 @@ public class DiagnosticService {
 		diagnostic.setDoctor(codDoctor);
 		diagnostic.setDescription(description);
 		diagnosticRepository.save(diagnostic);
+		
+		return "Saved";
+	}
+	
+	
+	public String addNewDiagnostic(Diagnostic diagnosticCreated)
+	{
+		diagnosticRepository.save(diagnosticCreated);
 		
 		return "Saved";
 	}

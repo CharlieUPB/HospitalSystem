@@ -20,7 +20,7 @@ public class ScheduleService {
 	private ScheduleRepository scheduleRepository;
 
 	
-	public String addNewDiagnostic (Patient codPatient, MedicalStaff codDoctor, Date date, Date hour) 
+	public String createNewSchedule (Patient codPatient, MedicalStaff codDoctor, Date date, Date hour) 
 	{
 		Schedule schedule = new Schedule();
 		
@@ -29,6 +29,14 @@ public class ScheduleService {
 		schedule.setDate(date);
 		schedule.setHour(hour);
 		scheduleRepository.save(schedule);
+		
+		return "Saved";
+	}
+	
+	
+	public String addNewSchedule(Schedule scheduleCreated)
+	{
+		scheduleRepository.save(scheduleCreated);
 		
 		return "Saved";
 	}

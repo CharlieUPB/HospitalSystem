@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.HealthInsurance;
 import com.hl7.hospital.adthl7service.repositories.HealthInsuranceRepository;
 
@@ -17,13 +18,21 @@ public class HealthInsuranceService {
 	private HealthInsuranceRepository healthInsuranceRepository;
 
 	
-	public String addNewHealthInsurance (String nameOrganization, Date vecDate) 
+	public String createNewHealthInsurance (String nameOrganization, Date vecDate) 
 	{
 		HealthInsurance healthInsurance = new HealthInsurance();
 		
 		healthInsurance.setNameOrganization(nameOrganization);
 		healthInsurance.setVecDate(vecDate);
 		healthInsuranceRepository.save(healthInsurance);
+		
+		return "Saved";
+	}
+	
+	
+	public String addNewHealthInsurance(HealthInsurance healthInsuranceCreated)
+	{
+		healthInsuranceRepository.save(healthInsuranceCreated);
 		
 		return "Saved";
 	}
