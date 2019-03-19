@@ -24,8 +24,8 @@ public class Patient {
 	private String lastName;
 	private int gender;
 	private Date birthDate;
-	private int phone;
-	private int cellPhone;
+	private String phone;
+	private String cellPhone;
 	private String address;
 	private boolean deceased;
 	private String maritalStatus;
@@ -46,7 +46,7 @@ public class Patient {
     private Set<Schedule> schedule;
 	
 	
-	public Patient(int cod, String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure)
+	public Patient(int cod, String name, String lastName, int gender, Date birthDate, String phone, String cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure)
 	{
 		this.cod = cod;
 		this.name = name;
@@ -89,11 +89,11 @@ public class Patient {
 	{
 		return this.birthDate;
 	}
-	public int getPhone()
+	public String getPhone()
 	{
 		return this.phone;
 	}
-	public int getCellPhone()
+	public String getCellPhone()
 	{
 		return this.cellPhone;
 	}
@@ -143,11 +143,11 @@ public class Patient {
 	{
 		this.birthDate = birthDate;
 	}
-	public void setPhone(int phone)
+	public void setPhone(String phone)
 	{
 		this.phone = phone;
 	}
-	public void setCellPhone(int cellPhone)
+	public void setCellPhone(String cellPhone)
 	{
 		this.cellPhone = cellPhone;
 	}

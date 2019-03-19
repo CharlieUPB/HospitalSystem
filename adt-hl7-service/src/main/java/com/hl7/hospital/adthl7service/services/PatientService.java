@@ -18,7 +18,7 @@ public class PatientService {
 	private PatientRepository patientRepository;
 
 	
-	public String createNewPatient (String name, String lastName, int gender, Date birthDate, int phone, int cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure) 
+	public String createNewPatient (String name, String lastName, int gender, Date birthDate, String phone, String cellPhone, String address, boolean deceased, String maritalStatus, String nationality, String city, HealthInsurance codSecure) 
 	{
 		Patient patient = new Patient();
 		
