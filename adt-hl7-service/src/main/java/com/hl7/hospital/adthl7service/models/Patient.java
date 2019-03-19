@@ -36,6 +36,9 @@ public class Patient {
     @JoinColumn
 	private HealthInsurance codSecure;
 	
+	@OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
+	private Set<PatientHistory> patientHistorys;
+	
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private Set<Diagnostic> diagnostics;
 	

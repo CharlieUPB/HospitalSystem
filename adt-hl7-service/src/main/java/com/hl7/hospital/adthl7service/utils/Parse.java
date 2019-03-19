@@ -1,6 +1,7 @@
 package com.hl7.hospital.adthl7service.utils;
 
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -281,6 +282,18 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
             System.out.println("Validation FAILED during parsing:" + e.getMessage());
             return false;
         }
+	}
+	
+	public Date parseStringToDate(String date) {
+		String year = date.substring(0, 4);
+		String month = date.substring(4,6);
+		String day = date.substring(6, 8);
+		
+		String finalDate = year + "-" + month + "-" + day;
+		
+		Date sqlDate = java.sql.Date.valueOf(finalDate); //date should be like "2010-01-31"
+		
+		return sqlDate;
 	}
 	
 
