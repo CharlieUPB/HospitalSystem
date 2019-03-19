@@ -9,7 +9,8 @@ import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
   import ca.uhn.hl7v2.model.GenericMessage;
   import ca.uhn.hl7v2.model.Message;
-  import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
+import ca.uhn.hl7v2.model.v22.segment.MSH;
+import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
   import ca.uhn.hl7v2.parser.DefaultModelClassFactory;
   import ca.uhn.hl7v2.parser.GenericModelClassFactory;
   import ca.uhn.hl7v2.parser.PipeParser;
@@ -61,6 +62,9 @@ public class Parse {
         Terser t = new Terser(message);
         String name = t.get("/PID-5-2");
         String lastName = t.get("/PID-5-1");
+        
+        String mshControlID = t.get("/MSH-10");
+        
         int codPatient = Integer.parseInt(t.get("/PID-1"));
         int gender = 3;
         if (t.get("/PID-8").equals("F")) {
@@ -125,6 +129,7 @@ public class Parse {
  		
  	    HashMap<String, Object> map = new HashMap<>();
  	    HashMap<String, String> mapdir = new HashMap<>();
+ 	    map.put("mshControlID", mshControlID);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);
@@ -163,6 +168,8 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
 
         // The parser will always parse this as a "GenericMessage"
        GenericMessage message = (GenericMessage) context.getPipeParser().parse(msg);
+       
+       
         
         /* 
          * A generic message has a flat structure, so you can ask for any
@@ -171,6 +178,9 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
         Terser t = new Terser(message);
         String name = t.get("/PID-5-2");
         String lastName = t.get("/PID-5-1");
+        
+        String mshControlID = t.get("/MSH-10");
+        
         int codPatient = Integer.parseInt(t.get("/PID-1"));
         int gender = 3;
         if (t.get("/PID-8").equals("F")) {
@@ -235,6 +245,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  		
  	    HashMap<String, Object> map = new HashMap<>();
  	    HashMap<String, String> mapdir = new HashMap<>();
+ 	    map.put("mshControlID", mshControlID);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);

@@ -2,6 +2,7 @@ package com.hl7.hospital.adthl7service.services;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
 
 import ca.uhn.hl7v2.HL7Exception;
 
@@ -10,10 +11,15 @@ import com.hl7.hospital.adthl7service.models.MedicalStaff;
 import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.models.Schedule;
 import com.hl7.hospital.adthl7service.utils.*;
+import com.hl7.hospital.adthl7service.services.*;
 public class ADTServices {
 	
 	Parse parse = new Parse();
 	Create create = new Create();
+	PatientService pService = new PatientService();
+	HealthInsuranceService hService = new HealthInsuranceService();
+	ScheduleService scheduleService = new ScheduleService();
+	
 	public void ADT01Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
@@ -99,12 +105,17 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
+		
 		health.setCod((int)parsedmessage.get("codSecure"));
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
+		
+		patient.setCodSecure(health);
 		
 		medical.setCod((int)parsedmessage.get("codDoctor"));
 		medical.setName((String)parsedmessage.get("nameDoctor"));
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
+	
+		pService.addNewPatient(patient);
 		
 		//insertamos en la base de datos, los datos del paciente, del seguro y del medico
 	}
@@ -135,6 +146,8 @@ public class ADTServices {
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
 		
 		//insertamos en la base de datos, los datos y generamos un agendamiento		
+		
+//		scheduleService.addNewDiagnostic(patient, medical, date, hour)
 	}
 	
 	public void ADT08Handler (String message) throws HL7Exception, IOException {

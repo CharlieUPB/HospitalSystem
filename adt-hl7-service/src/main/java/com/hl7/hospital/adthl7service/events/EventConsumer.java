@@ -1,5 +1,7 @@
 package com.hl7.hospital.adthl7service.events;
 
+import java.util.HashMap;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.hl7.hospital.adthl7service.models.Message;
 import com.hl7.hospital.adthl7service.utils.Create;
 import com.hl7.hospital.adthl7service.utils.Parse;
@@ -59,14 +62,13 @@ public class EventConsumer implements MqttCallback {
 		this.processMessage(topic, message);
 	}
 	
-	private void processMessage(String topic, MqttMessage message) throws Exception {
+	private void processMessage(String topic, MqttMessage message) throws Exception  {
 		
-		String payload = new String(message.getPayload()); //get the message data is in json form
-		Message msgRecieved = new Gson().fromJson(payload, Message.class); //parse the json data to Message Class
-		Message msgResponse = new Message(); //Create new message class But for response
+		String hl7Message = new String(message.getPayload()); //get the message data is in json form
 		
-		String hl7Message = msgRecieved.getData(); //Get the hl7 data from the message
-		String msgControlID = msgRecieved.getMessageControlID(); //GEt the message control id from the message
+		HashMap<String, Object>  formatedHL7 = this.parseUtil.ADT(hl7Message);
+		
+		String msgControlID = (String) formatedHL7.get("mshControlID");//GEt the message control id from the message
 		String acknowledgment = "";
 		
 		if(this.parseUtil.isHL7SyntaxValid(hl7Message)) {
@@ -75,12 +77,9 @@ public class EventConsumer implements MqttCallback {
 			acknowledgment = this.createUtil.CreateACK(msgControlID,"AR"); //Create Application Reject ACK pasing the MessageControlID;
 		}
 
-		msgResponse.setMessageControlID(msgControlID); //Response to the same Message Control ID
-		msgResponse.setData(acknowledgment); //Response  with the ackowledgment
-		
 		this.handleMessage(topic, hl7Message); //Does all the database interaction necessary.
 	
-		EventProducer.getInstance().publishMessage("ACK", msgResponse.toString());
+		EventProducer.getInstance().publishMessage("ACK", acknowledgment);
 	}
 	
 	private void handleMessage(String topic, String message) throws Exception {

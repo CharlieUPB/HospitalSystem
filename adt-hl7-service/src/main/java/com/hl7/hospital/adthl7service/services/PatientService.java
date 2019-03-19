@@ -38,6 +38,11 @@ public class PatientService {
 		return "Saved";
 	}
 	
+	public String addNewPatient(Patient patient) {
+		patientRepository.save(patient);
+		return "saved";
+	}
+	
 	
 	public Iterable<Patient> getAllPatients()
 	{
