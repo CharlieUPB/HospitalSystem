@@ -181,6 +181,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-2");
         
         int codPatient = Integer.parseInt(t.get("/PID-1"));
         int gender = 3;
@@ -247,6 +248,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  	    HashMap<String, Object> map = new HashMap<>();
  	    HashMap<String, String> mapdir = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);
