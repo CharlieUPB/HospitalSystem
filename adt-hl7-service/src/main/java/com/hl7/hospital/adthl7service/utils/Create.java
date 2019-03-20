@@ -645,6 +645,11 @@ public String CreateRDE_011(String MSHmessageName, String MSHControlID, String P
 	          orc.getOrderControl().setValue(ORCOrderControl);
 	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
 	          
+	          adt.getORDER().getORDER_DETAIL().getRXO().getRequestedGiveUnits().getCe1_Identifier().setValue("Paracetamol");
+	          adt.getORDER().getORDER_DETAIL().getRXO().getRequestedGiveAmountMinimum().setValue("200 gr");
+	          
+	          adt.getORDER().getORDER_DETAIL().getRXR().getAdministrationMethod().getIdentifier().setValue("inyeccion");
+	          adt.getORDER().getORDER_DETAIL().getRXR().getAdministrationMethod().getText().setValue("Inyectar 200 gr cada 3 hrs");
 
 	          HapiContext context = new DefaultHapiContext();
 	          Parser parser = context.getPipeParser();
@@ -694,6 +699,8 @@ public String CreateOML_O21(String MSHmessageName, String MSHsequenceNumber, Str
 	          orc.getOrderControl().setValue(ORCOrderControl);
 	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
 	          
+	          adt.getORDER_GENERAL().getORDER().getOBSERVATION_REQUEST().getOBR().getRelevantClinicalInfo().setValue("Necesita una dosis alta");
+	          adt.getORDER_GENERAL().getORDER().getOBSERVATION_REQUEST().getCONTAINER_2().getSAC().getTreatment().getText().setValue("Prueba de sangre");
 
 	          HapiContext context = new DefaultHapiContext();
 	          Parser parser = context.getPipeParser();
@@ -710,12 +717,14 @@ public String CreateOML_O21(String MSHmessageName, String MSHsequenceNumber, Str
 	// AE Application Error
 	// AR Appilcation Reject
 
-	public String CreateACK (String MSHControlID, String acknowledgeCode) throws HL7Exception, IOException {
+	public String CreateACK (String MSHControlID, String acknowledgeCode, String sendingApplication, String sendingReceiver) throws HL7Exception, IOException {
 		ACK ack = new ACK();
 		ack.initQuickstart("ACK", "ACK", "P");
 		MSH mshSegment = ack.getMSH();
 		mshSegment.getSecurity().setValue("ACK");
 		mshSegment.getMessageControlID().setValue(MSHControlID);
+		mshSegment.getSendingApplication().getNamespaceID().setValue(sendingApplication);
+		mshSegment.getReceivingApplication().getNamespaceID().setValue(sendingReceiver);
 		
 		MSA msaSegmentMsa = ack.getMSA();
 		msaSegmentMsa.getAcknowledgementCode().setValue(acknowledgeCode);
