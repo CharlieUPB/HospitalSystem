@@ -3,19 +3,13 @@ package com.hl7.hospital.adthl7service.utils;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.Map;
-
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
-  import ca.uhn.hl7v2.model.GenericMessage;
-  import ca.uhn.hl7v2.model.Message;
-import ca.uhn.hl7v2.model.v22.segment.MSH;
-import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
-  import ca.uhn.hl7v2.parser.DefaultModelClassFactory;
-  import ca.uhn.hl7v2.parser.GenericModelClassFactory;
-  import ca.uhn.hl7v2.parser.PipeParser;
-  import ca.uhn.hl7v2.util.Terser;
+import ca.uhn.hl7v2.model.GenericMessage;
+import ca.uhn.hl7v2.parser.GenericModelClassFactory;
+import ca.uhn.hl7v2.parser.PipeParser;
+import ca.uhn.hl7v2.util.Terser;
 import ca.uhn.hl7v2.validation.ValidationContext;
 import ca.uhn.hl7v2.validation.impl.ValidationContextFactory;
 
@@ -137,7 +131,7 @@ public class Parse {
  	    map.put("birthDate", birthDate);
  	    map.put("phone", phone);
  	    map.put("cellPhone", cellPhone);
- 	   map.put("address", address);
+ 	    map.put("address", address);
  	    map.put("deceased", deceased);
  	    map.put("maritalStatus", maritalStatus);
  	    map.put("nationality", nationality);

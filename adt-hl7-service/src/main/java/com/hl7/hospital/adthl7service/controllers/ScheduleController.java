@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hl7.hospital.adthl7service.errors.NotFoundException;
-import com.hl7.hospital.adthl7service.models.PatientHistory;
 import com.hl7.hospital.adthl7service.models.Schedule;
 import com.hl7.hospital.adthl7service.services.ScheduleService;
 

@@ -1,6 +1,8 @@
 package com.hl7.hospital.adthl7service.models;
 
 import java.sql.Date;
+import java.sql.Time;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,10 +26,10 @@ public class Schedule {
 	@JoinColumn
 	private MedicalStaff codDoctor;
 	private Date date;
-	private Date hour;
+	private Time hour;
 
 	
-	public Schedule(int cod, Patient codPatient, MedicalStaff codDoctor, Date date, Date hour)
+	public Schedule(int cod, Patient codPatient, MedicalStaff codDoctor, Date date, Time hour)
 	{
 		this.cod = cod;
 		this.codPatient = codPatient;
@@ -58,7 +60,7 @@ public class Schedule {
 	{
 		return this.date;
 	}
-	public Date getHour()
+	public Time getHour()
 	{
 		return this.hour;
 	}
@@ -81,7 +83,7 @@ public class Schedule {
 	{
 		this.date = date;
 	}
-	public void setHour(Date hour)
+	public void setHour(Time hour)
 	{
 		this.hour = hour;
 	}

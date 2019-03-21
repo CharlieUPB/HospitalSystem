@@ -1,19 +1,14 @@
 package com.hl7.hospital.adthl7service.utils;
 
 import java.io.IOException;
-
-import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
-
 import ca.uhn.hl7v2.DefaultHapiContext;
- import ca.uhn.hl7v2.HL7Exception;
- import ca.uhn.hl7v2.HapiContext;
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.v24.datatype.TX;
-import ca.uhn.hl7v2.model.v24.datatype.XTN;
 import ca.uhn.hl7v2.model.v24.group.ADT_A01_INSURANCE;
 import ca.uhn.hl7v2.model.v24.group.ADT_A05_INSURANCE;
 import ca.uhn.hl7v2.model.v24.group.OML_O21_INSURANCE;
 import ca.uhn.hl7v2.model.v24.group.ORM_O01_INSURANCE;
-import ca.uhn.hl7v2.model.v24.group.ORM_O01_OBSERVATION;
 import ca.uhn.hl7v2.model.v24.group.ORU_R01_OBSERVATION;
 import ca.uhn.hl7v2.model.v24.group.ORU_R01_ORDER_OBSERVATION;
 import ca.uhn.hl7v2.model.v24.group.RDE_O11_INSURANCE;
@@ -39,7 +34,8 @@ public class Create {
 	
 
 public String CreateADT_A01(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
 	          
@@ -72,7 +68,8 @@ public String CreateADT_A01(String SendingApplication, String PIDname, String PI
 	          PV1 pv1 = adt.getPV1();
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
-	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+			  pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+			  pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -96,7 +93,8 @@ public String CreateADT_A01(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A02(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A02 adt = new ADT_A02();
 	          adt.initQuickstart("ADT", "A02", "P");
 	          
@@ -124,6 +122,7 @@ public String CreateADT_A02(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -147,7 +146,8 @@ public String CreateADT_A02(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A03(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 			  ADT_A03 adt = new ADT_A03();
 	          adt.initQuickstart("ADT", "A03", "P");
 	          
@@ -175,6 +175,7 @@ public String CreateADT_A03(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -199,7 +200,8 @@ public String CreateADT_A03(String SendingApplication, String PIDname, String PI
 
 
 public String CreateADT_A04(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
 	          
@@ -233,6 +235,7 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -256,7 +259,8 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A05(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -290,6 +294,7 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -307,7 +312,8 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A08(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -341,6 +347,7 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -358,7 +365,8 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A11(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -392,6 +400,7 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -409,7 +418,8 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A12(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -443,6 +453,7 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);
@@ -460,7 +471,8 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 	}
 
 public String CreateADT_A13(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
-		String codSecure, String nameOrganization, String vecDate, String codDoctor, String nameDoctor, String lastNameDoctor, String diagnostic) throws HL7Exception, IOException {
+		String codSecure, String nameOrganization, String vecDate, 
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -494,6 +506,7 @@ public String CreateADT_A13(String SendingApplication, String PIDname, String PI
 	          pv1.getSetIDPV1().setValue(codDoctor);
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
+	          pv1.getPatientClass().setValue(PatientClass);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);

@@ -1,6 +1,7 @@
 package com.hl7.hospital.adthl7service.services;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class ScheduleService {
 	private ScheduleRepository scheduleRepository;
 
 	
-	public String createNewSchedule (Patient codPatient, MedicalStaff codDoctor, Date date, Date hour) 
+	public String createNewSchedule (Patient codPatient, MedicalStaff codDoctor, Date date, Time hour) 
 	{
 		Schedule schedule = new Schedule();
 		

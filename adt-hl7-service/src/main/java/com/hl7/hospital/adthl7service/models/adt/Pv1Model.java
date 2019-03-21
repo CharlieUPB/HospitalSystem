@@ -10,6 +10,12 @@ public class Pv1Model {
 	private String attendingDoctorName;
 	@JsonProperty(value = "attendingDoctorLastName")
 	private String attendingDoctorLastName;
+	@JsonProperty(value = "patientClass")
+	private String patientClass;  // EMERGENCY (E) || INPATIENT (I) || OUTPATIENT (O) || PREADMIT (P)
+	@JsonProperty(value = "admitDate")
+	private String admitDateTime; // Should be passed like "2010-01-31"
+	@JsonProperty(value = "admitDateHour")
+	private String admitDateHour; // should be passes like "18:15:00"
 	
 	public String getPv1ID() {
 		return pv1ID;
@@ -28,5 +34,24 @@ public class Pv1Model {
 	}
 	public void setAttendingDoctorLastName(String attendingDoctorLastName) {
 		this.attendingDoctorLastName = attendingDoctorLastName;
+	}
+	public String getPatientClass() {
+		return patientClass;
+	}
+	public void setPatientClass(String patientClass) {
+		this.patientClass = patientClass;
+	}
+	
+	public String getAdmitDateTime() {
+		return admitDateTime;
+	}
+	public void setAdmitDateTime(String admitDateTime) {
+		this.admitDateTime = admitDateTime;
+	}
+	public String getAdmitDateHour() {
+		return admitDateHour;
+	}
+	public void setAdmitDateHour(String admitDateHour) {
+		this.admitDateHour = admitDateHour;
 	}
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hl7.hospital.adthl7service.errors.NotFoundException;
 import com.hl7.hospital.adthl7service.models.Diagnostic;
-import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.services.DiagnosticService;
 
 @RestController
