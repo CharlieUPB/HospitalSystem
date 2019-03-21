@@ -2,6 +2,7 @@ package com.hl7.hospital.adthl7service.controllers;
 
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,9 +28,9 @@ public class DiagnosticController {
 	
 	
 	@RequestMapping(
-			value = "/",
+			value = "/{id}",
 			method = RequestMethod.GET)
-	public @ResponseBody Optional<Diagnostic> getDiagnosticById(@RequestParam("id") String codDiagnostic)
+	public @ResponseBody Optional<Diagnostic> getDiagnosticById(@PathVariable("id") String codDiagnostic)
 	{
 		return diagServ.getDiagnosticByID(Integer.parseInt(codDiagnostic));
 	}
