@@ -20,7 +20,7 @@ public class ADTServices {
 	HealthInsuranceService hService = new HealthInsuranceService();
 	ScheduleService scheduleService = new ScheduleService();
 	
-	public void ADT01Handler (String message) throws HL7Exception, IOException {
+	public String ADT01Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
@@ -47,9 +47,17 @@ public class ADTServices {
 		
 		//insertamos en la base de datos, los datos del paciente
 		
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+				
+		return ack;
 	}
 	
-	public void ADT02Handler (String message) throws HL7Exception, IOException {
+	public String ADT02Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
@@ -66,9 +74,18 @@ public class ADTServices {
 		patient.setCity((String)parsedmessage.get("city"));
 		
 		//insertamos en la base de datos, los datos del paciente
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+					
+		return ack;
+		
 	}
 	
-	public void ADT03Handler (String message) throws HL7Exception, IOException {
+	public String ADT03Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
@@ -85,9 +102,17 @@ public class ADTServices {
 		patient.setCity((String)parsedmessage.get("city"));
 		
 		//insertamos en la base de datos, los datos del paciente
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+					
+		return ack;
 	}
 	
-	public void ADT04Handler (String message) throws HL7Exception, IOException {
+	public String ADT04Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
@@ -118,9 +143,19 @@ public class ADTServices {
 		pService.addNewPatient(patient);
 		
 		//insertamos en la base de datos, los datos del paciente, del seguro y del medico
+		
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+					
+		return ack;
+		
 	}
 	
-	public void ADT05Handler (String message) throws HL7Exception, IOException {
+	public String ADT05Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
@@ -148,9 +183,18 @@ public class ADTServices {
 		//insertamos en la base de datos, los datos y generamos un agendamiento		
 		
 //		scheduleService.addNewDiagnostic(patient, medical, date, hour)
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+					
+		return ack;
+		
 	}
 	
-	public void ADT08Handler (String message) throws HL7Exception, IOException {
+	public String ADT08Handler (String message) throws HL7Exception, IOException {
 		
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
@@ -176,9 +220,18 @@ public class ADTServices {
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
 		
 		//hacer consulta sql para editar la informacion del paciente que tenga ese codigo
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+			
+		return ack;
+		
 	}
 	
-	public void ADT11Handler (String message) throws HL7Exception, IOException {
+	public String ADT11Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
@@ -204,9 +257,19 @@ public class ADTServices {
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
 		
 		//insertamos en la base de datos, los datos del paciente
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+			
+		return ack;
+		
+		
 	}
 	
-	public void ADT12Handler (String message) throws HL7Exception, IOException {
+	public String ADT12Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
@@ -223,12 +286,23 @@ public class ADTServices {
 		patient.setCity((String)parsedmessage.get("city"));
 		
 		//insertamos en la base de datos, los datos del paciente
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+		
+		return ack;
+		
 	}
 	
-	public void ADT13Handler (String message) throws HL7Exception, IOException {
+	public String ADT13Handler (String message) throws HL7Exception, IOException {
 		Patient patient = new Patient();
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
+		
+		// we get the data from the hl7 message;
 		
 		parsedmessage = parse.ADT(message);
 		patient.setCod((int)parsedmessage.get("codPatient"));
@@ -242,17 +316,42 @@ public class ADTServices {
 		patient.setCity((String)parsedmessage.get("city"));
 		
 		//insertamos en la base de datos, los datos del paciente
+		
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+		
+		return ack;
+		
 	}
-	public void RDEHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK("","");
+	public String RDEHandler (String message) throws HL7Exception, IOException {
+		HashMap<String, Object> parsedmessage = new HashMap<>();
+		parsedmessage = parse.getMSH(message);
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","PHARMACY",sedingApp);
+		return ack;
 	}
 	
-	public void ORMHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK("","");
+	public String ORMHandler (String message) throws HL7Exception, IOException {
+		HashMap<String, Object> parsedmessage = new HashMap<>();
+		parsedmessage = parse.getMSH(message);
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","ORDER",sedingApp);
+		return ack;
 	}
 	
-	public void OMLHandler (String message) throws HL7Exception, IOException {
-		String ack = create.CreateACK("","");
+	public String OMLHandler (String message) throws HL7Exception, IOException {
+		HashMap<String, Object> parsedmessage = new HashMap<>();
+		parsedmessage = parse.getMSH(message);
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		String ack = create.CreateACK(mshControlID,"AA","LABORATORY",sedingApp);
+		return ack;
 	}
 
 }

@@ -22,7 +22,6 @@ import ca.uhn.hl7v2.validation.impl.ValidationContextFactory;
 
 public class Parse {
 	
-	
 	public String typeOfMessage(String messagep) throws HL7Exception {
 		String msg = "MSH|^~\\&|HIS|RIH|EKG|EKG|199904140038||ADT^A01||P|2.2\r"
                 + "PID|0001|00009874|00001122|A00977|SMITH^JOHN^M|MOM|19581119|F|NOTREAL^LINDA^M|C|564 SPRING ST^^NEEDHAM^MA^02494^US|0002|(818)565-1551|(425)828-3344|E|S|C|0000444444|252-00-4414||||SA|||SA||||NONE|V1|0001|I|D.ER^50A^M110^01|ER|P00055|11B^M011^02|070615^BATMAN^GEORGE^L|555888^NOTREAL^BOB^K^DR^MD|777889^NOTREAL^SAM^T^DR^MD^PHD|ER|D.WT^1A^M010^01|||ER|AMB|02|070615^NOTREAL^BILL^L|ER|000001916994|D||||||||||||||||GDD|WA|NORM|02|O|02|E.IN^02D^M090^01|E.IN^01D^M080^01|199904072124|199904101200|199904101200||||5555112333|||666097^NOTREAL^MANNY^P\r"
@@ -37,7 +36,6 @@ public class Parse {
         GenericMessage message = (GenericMessage) context.getPipeParser().parse(messagep);
         Terser t = new Terser(message);
 		return t.get("/MSH-8-1")+t.get("/MSH-8-2");
-		
 	}
 	
 	public HashMap<String, Object> ADT(String msg) throws HL7Exception {
@@ -65,6 +63,7 @@ public class Parse {
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-2");
         
         int codPatient = Integer.parseInt(t.get("/PID-1"));
         int gender = 3;
@@ -129,8 +128,8 @@ public class Parse {
 
  		
  	    HashMap<String, Object> map = new HashMap<>();
- 	    HashMap<String, String> mapdir = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);
@@ -154,7 +153,7 @@ public class Parse {
 	    return map;
 	}	
 	
-public Map<String, Object> ORU(String msg) throws HL7Exception {
+public HashMap<String, Object> ORU(String msg) throws HL7Exception {
 		
 		HapiContext context = new DefaultHapiContext();
         context.setModelClassFactory(new GenericModelClassFactory());
@@ -246,7 +245,6 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
 
  		
  	    HashMap<String, Object> map = new HashMap<>();
- 	    HashMap<String, String> mapdir = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
  	    map.put("mshSendingApplication", mshSendingApplication);
  	    map.put("codPatient",codPatient);
@@ -256,7 +254,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  	    map.put("birthDate", birthDate);
  	    map.put("phone", phone);
  	    map.put("cellPhone", cellPhone);
- 	   map.put("address", address);
+ 	    map.put("address", address);
  	    map.put("deceased", deceased);
  	    map.put("maritalStatus", maritalStatus);
  	    map.put("nationality", nationality);
@@ -271,6 +269,29 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  	    System.out.println(map.toString());
 	    return map;
 	}
+
+	public HashMap<String, Object> getMSH(String hl7Message) throws HL7Exception {
+		HapiContext context = new DefaultHapiContext();
+        context.setModelClassFactory(new GenericModelClassFactory());
+
+        // The parser will always parse this as a "GenericMessage"
+       GenericMessage message = (GenericMessage) context.getPipeParser().parse(hl7Message);
+    
+        /* 
+         * A generic message has a flat structure, so you can ask for any
+         * field by only its segment name, not a complex path 
+         */
+        Terser t = new Terser(message);
+        String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-2");
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("mshControlID", mshControlID);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
+ 	    
+ 	    return map;
+	}
+	
 
 	public boolean isHL7SyntaxValid(String hl7Message) {
         HapiContext context = new DefaultHapiContext();

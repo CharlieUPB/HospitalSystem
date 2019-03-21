@@ -37,7 +37,7 @@ public class OrmController {
 			method = RequestMethod.POST)
 	public @ResponseBody Message ORMController(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
 		Create create = new Create();
-		if (genericMessage.getEvn().equals("ORM-O01")) {
+		if (genericMessage.getEvn().equals("O01")) {
 			Message response = new Message();
 		String data =create.CreateADT_ORM01(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
 				genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 

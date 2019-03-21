@@ -37,7 +37,7 @@ public class OmlController {
 			method = RequestMethod.POST)
 	public @ResponseBody Message OMLController(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
 		Create create = new Create();
-		if (genericMessage.getEvn().equals("OML-O21")) {
+		if (genericMessage.getEvn().equals("O21")) {
 			Message response = new Message();
 		String data =create.CreateOML_O21(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
 				genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 

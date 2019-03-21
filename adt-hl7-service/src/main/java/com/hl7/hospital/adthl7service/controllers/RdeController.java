@@ -33,11 +33,11 @@ public class RdeController {
 	}
 
 	@RequestMapping(
-			value = "/rde-011",
+			value = "/rde-o11",
 			method = RequestMethod.POST)
 	public @ResponseBody Message RDEController(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
 		Create create = new Create();
-		if (genericMessage.getEvn().equals("RDE-011")) {
+		if (genericMessage.getEvn().equals("O11")) {
 			Message response = new Message();
 		String data =create.CreateRDE_011(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
 				genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 

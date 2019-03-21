@@ -63,57 +63,60 @@ public class EventConsumer implements MqttCallback {
 	}
 	
 	private void processMessage(String topic, MqttMessage message) throws Exception  {
-		
-		String hl7Message = new String(message.getPayload()); //get the message data is in json form
-		
-		HashMap<String, Object>  formatedHL7 = this.parseUtil.ADT(hl7Message);
-		
-		String msgControlID = (String) formatedHL7.get("mshControlID");//GEt the message control id from the message
-		String acknowledgment = "";
+		String hl7Message = new String(message.getPayload());
 		
 		if(this.parseUtil.isHL7SyntaxValid(hl7Message)) {
-			acknowledgment = this.createUtil.CreateACK(msgControlID,"AA"); //Create Application Accept ACK pasing the MessageControlID;
-		} else {
-			acknowledgment = this.createUtil.CreateACK(msgControlID,"AR"); //Create Application Reject ACK pasing the MessageControlID;
+			String acknowledgment = this.handleMessage(topic, hl7Message);
+			if(acknowledgment != "") {
+				EventProducer.getInstance().publishMessage("ACK", acknowledgment);
+			}
 		}
-
-		this.handleMessage(topic, hl7Message); //Does all the database interaction necessary.
-	
-		EventProducer.getInstance().publishMessage("ACK", acknowledgment);
+		
 	}
 	
-	private void handleMessage(String topic, String message) throws Exception {
+	private String handleMessage(String topic, String message) throws Exception {
+		String acknowledgment = "";
 		switch (topic) {
 		case "ADT-A01":
-			this.adtServices.ADT01Handler(message);
+			acknowledgment = this.adtServices.ADT01Handler(message);
 			break;
 		case "ADT-A02":
-			this.adtServices.ADT02Handler(message);
+			acknowledgment = this.adtServices.ADT02Handler(message);
 			break;
 		case "ADT-A03":
-			this.adtServices.ADT03Handler(message);
+			acknowledgment = this.adtServices.ADT03Handler(message);
 			break;
 		case "ADT-A04":
-			this.adtServices.ADT04Handler(message);
+			acknowledgment = this.adtServices.ADT04Handler(message);
 			break;
 		case "ADT-A05":
-			this.adtServices.ADT05Handler(message);
+			acknowledgment = this.adtServices.ADT05Handler(message);
 			break;
 		case "ADT-A08":
-			this.adtServices.ADT08Handler(message);
+			acknowledgment =  this.adtServices.ADT08Handler(message);
 			break;
 		case "ADT-A11":
-			this.adtServices.ADT11Handler(message);
+			acknowledgment = this.adtServices.ADT11Handler(message);
 			break;
 		case "ADT-A12":
-			this.adtServices.ADT12Handler(message);
+			acknowledgment = this.adtServices.ADT12Handler(message);
 			break;
 		case "ADT-A13":
-			this.adtServices.ADT13Handler(message);
+			acknowledgment = this.adtServices.ADT13Handler(message);
+			break;
+		case "ORM-O01":
+			acknowledgment = this.adtServices.ORMHandler(message);
+			break;	
+		case "OML-O21":
+			acknowledgment = this.adtServices.OMLHandler(message);
+			break;	
+		case "RDE-O11":
+			acknowledgment = this.adtServices.RDEHandler(message);
 			break;	
 		default:
 			break;
 		}
+		return acknowledgment;
 	}
 
 	
