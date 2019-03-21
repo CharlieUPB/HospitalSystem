@@ -16,7 +16,6 @@ public class EventProducer implements MqttCallback {
 	
 	private String mqttServer = "tcp://192.168.99.100:1883";
 	private int qos = 2;
-	private String clientId = "hl7Producer";
 	private MqttClient mqttClient = null;
 	private MqttConnectOptions connectionOptions = null;
 	private MemoryPersistence persistence = null;
@@ -30,7 +29,7 @@ public class EventProducer implements MqttCallback {
 		this.connectionOptions = new MqttConnectOptions();
 		this.persistence = new MemoryPersistence();
 		try {
-			this.mqttClient = new MqttClient(mqttServer,clientId,persistence);
+			this.mqttClient = new MqttClient(mqttServer, MqttClient.generateClientId() ,persistence);
 			this.connectionOptions.setCleanSession(true);
 			this.mqttClient.connect(this.connectionOptions);
 			this.mqttClient.setCallback(this);

@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.HealthInsurance;
 import com.hl7.hospital.adthl7service.repositories.HealthInsuranceRepository;
 
+@Service
 public class HealthInsuranceService {
 	
 

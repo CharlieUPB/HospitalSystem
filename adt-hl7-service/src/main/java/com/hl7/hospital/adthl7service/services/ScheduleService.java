@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hl7.hospital.adthl7service.models.Diagnostic;
+import org.springframework.stereotype.Service;
 import com.hl7.hospital.adthl7service.models.MedicalStaff;
 import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.models.Schedule;
-import com.hl7.hospital.adthl7service.repositories.DiagnosticRepository;
 import com.hl7.hospital.adthl7service.repositories.ScheduleRepository;
 
+
+@Service
 public class ScheduleService {
 	
 	@Autowired 

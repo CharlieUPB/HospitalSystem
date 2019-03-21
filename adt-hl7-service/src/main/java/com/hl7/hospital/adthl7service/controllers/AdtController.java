@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hl7.hospital.adthl7service.errors.BadRequestError;
 import com.hl7.hospital.adthl7service.events.EventProducer;
 import com.hl7.hospital.adthl7service.models.Message;
 import com.hl7.hospital.adthl7service.models.adt.GenericMessage;
@@ -57,7 +56,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -79,7 +78,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -100,7 +99,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -121,7 +120,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -142,7 +141,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -163,7 +162,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -185,7 +184,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -206,7 +205,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}
@@ -227,7 +226,7 @@ public class AdtController {
 		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
 		return response;
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}

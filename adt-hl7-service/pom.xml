@@ -73,6 +73,14 @@
     		<artifactId>gson</artifactId>
 		</dependency>
 		
+		<!-- Dependency to have better control over iterables -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>r05</version>
+		</dependency>
+		
+		
 		<!-- HL7 protocol for java library -->
     
 		<dependency>

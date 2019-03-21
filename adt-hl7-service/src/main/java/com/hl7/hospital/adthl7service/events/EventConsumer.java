@@ -27,13 +27,11 @@ public class EventConsumer implements MqttCallback {
 	
 	private String mqttServer = "tcp://192.168.99.100:1883";
 	private int qos = 2;
-	final private String clientId = "hl7Consumer";
 	
 	private MqttConnectOptions connectionOptions = null;
 	private MqttClient mqttClient = null;
 	private MemoryPersistence persistence = null;
 	
-	private Create createUtil = null;
 	private Parse parseUtil = null;
 	private ADTServices adtServices = null;
 	
@@ -71,7 +69,6 @@ public class EventConsumer implements MqttCallback {
 				EventProducer.getInstance().publishMessage("ACK", acknowledgment);
 			}
 		}
-		
 	}
 	
 	private String handleMessage(String topic, String message) throws Exception {
@@ -122,14 +119,13 @@ public class EventConsumer implements MqttCallback {
 	
 	private void init() {
 		
-		this.createUtil = new Create();
 		this.parseUtil = new Parse();
 		this.adtServices = new ADTServices();
 		
 		this.connectionOptions = new MqttConnectOptions();
 		this.persistence = new MemoryPersistence();
 		try {
-			this.mqttClient = new MqttClient(mqttServer, clientId,persistence);
+			this.mqttClient = new MqttClient(mqttServer, MqttClient.generateClientId(), persistence);
 			this.connectionOptions.setCleanSession(true);
 			this.mqttClient.connect(this.connectionOptions);
 			this.mqttClient.setCallback(this);
