@@ -250,6 +250,9 @@ public class ADTServices {
 		Schedule sh = new Schedule();
 		sh.setCodDoctor(medical);
 		sh.setCodPatient(patient);
+		
+		//saco el date y hour de parsedMessage
+		
 		sh.setDate(date); //que date y que hour?
 		
 		scheduleService.addNewSchedule(sh);

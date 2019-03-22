@@ -77,7 +77,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				//por que OBR???? y no PV1
 				response.setData(data);
 				return response;
@@ -103,7 +107,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -128,7 +136,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -153,7 +165,16 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getPv1Model().getAdmitDateYear(),
+							genericMessage.getPv1Model().getAdmitDateMonth(),
+							genericMessage.getPv1Model().getAdmitDateDay(),
+							genericMessage.getPv1Model().getAdmitDateHour(),
+							genericMessage.getPv1Model().getAdmitDateMin()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -178,7 +199,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -204,7 +229,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -229,7 +258,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -245,7 +278,7 @@ public class AdtController {
 			method = RequestMethod.POST)
 	public @ResponseBody Message ADTA13Controller(@RequestBody GenericMessage genericMessage) {
 		Create create = new Create();
-		if (genericMessage.getEvn().equals("A01")) {
+		if (genericMessage.getEvn().equals("A13")) {
 			Message response = new Message();
 			String data;
 			try {
@@ -253,7 +286,11 @@ public class AdtController {
 							genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
 							genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), genericMessage.getPidModel().getMaritalStatus(), 
 							genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-							genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), genericMessage.getObrModel().getDiagnostic()).toString();
+							genericMessage.getPv1Model().getPv1ID(),
+							genericMessage.getPv1Model().getAttendingDoctorName(),
+							genericMessage.getPv1Model().getAttendingDoctorLastName(),
+							genericMessage.getPv1Model().getPatientClass(),
+							genericMessage.getObxModel().getDiagnostic()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {

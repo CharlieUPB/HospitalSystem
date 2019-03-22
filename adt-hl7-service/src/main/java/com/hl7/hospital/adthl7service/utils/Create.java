@@ -260,7 +260,8 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A05(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic,
+		int admitYear, int admitMonth, int admitDay, int admitHour, int admitMin) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -295,6 +296,7 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 	          pv1.getAttendingDoctor(0).getGivenName().setValue(nameDoctor);
 	          pv1.getAttendingDoctor(0).getFamilyName().getFn1_Surname().setValue(lastNameDoctor);
 	          pv1.getPatientClass().setValue(PatientClass);
+	          pv1.getAdmitDateTime().getTimeOfAnEvent().setDateMinutePrecision(admitYear, admitMonth, admitDay, admitHour, admitMin);
 	          
 	          TX tx = new TX(adt);
 	                  tx.setValue(diagnostic);

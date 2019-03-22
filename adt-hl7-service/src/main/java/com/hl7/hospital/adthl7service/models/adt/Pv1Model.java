@@ -12,10 +12,16 @@ public class Pv1Model {
 	private String attendingDoctorLastName;
 	@JsonProperty(value = "patientClass")
 	private String patientClass;  // EMERGENCY (E) || INPATIENT (I) || OUTPATIENT (O) || PREADMIT (P)
-	@JsonProperty(value = "admitDate")
-	private String admitDateTime; // Should be passed like "2010-01-31"
+	@JsonProperty(value = "admitDateYear")
+	private int admitDateYear; 
+	@JsonProperty(value = "admitDateMonth")
+	private int admitDateMonth;
+	@JsonProperty(value = "admitDateDay")
+	private int admitDateDay; 
 	@JsonProperty(value = "admitDateHour")
-	private String admitDateHour; // should be passes like "18:15:00"
+	private int admitDateHour;
+	@JsonProperty(value = "admitDateMin")
+	private int admitDateMin;
 	
 	public String getPv1ID() {
 		return pv1ID;
@@ -42,16 +48,35 @@ public class Pv1Model {
 		this.patientClass = patientClass;
 	}
 	
-	public String getAdmitDateTime() {
-		return admitDateTime;
+	
+	public int getAdmitDateMonth() {
+		return admitDateMonth;
 	}
-	public void setAdmitDateTime(String admitDateTime) {
-		this.admitDateTime = admitDateTime;
+	public void setAdmitDateMonth(int admitDateMonth) {
+		this.admitDateMonth = admitDateMonth;
 	}
-	public String getAdmitDateHour() {
+	public int getAdmitDateDay() {
+		return admitDateDay;
+	}
+	public void setAdmitDateDay(int admitDateDay) {
+		this.admitDateDay = admitDateDay;
+	}
+	public int getAdmitDateMin() {
+		return admitDateMin;
+	}
+	public void setAdmitDateMin(int admitDateMin) {
+		this.admitDateMin = admitDateMin;
+	}
+	public int getAdmitDateHour() {
 		return admitDateHour;
 	}
-	public void setAdmitDateHour(String admitDateHour) {
+	public void setAdmitDateHour(int admitDateHour) {
 		this.admitDateHour = admitDateHour;
+	}
+	public int getAdmitDateYear() {
+		return admitDateYear;
+	}
+	public void setAdmitDateYear(int admitDateYear) {
+		this.admitDateYear = admitDateYear;
 	}
 }
