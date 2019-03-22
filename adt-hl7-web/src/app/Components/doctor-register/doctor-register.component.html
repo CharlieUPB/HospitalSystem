@@ -1,0 +1,30 @@
+<form [formGroup]="formPatient">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput type="text" placeholder="Apellido del Doctor"  formControlName="lastName">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-select required placeholder="Genero">
+        <mat-option value=1>Masculino</mat-option>
+        <mat-option value=2>Femenino</mat-option>
+        <mat-option value=3>Desconocido</mat-option>
+        <mat-option value=4>Otro</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Especialidad" type="text"  formControlName="speciality">
+    </mat-form-field>
+  </div>
+  <div  class = "button-container">
+    <button class = "primary" mat-button (click)="onSubmit(formPatient.value)" [mat-dialog-close]="true">Guardar</button>
+  </div>
+  <div  class = "button-container">
+    <button class = "secondary" mat-button mat-dialog-close>Cancelar</button>
+  </div>
+  </form>
