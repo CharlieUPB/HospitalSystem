@@ -37,9 +37,6 @@ public class ADTServices {
 	PatientService patientService;
 	
 	@Autowired
-	PatientRepository patientDAO;
-	
-	@Autowired
 	PatientHistoryService patientHistoryService;
 	
 	@Autowired
@@ -55,8 +52,10 @@ public class ADTServices {
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A01") {
-			System.out.println("***** ENTRASTE A UN TOPICO ADT-01 PERO EL MENSAJE NO ERA ADT-01");
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A01")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-01 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
@@ -64,7 +63,7 @@ public class ADTServices {
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
 		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -74,16 +73,10 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		health.setCod((int)parsedmessage.get("codSecure"));
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
 		
-		medical.setCod((int)parsedmessage.get("codDoctor"));
 		medical.setName((String)parsedmessage.get("nameDoctor"));
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
-		
-		//insertamos en la base de datos, los datos del paciente
-		
-		
 		
 		//Registramos en la base de datos el evento.
 		
@@ -95,15 +88,23 @@ public class ADTServices {
 		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
-		patientHistoryService.addPatientHistory(ph);
+		
 		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-				
-		return ack;
+		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
+		//insertamos en la base de datos, los datos del paciente
+	
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	
 	
@@ -113,13 +114,15 @@ public class ADTServices {
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A02") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A02")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-02 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
 		Patient patient = new Patient();
-		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -129,7 +132,7 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		//insertamos en la base de datos, los datos del paciente
+		//insertamos en la base de datos, el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
 		ph.setAdtCode("ADT-A02");
@@ -140,16 +143,23 @@ public class ADTServices {
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
 		
-		patientHistoryService.addPatientHistory(ph);
-		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-					
-		return ack;
 		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
+		
+		// insertamos en la base de datos, los datos del paciente
+		
+		
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	
 	//Patient Discharge
@@ -158,12 +168,15 @@ public class ADTServices {
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A03") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A03")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-03 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
 		Patient patient = new Patient();
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -173,7 +186,7 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		//insertamos en la base de datos, los datos del paciente
+		//insertamos en la base de datos, el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
 		ph.setAdtCode("ADT-A03");
@@ -184,15 +197,24 @@ public class ADTServices {
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
 		
-		patientHistoryService.addPatientHistory(ph);
-		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-					
-		return ack;
+		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
+		
+		//insertamos en la base de datos, los datos del paciente
+		
+		
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+
 	}
 	
 	//Patient Registration
@@ -201,96 +223,66 @@ public class ADTServices {
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		String evnCode = (String) parsedmessage.get("evnCode"); 
+		String evnCode = (String) parsedmessage.get("evnCode");
 		
-		System.out.println(evnCode);
+		if( !(evnCode.equals("A04")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-04 PERO EL CAMPO EVN INDICA: " + evnCode);
+			return "";
+		}
 		
 		Patient patient = new Patient();
-		patientDAO.save(patient);
-		//patientService.addNewPatient(patient);
+		HealthInsurance health = new HealthInsurance();
 		
-//		HealthInsurance health = new HealthInsurance();
-//		MedicalStaff medical = new MedicalStaff();
-//		
-//		//String birthDay = (String)parsedmessage.get("birthDate");
-//		//System.out.println("BIRTH ES: " + birthDay);
-//		patient.setName((String)parsedmessage.get("name"));
-//		patient.setLastName((String)parsedmessage.get("lastName"));
-//		patient.setGender((int)parsedmessage.get("gender"));
-//		//patient.setBirthDate(parse.parseStringToDate(birthDay));
-//		patient.setPhone((String)parsedmessage.get("phone"));
-//		patient.setCellPhone((String)parsedmessage.get("cellPhone"));
-//		patient.setAddress((String)parsedmessage.get("address"));
-//		patient.setDeceased((boolean)parsedmessage.get("deceased"));
-//		patient.setMaritalStatus((String)parsedmessage.get("maritalStatus"));
-//		patient.setNationality((String)parsedmessage.get("nationality"));
-//		patient.setCity((String)parsedmessage.get("city"));
-//		
-//		System.out.println("YA POPULE PATIENT");
-//		
-//		//String vecDate = (String)parsedmessage.get("vecDate");
-//		
-//		health.setCod((int)parsedmessage.get("codSecure"));
-//		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
-//		
-//		//healthInsuranceService.addNewHealthInsurance(health);
-//		
-//		//health.setVecDate(parse.parseStringToDate(vecDate));
-//	
-//		System.out.println("YA POPULE HEALTH INSURANCE");
-//		
-//
-//		//insertamos en la base de datos, los datos del paciente -- Deberia insertar health insurance tambien
-//		
-//		
-//		if(patientService == null) {
-//			System.out.println("EL SERVICIO patientService ES NULL");
-//		} else {
-//			System.out.println("EL SERVICIO patientService no ES NULL");
-//			System.out.println(patient.toString());
-//			patientService.addNewPatient(patient);
-//			System.out.println("YA AGRUEGUE A LA BD DE PATIENT");
-//		}
-//	
-//		
-//		patient.setCodSecure(health);
-//		
-//		medical.setCod((int)parsedmessage.get("codDoctor"));
-//		medical.setName((String)parsedmessage.get("nameDoctor"));
-//		medical.setSpeciality((String)parsedmessage.get("speciality"));
-//		
-//		System.out.println("YA POPULE MEDICAL");
-//		
-//		//medicalStaffService.addNewMedicalStaff(medical);
-//		
-//		//insertamos en la base de datos, el registro del evento
-//		
-//		PatientHistory ph = new PatientHistory();
-//		ph.setAdtCode("ADT-A04");
-//		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
-//		ph.setPatientPH(patient);
-//		
-//		System.out.println("YA POPULE PATIENT HISTORY");
-//		
-//		//HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
-//		//ph.setEventDate((Date) mshDate.get("sqlDate"));
-//		//ph.setEventTime((Time) mshDate.get("sqlTime"));
-//		
-//		if(patientHistoryService == null) {
-//			System.out.println("EL SERVICIO patientHistoryService ES NULL");
-//		} else {
-//			System.out.println("EL SERVICIO patientHistoryService no ES NULL");
-//			patientHistoryService.addPatientHistory(ph);
-//			System.out.println("YA AGRUEGUE A LA BD DE PH");
-//		}
-//		
-//		//we generate ack based on transactions and other information
+		//String birthDay = (String)parsedmessage.get("birthDate");
+		patient.setCI((int)parsedmessage.get("codPatient"));
+		patient.setName((String)parsedmessage.get("name"));
+		patient.setLastName((String)parsedmessage.get("lastName"));
+		patient.setGender((int)parsedmessage.get("gender"));
+		//patient.setBirthDate(parse.parseStringToDate(birthDay));
+		patient.setPhone((String)parsedmessage.get("phone"));
+		patient.setCellPhone((String)parsedmessage.get("cellPhone"));
+		patient.setAddress((String)parsedmessage.get("address"));
+		patient.setDeceased((boolean)parsedmessage.get("deceased"));
+		patient.setMaritalStatus((String)parsedmessage.get("maritalStatus"));
+		patient.setNationality((String)parsedmessage.get("nationality"));
+		patient.setCity((String)parsedmessage.get("city"));
+		
+		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
+		//health.setVecDate(parse.parseStringToDate((String)parsedmessage.get("vecDate")));
+		patient.setCodSecure(health);
+		
+		//insertamos en la base de datos, el registro del evento
+		
+		PatientHistory ph = new PatientHistory();
+		//HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
+				
+		ph.setAdtCode("ADT-A04");
+		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
+		ph.setPatientPH(patient);
+		//ph.setEventDate((Date) mshDate.get("sqlDate"));
+		//ph.setEventTime((Time) mshDate.get("sqlTime"));
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
-		System.out.println("YA GENERE EL ACK");
+		//we generate ack based on transactions and other information
+				
+		try {
+			patientHistoryService.addPatientHistory(ph);
+			//insertamos en la base de datos, los datos del paciente -- Deberia insertar health insurance tambien
+		} catch (Exception e) {
+			e.printStackTrace();
+			String ack = create.CreateACK(mshControlID,"AE","HIS",sedingApp);
+		}
+		
+		try {
+			patientService.addNewPatient(patient);
+		} catch (Exception e) {
+			e.printStackTrace();
+			String ack = create.CreateACK(mshControlID,"AE","HIS",sedingApp);
+		}
+
+		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
 		return ack;
 		
@@ -302,11 +294,12 @@ public class ADTServices {
 	public String ADT05Handler (String message) throws HL7Exception, IOException {
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
-		System.out.println("PARSEARE UN un adt a05");
 		parsedmessage = parse.ADT(message);
-		System.out.println("SI PUDE PARSEAR");
 		
-		if((String) parsedmessage.get("evnCode") != "ADTA05") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A05")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-05 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
@@ -314,7 +307,7 @@ public class ADTServices {
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
 		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -324,25 +317,35 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		health.setCod((int)parsedmessage.get("codSecure"));
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
 		
-		medical.setCod((int)parsedmessage.get("codDoctor"));
 		medical.setName((String)parsedmessage.get("nameDoctor"));
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
 		
-		//insertamos en la base de datos, los datos y generamos un agendamiento
+		//insertamos en la base de datos el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
-		ph.setAdtCode("ADT-A04");
+		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
+		
+		ph.setAdtCode("ADT-A05");
 		ph.setDetails("A Patient PRE-ADMISSION was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
-		
-		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
 		
-		patientHistoryService.addPatientHistory(ph);
+		
+		//we generate ack based on transactions and other information
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
 		
 		Schedule sh = new Schedule();
 		sh.setCodDoctor(medical);
@@ -365,27 +368,27 @@ public class ADTServices {
 		
 		//insertamos en la base de datos,el agendamiento
 		
-		scheduleService.addNewSchedule(sh);
-	
+		try {
+			scheduleService.addNewSchedule(sh);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
 		
-//		scheduleService.addNewDiagnostic(patient, medical, date, hour)
-		
-		//we generate ack based on transactions and other information
-		
-		String mshControlID = (String) parsedmessage.get("mshControlID");
-		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-					
-		return ack;
-		
+
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	
+	// Update patient information
 	public String ADT08Handler (String message) throws HL7Exception, IOException {
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A08") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A08")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-08 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
@@ -394,7 +397,7 @@ public class ADTServices {
 		MedicalStaff medical = new MedicalStaff();
 		
 		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -404,14 +407,10 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		health.setCod((int)parsedmessage.get("codSecure"));
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
 		
-		medical.setCod((int)parsedmessage.get("codDoctor"));
 		medical.setName((String)parsedmessage.get("nameDoctor"));
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
-		
-		//hacer consulta sql para editar la informacion del paciente que tenga ese codigo
 		
 		//insertamos en la base de datos, el registro del evento
 		
@@ -423,34 +422,55 @@ public class ADTServices {
 		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
-				
-		patientHistoryService.addPatientHistory(ph);
 		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
 			
-		return ack;
+		//hacer consulta sql para editar la informacion del paciente que tenga ese codigo
+		
+		try {
+			patientService.addNewPatient(patient);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
+		
+		//hacer consulta sql para editar la informacion del paciente que tenga ese codigo
+	
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
 	}
 	
+	// Cancel admit visit notification
 	public String ADT11Handler (String message) throws HL7Exception, IOException {
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A11") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A11")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-11 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
+		
 		
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
 		MedicalStaff medical = new MedicalStaff();
 		
 		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -460,52 +480,59 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		health.setCod((int)parsedmessage.get("codSecure"));
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
 		
-		medical.setCod((int)parsedmessage.get("codDoctor"));
 		medical.setName((String)parsedmessage.get("nameDoctor"));
 		medical.setSpeciality((String)parsedmessage.get("speciality"));
-		
-		//insertamos en la base de datos, los datos del paciente
 		
 		//insertamos en la base de datos, el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
 		ph.setAdtCode("ADT-A04");
-		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
+		ph.setDetails("A Patient CANCEL ADMIT was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		
 		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
-				
-		patientHistoryService.addPatientHistory(ph);
 		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-			
-		return ack;
+		
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
+		
+		//insertamos en la base de datos, los datos del paciente
+		
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+
 		
 		
 	}
 	
+	// Cancel Transfer
 	public String ADT12Handler (String message) throws HL7Exception, IOException {
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A12") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A12")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-12 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
 		
 		Patient patient = new Patient();
 		
-		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -514,45 +541,51 @@ public class ADTServices {
 		patient.setMaritalStatus((String)parsedmessage.get("maritalStatus"));
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
-		
-		//insertamos en la base de datos, los datos del paciente
-		
-		
+	
 		//insertamos en la base de datos, el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
 		ph.setAdtCode("ADT-A04");
-		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
+		ph.setDetails("A Patient CANCEL TRANSFER was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 				
 		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
-			
-		patientHistoryService.addPatientHistory(ph);
 		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
+			
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
 		
-		return ack;
 		
+		//insertamos en la base de datos, los datos del paciente
+		
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	
+	// Cancel discharge/end visit
 	public String ADT13Handler (String message) throws HL7Exception, IOException {
 		
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.ADT(message);
 		
-		if((String) parsedmessage.get("evnCode") != "A13") {
+		String evnCode = (String) parsedmessage.get("evnCode");
+		
+		if( !(evnCode.equals("A13")) ) {
+			System.out.println("***** ENTRASTE A UN TOPICO ADT-13 PERO EL CAMPO EVN INDICA: " + evnCode);
 			return "";
 		}
-		
 		Patient patient = new Patient();
 		
-		patient.setCod((int)parsedmessage.get("codPatient"));
+		patient.setCI((int)parsedmessage.get("codPatient"));
 		patient.setName((String)parsedmessage.get("name"));
 		patient.setLastName((String)parsedmessage.get("lastName"));
 		patient.setGender((int)parsedmessage.get("gender"));
@@ -562,30 +595,33 @@ public class ADTServices {
 		patient.setNationality((String)parsedmessage.get("nationality"));
 		patient.setCity((String)parsedmessage.get("city"));
 		
-		//insertamos en la base de datos, los datos del paciente
-		
 		//insertamos en la base de datos, el registro del evento
 		
 		PatientHistory ph = new PatientHistory();
 		ph.setAdtCode("ADT-A04");
-		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
+		ph.setDetails("A Patient CANCEL DISCHARGE was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 				
 		HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
 		ph.setEventDate((Date) mshDate.get("sqlDate"));
 		ph.setEventTime((Time) mshDate.get("sqlTime"));
-				
-		patientHistoryService.addPatientHistory(ph);
-		
 		
 		//we generate ack based on transactions and other information
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		String ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
-		return ack;
+		try {
+			patientHistoryService.addPatientHistory(ph);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
 		
+		
+		//insertamos en la base de datos, los datos del paciente
+
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	public String RDEHandler (String message) throws HL7Exception, IOException {
 		HashMap<String, Object> parsedmessage = new HashMap<>();

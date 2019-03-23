@@ -46,10 +46,7 @@ public class HealthInsurance {
 	{
 		return this.vecDate;
 	}
-	public void setCod(int cod)
-	{
-		this.cod = cod;
-	}
+	
 	public void setNameOrganization(String nameOrganization)
 	{
 		this.nameOrganization = nameOrganization;

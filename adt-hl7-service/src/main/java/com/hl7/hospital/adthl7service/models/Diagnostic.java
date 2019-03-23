@@ -56,10 +56,6 @@ public class Diagnostic {
 		return this.description;
 	}
 	
-	public void setCodDiagnostic(int codDiagnostic)
-	{
-		this.codDiagnostic = codDiagnostic;
-	}
 	public void setPatient(Patient patient) 
 	{
 		this.patient = patient;

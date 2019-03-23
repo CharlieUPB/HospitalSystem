@@ -65,12 +65,6 @@ public class Schedule {
 		return this.hour;
 	}
 	
-	
-	
-	public void setCod(int cod) 
-	{
-		this.cod = cod;
-	}
 	public void setCodPatient(Patient codPatient)
 	{
 		this.codPatient = codPatient;

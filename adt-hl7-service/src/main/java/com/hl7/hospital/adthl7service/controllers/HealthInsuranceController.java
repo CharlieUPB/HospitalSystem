@@ -24,16 +24,9 @@ public class HealthInsuranceController {
 	@RequestMapping(
 			value = "/",
 			method = RequestMethod.GET)
-	public @ResponseBody HealthInsurance getAllHealthInsurances()
+	public @ResponseBody Iterable<HealthInsurance> getAllHealthInsurances()
 	{
-		HealthInsurance healthInsuranceCreated = new HealthInsurance();
-		healthInsuranceCreated.setNameOrganization("HOLA");
-		healthInsuranceCreated.setVecDate(java.sql.Date.valueOf("2019-05-31"));
-		
-		HealthInsurance saved = healthInsuranceService.addNewHealthInsurance(healthInsuranceCreated);
-		System.out.println("EL RESULTADO ES " + saved);
-		return saved;
-		//1return healthInsuranceService.getAllHealthInsurances();
+		return healthInsuranceService.getAllHealthInsurances();
 	}
 	
 	

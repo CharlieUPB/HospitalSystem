@@ -64,7 +64,7 @@ public class Parse {
         String mshSendingApplication = t.get("/MSH-2");
         String mshStringDate = t.get("/MSH-7");
         
-        String evnCode = this.typeOfMessage(msg); 
+        String evnCode = t.get("/EVN-1");
         
         HashMap<String, Integer> parsedMSHDate = new HashMap<String, Integer>();
         try {
@@ -73,7 +73,7 @@ public class Parse {
         	System.out.println("NO EXISTE FECHA EN EL MSH, ERR: " + e);
         }
         
-        int codPatient = Integer.parseInt(t.get("/PID-1"));
+        int codPatient = Integer.parseInt(t.get("/PID-2")); //We use PATIENT ID as the "cod patient"
         int gender = 3;
         if (t.get("/PID-8").equals("F")) {
        	 gender = 0;
@@ -151,7 +151,7 @@ public class Parse {
  	    map.put("mshControlID", mshControlID);
  	    map.put("mshSendingApplication", mshSendingApplication);
  	    map.put("evnCode", evnCode);
- 	    map.put("codPatient",codPatient);
+ 	    map.put("codPatient",codPatient); //NOTE THIS WILL BE SET TO CI. NOT TO THE ENTITY PRIMARY KEY.
  	    map.put("name", name);
  	    map.put("lastName", lastName);
  	    map.put("gender", gender);

@@ -1,5 +1,6 @@
 package com.hl7.hospital.adthl7service.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +29,12 @@ public class PatientHistoryController {
 		return patientHistoryService.findAll();
 	}
 	
-	
 	@RequestMapping(
 			value = "/{id}",
 			method = RequestMethod.GET)
-	public @ResponseBody PatientHistory getPatientById(@PathVariable("id") String codPatient)
+	public @ResponseBody ArrayList<PatientHistory> getPatientHistoryById(@PathVariable("id") String codPatient)
 	{
-		Optional<PatientHistory> patientHistoryOptional = patientHistoryService.findOne(Integer.parseInt(codPatient));
-		if(patientHistoryOptional.isPresent()) {
-			return patientHistoryOptional.get();
-		} else {
-			throw new NotFoundException();
-		}
-		
+		return patientHistoryService.findByPatient(Integer.parseInt(codPatient));
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.hl7.hospital.adthl7service.models;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class PatientHistory {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codPatientHistory;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Patient patientPH;
 	
@@ -49,9 +50,7 @@ public class PatientHistory {
 	public int getCodPatientHistory() {
 		return codPatientHistory;
 	}
-	public void setCodPatientHistory(int codPatientHistory) {
-		this.codPatientHistory = codPatientHistory;
-	}
+	
 	public Date getEventDate() {
 		return eventDate;
 	}

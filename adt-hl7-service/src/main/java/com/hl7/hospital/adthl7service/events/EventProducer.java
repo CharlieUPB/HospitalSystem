@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EventProducer implements MqttCallback {
 	
-	private String mqttServer = "tcp://192.168.99.100:1883";
-	private int qos = 2;
+	private String mqttServer = "ws://localhost:3000"; // using web sockets over mqtt instead of tcp sockets
+	private int qos = 0;
 	private MqttClient mqttClient = null;
 	private MqttConnectOptions connectionOptions = null;
 	private MemoryPersistence persistence = null;

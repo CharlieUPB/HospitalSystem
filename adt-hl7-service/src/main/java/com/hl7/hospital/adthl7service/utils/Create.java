@@ -49,7 +49,7 @@ public String CreateADT_A01(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -110,7 +110,7 @@ public String CreateADT_A02(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -165,7 +165,7 @@ public String CreateADT_A03(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -210,7 +210,7 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
-	          adt.initQuickstart("ADT", "A01", "P");
+	          adt.initQuickstart("ADT", "A04", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
@@ -221,7 +221,7 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -283,7 +283,7 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -328,7 +328,7 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
-	          adt.initQuickstart("ADT", "A05", "P");
+	          adt.initQuickstart("ADT", "A08", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
@@ -339,7 +339,7 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -383,7 +383,7 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
-	          adt.initQuickstart("ADT", "A05", "P");
+	          adt.initQuickstart("ADT", "A11", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
@@ -394,7 +394,7 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -438,7 +438,7 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
-	          adt.initQuickstart("ADT", "A05", "P");
+	          adt.initQuickstart("ADT", "A12", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
@@ -449,7 +449,7 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -493,7 +493,7 @@ public String CreateADT_A13(String SendingApplication, String PIDname, String PI
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
-	          adt.initQuickstart("ADT", "A05", "P");
+	          adt.initQuickstart("ADT", "A13", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
@@ -504,7 +504,7 @@ public String CreateADT_A13(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -556,7 +556,7 @@ public String CreateORU(String SendingApplication, String PIDname, String PIDlas
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT_RESULT(0).getPATIENT().getPID();
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -603,7 +603,7 @@ public String CreateADT_ORM01(String SendingApplication, String PIDname, String 
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -651,7 +651,7 @@ public String CreateRDE_011(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);
@@ -704,7 +704,7 @@ public String CreateOML_O21(String SendingApplication, String PIDname, String PI
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
-	          pid.getSetIDPID().setValue(PIDcodPatient);
+	          pid.getPatientID().getID().setValue(PIDcodPatient);
 	          pid.getPatientName(0).getFamilyName().getSurname().setValue(PIDname);
 	          pid.getPatientName(0).getGivenName().setValue(PIDlastName);
 	          pid.getBirthOrder().setValue(birthDate);

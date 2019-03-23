@@ -19,6 +19,7 @@ public class Patient {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cod;
+	private int CI;
 	private String name;
 	private String lastName;
 	private int gender;
@@ -130,10 +131,6 @@ public class Patient {
 	}
 	
 	
-	public void setCod(int cod)
-	{
-		this.cod = cod;
-	}
 	public void setName(String name)
 	{
 		this.name = name;
@@ -178,8 +175,17 @@ public class Patient {
 	{
 		this.city = city;
 	}
+	
 	public void setCodSecure(HealthInsurance codSecure)
 	{
 		this.codSecure = codSecure;
+	}
+
+	public int getCI() {
+		return CI;
+	}
+
+	public void setCI(int cI) {
+		CI = cI;
 	}
 }
