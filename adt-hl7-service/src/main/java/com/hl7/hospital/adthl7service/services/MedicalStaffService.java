@@ -12,7 +12,6 @@ import com.hl7.hospital.adthl7service.repositories.MedicalStaffRepository;
 public class MedicalStaffService {
 	
 	@Autowired 
-	
 	private MedicalStaffRepository medicalStaffRepository;
 
 	

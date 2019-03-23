@@ -17,7 +17,7 @@ import com.hl7.hospital.adthl7service.services.PatientService;
 public class PatientController {
 
 	@Autowired
-	PatientService patientService = new PatientService();
+	PatientService patientService;
 	
 	@RequestMapping(
 			value = "/",

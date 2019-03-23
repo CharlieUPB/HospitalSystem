@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.hl7.hospital.adthl7service.models.HealthInsurance;
@@ -13,8 +15,7 @@ import com.hl7.hospital.adthl7service.repositories.HealthInsuranceRepository;
 public class HealthInsuranceService {
 	
 
-	@Autowired 
-	
+	@Autowired
 	private HealthInsuranceRepository healthInsuranceRepository;
 
 	
@@ -29,12 +30,9 @@ public class HealthInsuranceService {
 		return "Saved";
 	}
 	
-	
-	public String addNewHealthInsurance(HealthInsurance healthInsuranceCreated)
+	public HealthInsurance addNewHealthInsurance(HealthInsurance healthInsuranceCreated)
 	{
-		healthInsuranceRepository.save(healthInsuranceCreated);
-		
-		return "Saved";
+		return healthInsuranceRepository.save(healthInsuranceCreated);
 	}
 	
 	
@@ -65,7 +63,6 @@ public class HealthInsuranceService {
 		
 		return healthInsurancesOrg;
 	}
-	
 	
 	public void deleteHealthInsurance(int codHealthInsurance)
 	{

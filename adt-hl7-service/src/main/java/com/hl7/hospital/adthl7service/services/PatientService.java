@@ -14,8 +14,7 @@ import com.hl7.hospital.adthl7service.repositories.PatientRepository;
 @Service
 public class PatientService {
 	
-	@Autowired 
-	
+	@Autowired
 	private PatientRepository patientRepository;
 
 	

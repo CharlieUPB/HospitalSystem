@@ -18,7 +18,7 @@ import com.hl7.hospital.adthl7service.services.DiagnosticService;
 public class DiagnosticController {
 
 	@Autowired
-	DiagnosticService diagServ = new DiagnosticService();
+	DiagnosticService diagServ;
 	
 	@RequestMapping(
 			value = "/",

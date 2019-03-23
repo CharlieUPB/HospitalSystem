@@ -19,7 +19,7 @@ import com.hl7.hospital.adthl7service.services.MedicalStaffService;
 public class MedicalStaffController {
 
 	@Autowired
-	MedicalStaffService medicalStaffService = new MedicalStaffService();
+	MedicalStaffService medicalStaffService;
 	
 	@RequestMapping(
 			value = "/",

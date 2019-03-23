@@ -14,7 +14,6 @@ import com.hl7.hospital.adthl7service.repositories.DiagnosticRepository;
 public class DiagnosticService {
 	
 	@Autowired 
-	
 	private DiagnosticRepository diagnosticRepository;
 
 	

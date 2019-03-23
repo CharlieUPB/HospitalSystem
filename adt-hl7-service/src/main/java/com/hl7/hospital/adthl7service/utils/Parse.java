@@ -31,7 +31,8 @@ public class Parse {
         context.setModelClassFactory(new GenericModelClassFactory());
         GenericMessage message = (GenericMessage) context.getPipeParser().parse(messagep);
         Terser t = new Terser(message);
-		return t.get("/MSH-8-1")+t.get("/MSH-8-2");
+        System.out.println(t.get("/MSH-9-1")+t.get("/MSH-9-2"));
+		return t.get("/MSH-9-1")+t.get("/MSH-9-2");
 	}
 	
 	public HashMap<String, Object> ADT(String msg) throws HL7Exception {
@@ -55,12 +56,16 @@ public class Parse {
          * field by only its segment name, not a complex path 
          */
         Terser t = new Terser(message);
+        
         String name = t.get("/PID-5-2");
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
         String mshSendingApplication = t.get("/MSH-2");
         String mshStringDate = t.get("/MSH-7");
+        
+        String evnCode = this.typeOfMessage(msg); 
+        
         HashMap<String, Integer> parsedMSHDate = new HashMap<String, Integer>();
         try {
         	parsedMSHDate = this.getMSHDate(mshStringDate);
@@ -93,7 +98,7 @@ public class Parse {
         String cellPhone = t.get("/PID-14");
         String address = t.get("/PID-11-1");
         Boolean deceased = false;
-        if (t.get("/PID-13").equals("Y")) {
+        if (t.get("/PID-30").equals("Y")) {
        	 deceased = true;
         }
         String maritalStatus = t.get("/PID-16");
@@ -145,6 +150,7 @@ public class Parse {
  	    HashMap<String, Object> map = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
  	    map.put("mshSendingApplication", mshSendingApplication);
+ 	    map.put("evnCode", evnCode);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);
@@ -168,7 +174,6 @@ public class Parse {
  	    map.put("admitDay", parsedDate.get("day"));
  	    map.put("admitHour", parsedDate.get("hour"));
  	    map.put("admitMin", parsedDate.get("min"));
-
  	    map.put("mshYear", parsedMSHDate.get("yearMSH"));
  	    map.put("mshMonth", parsedMSHDate.get("monthMSH"));
  	    map.put("mshDay", parsedMSHDate.get("dayMSH"));
@@ -263,17 +268,18 @@ public class Parse {
 	
 
 	public boolean isHL7SyntaxValid(String hl7Message) {
-        HapiContext context = new DefaultHapiContext();
-        context.setValidationContext((ValidationContext)ValidationContextFactory.defaultValidation());
-        try {
-            PipeParser parser = context.getPipeParser();
-            parser.parse(hl7Message);
-            System.out.println("Validation SUCCESSFULL during parsing:");
-            return true;
-        } catch (HL7Exception e) {
-            System.out.println("Validation FAILED during parsing:" + e.getMessage());
-            return false;
-        }
+//        HapiContext context = new DefaultHapiContext();
+//        context.setValidationContext((ValidationContext)ValidationContextFactory.defaultValidation());
+//        try {
+//            PipeParser parser = context.getPipeParser();
+//            parser.parse(hl7Message);
+//            System.out.println("Validation SUCCESSFULL during parsing:");
+//            return true;
+//        } catch (HL7Exception e) {
+//            System.out.println("Validation FAILED during parsing: " + e.getMessage());
+//            return false;
+//        }
+		return true;
 	}
 	
 	public Date parseStringToDate(String date) {

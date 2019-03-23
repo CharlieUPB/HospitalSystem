@@ -35,7 +35,7 @@ public class Patient {
     @JoinColumn
 	private HealthInsurance codSecure;
 	
-	@OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "patientPH" , cascade = CascadeType.ALL)
 	private Set<PatientHistory> patientHistorys;
 	
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
@@ -63,8 +63,16 @@ public class Patient {
 	}
 	
 	public Patient()
-	{
-		
+	{}
+	
+	@Override
+	public String toString() {
+		return "Patient Name: " + this.name + " LastName: " + this.lastName + 
+				" Gender: " + this.gender + " birthdate" + this.birthDate + 
+				" Phone: " + this.phone + " CellPhone: " + this.cellPhone + 
+				"address: " + this.address + " deceased: " + this.deceased + 
+				"maritalStatus" + this.maritalStatus + " nationality: " + this.nationality +
+				"city" + this.city + " codSecure" + this.codSecure;
 	}
 	
 	

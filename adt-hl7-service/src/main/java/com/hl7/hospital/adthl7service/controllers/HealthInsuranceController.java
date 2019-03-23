@@ -19,14 +19,21 @@ import com.hl7.hospital.adthl7service.services.HealthInsuranceService;
 public class HealthInsuranceController {
 
 	@Autowired
-	HealthInsuranceService healthInsuranceService = new HealthInsuranceService();
+	HealthInsuranceService healthInsuranceService;
 	
 	@RequestMapping(
 			value = "/",
 			method = RequestMethod.GET)
-	public @ResponseBody Iterable<HealthInsurance> getAllHealthInsurances()
+	public @ResponseBody HealthInsurance getAllHealthInsurances()
 	{
-		return healthInsuranceService.getAllHealthInsurances();
+		HealthInsurance healthInsuranceCreated = new HealthInsurance();
+		healthInsuranceCreated.setNameOrganization("HOLA");
+		healthInsuranceCreated.setVecDate(java.sql.Date.valueOf("2019-05-31"));
+		
+		HealthInsurance saved = healthInsuranceService.addNewHealthInsurance(healthInsuranceCreated);
+		System.out.println("EL RESULTADO ES " + saved);
+		return saved;
+		//1return healthInsuranceService.getAllHealthInsurances();
 	}
 	
 	

@@ -21,6 +21,7 @@ import ca.uhn.hl7v2.model.v24.message.OML_O21;
 import ca.uhn.hl7v2.model.v24.message.ORM_O01;
 import ca.uhn.hl7v2.model.v24.message.ORU_R01;
 import ca.uhn.hl7v2.model.v24.message.RDE_O11;
+import ca.uhn.hl7v2.model.v24.segment.EVN;
 import ca.uhn.hl7v2.model.v24.segment.MSA;
 import ca.uhn.hl7v2.model.v24.segment.MSH;
 import ca.uhn.hl7v2.model.v24.segment.OBR;
@@ -35,7 +36,7 @@ public class Create {
 
 public String CreateADT_A01(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
 	          
@@ -43,6 +44,8 @@ public String CreateADT_A01(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -94,7 +97,7 @@ public String CreateADT_A01(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A02(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A02 adt = new ADT_A02();
 	          adt.initQuickstart("ADT", "A02", "P");
 	          
@@ -102,6 +105,8 @@ public String CreateADT_A02(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -147,7 +152,7 @@ public String CreateADT_A02(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A03(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 			  ADT_A03 adt = new ADT_A03();
 	          adt.initQuickstart("ADT", "A03", "P");
 	          
@@ -155,6 +160,8 @@ public String CreateADT_A03(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -201,14 +208,16 @@ public String CreateADT_A03(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A04(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A01 adt = new ADT_A01();
 	          adt.initQuickstart("ADT", "A01", "P");
 	          
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
-	          
+	         
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -261,7 +270,7 @@ public String CreateADT_A04(String SendingApplication, String PIDname, String PI
 public String CreateADT_A05(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
 		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic,
-		int admitYear, int admitMonth, int admitDay, int admitHour, int admitMin) throws HL7Exception, IOException {
+		int admitYear, int admitMonth, int admitDay, int admitHour, int admitMin, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -269,6 +278,8 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -315,7 +326,7 @@ public String CreateADT_A05(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A08(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -323,6 +334,8 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -368,7 +381,7 @@ public String CreateADT_A08(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A11(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -376,6 +389,8 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -421,7 +436,7 @@ public String CreateADT_A11(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A12(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -429,6 +444,8 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -474,7 +491,7 @@ public String CreateADT_A12(String SendingApplication, String PIDname, String PI
 
 public String CreateADT_A13(String SendingApplication, String PIDname, String PIDlastName, String PIDcodPatient, String PIDGender, String birthDate, String phone, String cellPhone, String address, String deceased, String maritalStatus, String nationality, String city,
 		String codSecure, String nameOrganization, String vecDate, 
-		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic) throws HL7Exception, IOException {
+		String codDoctor, String nameDoctor,String lastNameDoctor, String PatientClass, String diagnostic, String evnCode) throws HL7Exception, IOException {
 	ADT_A05 adt = new ADT_A05();
 	          adt.initQuickstart("ADT", "A05", "P");
 	          
@@ -482,6 +499,8 @@ public String CreateADT_A13(String SendingApplication, String PIDname, String PI
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
+	          EVN evnSegment = adt.getEVN();
+	          evnSegment.getEventTypeCode().setValue(evnCode);
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPID(); 
@@ -535,7 +554,6 @@ public String CreateORU(String SendingApplication, String PIDname, String PIDlas
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
 	          
-	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT_RESULT(0).getPATIENT().getPID();
 	          pid.getSetIDPID().setValue(PIDcodPatient);
@@ -582,7 +600,6 @@ public String CreateADT_ORM01(String SendingApplication, String PIDname, String 
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
-	          
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();
@@ -631,7 +648,6 @@ public String CreateRDE_011(String SendingApplication, String PIDname, String PI
 	          // Populate the MSH Segment
 	          MSH mshSegment = adt.getMSH();
 	          mshSegment.getSendingApplication().getNamespaceID().setValue(SendingApplication);
-	          
 	          
 	          // Populate the PID Segment
 	          PID pid = adt.getPATIENT().getPID();

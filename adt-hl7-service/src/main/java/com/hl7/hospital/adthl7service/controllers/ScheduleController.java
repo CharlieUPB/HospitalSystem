@@ -18,7 +18,7 @@ import com.hl7.hospital.adthl7service.services.ScheduleService;
 public class ScheduleController {
 
 	@Autowired
-	ScheduleService scheduleService = new ScheduleService();
+	ScheduleService scheduleService;
 	
 	@RequestMapping(
 			value = "/",

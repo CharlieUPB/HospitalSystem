@@ -31,7 +31,7 @@ public class PatientHistoryService {
 		ArrayList<PatientHistory> found = new ArrayList<PatientHistory>();
 		Iterable<PatientHistory> all = this.patientHistoryRepository.findAll();
 		for (PatientHistory patientHistory : all) {
-			if (patientHistory.getPatient().getCod() == id) {
+			if (patientHistory.getPatientPH().getCod() == id) {
 				found.add(patientHistory);
 			}
 		}

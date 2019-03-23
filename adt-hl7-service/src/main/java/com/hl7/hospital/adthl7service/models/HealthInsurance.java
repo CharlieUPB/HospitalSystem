@@ -34,7 +34,7 @@ public class HealthInsurance {
 	}
 	
 	
-	public int getCod()
+	public long getCod()
 	{
 		return this.cod;
 	}
@@ -46,9 +46,6 @@ public class HealthInsurance {
 	{
 		return this.vecDate;
 	}
-	
-	
-	
 	public void setCod(int cod)
 	{
 		this.cod = cod;

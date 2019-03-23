@@ -51,7 +51,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -81,7 +82,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				//por que OBR???? y no PV1
 				response.setData(data);
 				return response;
@@ -111,7 +113,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -140,7 +143,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -174,7 +178,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAdmitDateMonth(),
 							genericMessage.getPv1Model().getAdmitDateDay(),
 							genericMessage.getPv1Model().getAdmitDateHour(),
-							genericMessage.getPv1Model().getAdmitDateMin()).toString();
+							genericMessage.getPv1Model().getAdmitDateMin(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -203,7 +208,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -233,7 +239,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -262,7 +269,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {
@@ -290,7 +298,8 @@ public class AdtController {
 							genericMessage.getPv1Model().getAttendingDoctorName(),
 							genericMessage.getPv1Model().getAttendingDoctorLastName(),
 							genericMessage.getPv1Model().getPatientClass(),
-							genericMessage.getObxModel().getDiagnostic()).toString();
+							genericMessage.getObxModel().getDiagnostic(),
+							genericMessage.getEvn()).toString();
 				response.setData(data);
 				return response;
 			} catch (HL7Exception | IOException e) {

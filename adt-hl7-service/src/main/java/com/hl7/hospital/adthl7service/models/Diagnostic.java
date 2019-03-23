@@ -27,7 +27,7 @@ public class Diagnostic {
 	
 	public Diagnostic(int codDiagnostic, Patient patient, MedicalStaff doctor, String description)
 	{
-		this.codDiagnostic =codDiagnostic;
+		this.codDiagnostic = codDiagnostic;
 		this.setPatient(patient);
 		this.setDoctor(doctor);
 		this.description = description;
@@ -39,7 +39,7 @@ public class Diagnostic {
 	}
 	
 	
-	public int getCodDiagnostic()
+	public long getCodDiagnostic()
 	{
 		return this.codDiagnostic;
 	}
@@ -55,8 +55,6 @@ public class Diagnostic {
 	{
 		return this.description;
 	}
-	
-	
 	
 	public void setCodDiagnostic(int codDiagnostic)
 	{

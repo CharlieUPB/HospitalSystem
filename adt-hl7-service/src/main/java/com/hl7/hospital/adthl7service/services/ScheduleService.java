@@ -17,10 +17,8 @@ import com.hl7.hospital.adthl7service.repositories.ScheduleRepository;
 public class ScheduleService {
 	
 	@Autowired 
-	
 	private ScheduleRepository scheduleRepository;
 
-	
 	public String createNewSchedule (Patient codPatient, MedicalStaff codDoctor, Date date, Time hour) 
 	{
 		Schedule schedule = new Schedule();
