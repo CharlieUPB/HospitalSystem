@@ -15,6 +15,8 @@ import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '
 
 
 import { AppComponent } from './app.component';
+import { NavbarComponentComponent } from './Components/navbar-component/navbar-component.component';
+import { InicioComponentComponent } from './Components/inicio-component/inicio-component.component';
 import { PatientRegisterComponentComponent } from './Components/patient-register-component/patient-register-component.component';
 import {Routing} from '../app-routing.module';
 import { DoctorRegisterComponent } from './Components/doctor-register/doctor-register.component';
@@ -39,11 +41,16 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 @NgModule({
   declarations: [
     AppComponent,
+
+    NavbarComponentComponent,
+    InicioComponentComponent,
+
     PatientRegisterComponentComponent,
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
     HistorialClinicoComponent,
     PatientEventHistoryComponent
+    HistorialClinicoComponent,
   ],
   imports: [
     BrowserModule,

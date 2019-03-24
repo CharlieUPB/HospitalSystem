@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Schedule, Patient, PatientHistory } from 'src/models/Domain';
+import { Schedule, Patient, PatientHistory } from '../models/Domain';
 import { Observable } from 'rxjs';
-import { GenericMessage } from 'src/models/ADT';
+import { GenericMessage } from '../models/ADT';
 
 interface parseResult {
   data: string;
