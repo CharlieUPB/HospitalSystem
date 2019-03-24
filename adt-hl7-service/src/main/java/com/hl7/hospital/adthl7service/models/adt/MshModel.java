@@ -4,21 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MshModel {
 	@JsonProperty(value = "sendingApplication")
-	private String sendinAplication;
-	@JsonProperty(value = "mshControlID")
-	private String mshControlID;
+	private String sendingApplication;
+	@JsonProperty(value = "receivingApplication")
+	private String receivingApplication;
 	
 	
-	public String getSendinAplication() {
-		return sendinAplication;
+	public String getSendingApplication() {
+		return sendingApplication;
 	}
-	public void setSendinAplication(String sendinAplication) {
-		this.sendinAplication = sendinAplication;
+	public void setSendingApplication(String sendinAplication) {
+		this.sendingApplication = sendinAplication;
 	}
-	public String getMshControlID() {
-		return mshControlID;
+	public String getReceivingApplication() {
+		return receivingApplication;
 	}
-	public void setMshControlID(String sequenceNumber) {
-		this.mshControlID = sequenceNumber;
+	public void setReceivingApplication(String receivingApplication) {
+		this.receivingApplication = receivingApplication;
 	}
 }

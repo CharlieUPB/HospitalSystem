@@ -1,19 +1,19 @@
 package com.hl7.hospital.adthl7service.services;
-import java.awt.color.ICC_ColorSpace;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.MedicalStaff;
 import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.repositories.DiagnosticRepository;
 
-
+@Service
 public class DiagnosticService {
 	
 	@Autowired 
-	
 	private DiagnosticRepository diagnosticRepository;
 
 	
