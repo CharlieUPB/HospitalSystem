@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hl7.hospital.adthl7service.errors.BadRequestError;
+import com.hl7.hospital.adthl7service.errors.BadRequestException;
+import com.hl7.hospital.adthl7service.errors.ParsingException;
 import com.hl7.hospital.adthl7service.models.Message;
 import com.hl7.hospital.adthl7service.models.adt.GenericMessage;
 import com.hl7.hospital.adthl7service.utils.Create;
@@ -35,23 +36,27 @@ public class OmlController {
 	@RequestMapping(
 			value = "/oml-o21",
 			method = RequestMethod.POST)
-	public @ResponseBody Message OMLController(@RequestBody GenericMessage genericMessage) throws HL7Exception, IOException {
+	public @ResponseBody Message OMLController(@RequestBody GenericMessage genericMessage) {
 		Create create = new Create();
-		if (genericMessage.getEvn().equals("OML-O21")) {
+		if (genericMessage.getEvn().equals("O21")) {
 			Message response = new Message();
-		String data =create.CreateOML_O21(genericMessage.getMshModel().getSendinAplication(), genericMessage.getMshModel().getMshControlID(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
-				genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
-				genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), 
-				genericMessage.getPidModel().getMaritalStatus(), 
-				genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), 
-				genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
-				genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), 
-				genericMessage.getObrModel().getDiagnostic(), genericMessage.getOrcModel().getOrcOrderControl(), genericMessage.getOrcModel().getPalcerGroupNumber()).toString();
-		response.setData(data);
-		response.setMessageControlID(genericMessage.getMshModel().getMshControlID());
-		return response;
+			String data;
+			try {
+				data = create.CreateOML_O21(genericMessage.getMshModel().getSendingApplication(), genericMessage.getPidModel().getSurName(), genericMessage.getPidModel().getName(), 
+						genericMessage.getPidModel().getIdPID(), genericMessage.getPidModel().getGender(), genericMessage.getPidModel().getBirthDate(), genericMessage.getPidModel().getPhoneNumber(), 
+						genericMessage.getPidModel().getPhoneBusiness(), genericMessage.getPidModel().getAddress(), genericMessage.getPidModel().getDeathIndicator(), 
+						genericMessage.getPidModel().getMaritalStatus(), 
+						genericMessage.getPidModel().getNationality(), genericMessage.getPidModel().getCity(), genericMessage.getIn1Model().getIn1ID(), 
+						genericMessage.getIn1Model().getInsuranceCompanyName(), genericMessage.getIn1Model().getInsuranceExpirationDate(), 
+						genericMessage.getObrModel().getObrID(), genericMessage.getObrModel().getEntityIdentifier(), genericMessage.getObrModel().getNameSpaceID(), 
+						genericMessage.getObrModel().getDiagnostic(), genericMessage.getOrcModel().getOrcOrderControl(), genericMessage.getOrcModel().getPalcerGroupNumber()).toString();
+				response.setData(data);
+				return response;
+			} catch (HL7Exception | IOException e) {
+				throw new ParsingException();
+			}
 		} else {
-			throw new BadRequestError();
+			throw new BadRequestException();
 		}
 		
 	}

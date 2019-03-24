@@ -19,6 +19,7 @@ public class Patient {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cod;
+	private int CI;
 	private String name;
 	private String lastName;
 	private int gender;
@@ -35,7 +36,7 @@ public class Patient {
     @JoinColumn
 	private HealthInsurance codSecure;
 	
-	@OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "patientPH" , cascade = CascadeType.ALL)
 	private Set<PatientHistory> patientHistorys;
 	
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
@@ -63,8 +64,16 @@ public class Patient {
 	}
 	
 	public Patient()
-	{
-		
+	{}
+	
+	@Override
+	public String toString() {
+		return "Patient Name: " + this.name + " LastName: " + this.lastName + 
+				" Gender: " + this.gender + " birthdate" + this.birthDate + 
+				" Phone: " + this.phone + " CellPhone: " + this.cellPhone + 
+				"address: " + this.address + " deceased: " + this.deceased + 
+				"maritalStatus" + this.maritalStatus + " nationality: " + this.nationality +
+				"city" + this.city + " codSecure" + this.codSecure;
 	}
 	
 	
@@ -122,10 +131,6 @@ public class Patient {
 	}
 	
 	
-	public void setCod(int cod)
-	{
-		this.cod = cod;
-	}
 	public void setName(String name)
 	{
 		this.name = name;
@@ -170,8 +175,17 @@ public class Patient {
 	{
 		this.city = city;
 	}
+	
 	public void setCodSecure(HealthInsurance codSecure)
 	{
 		this.codSecure = codSecure;
+	}
+
+	public int getCI() {
+		return CI;
+	}
+
+	public void setCI(int cI) {
+		CI = cI;
 	}
 }

@@ -1,5 +1,9 @@
 package com.hl7.hospital.adthl7service.models;
 
+import java.sql.Date;
+import java.sql.Time;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +20,14 @@ public class PatientHistory {
 	
 	@ManyToOne
 	@JoinColumn
-	private Patient patient;
+	private Patient patientPH;
 	
 	private String adtCode;
+	private String mshID;
 	private String details;
+	
+	private Date eventDate;
+	private Time eventTime;
 	
 	
 	public String getAdtCode() {
@@ -34,17 +42,33 @@ public class PatientHistory {
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	public Patient getPatient() {
-		return patient;
+	public Patient getPatientPH() {
+		return patientPH;
 	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
+	public void setPatientPH(Patient patient) {
+		this.patientPH = patient;
 	}
 	public int getCodPatientHistory() {
 		return codPatientHistory;
 	}
-	public void setCodPatientHistory(int codPatientHistory) {
-		this.codPatientHistory = codPatientHistory;
+	
+	public Date getEventDate() {
+		return eventDate;
+	}
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+	public Time getEventTime() {
+		return eventTime;
+	}
+	public void setEventTime(Time eventTime) {
+		this.eventTime = eventTime;
+	}
+	public String getMshID() {
+		return mshID;
+	}
+	public void setMshID(String mshID) {
+		this.mshID = mshID;
 	}
 	
 }

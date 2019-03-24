@@ -1,6 +1,6 @@
 package com.hl7.hospital.adthl7service.events;
 
-import java.util.HashMap;
+import java.io.IOException;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -9,15 +9,15 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.hibernate.hql.spi.id.IdTableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.hl7.hospital.adthl7service.models.Message;
-import com.hl7.hospital.adthl7service.utils.Create;
 import com.hl7.hospital.adthl7service.utils.Parse;
+
+import ca.uhn.hl7v2.HL7Exception;
+
 import com.hl7.hospital.adthl7service.services.ADTServices;
 
 import com.hl7.hospital.adthl7service.events.EventProducer;
@@ -25,17 +25,20 @@ import com.hl7.hospital.adthl7service.events.EventProducer;
 @Component
 public class EventConsumer implements MqttCallback {
 	
-	private String mqttServer = "tcp://192.168.99.100:1883";
-	private int qos = 2;
-	final private String clientId = "hl7Consumer";
+	@Autowired
+	Runnable MessageListener;
+	
+	private String mqttServer = "ws://localhost:3000"; // using web sockets over mqtt instead of tcp sockets
+	private int qos = 0;
 	
 	private MqttConnectOptions connectionOptions = null;
 	private MqttClient mqttClient = null;
 	private MemoryPersistence persistence = null;
 	
-	private Create createUtil = null;
 	private Parse parseUtil = null;
-	private ADTServices adtServices = null;
+	
+	@Autowired
+	private ADTServices adtServices;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 	
@@ -43,6 +46,7 @@ public class EventConsumer implements MqttCallback {
 	public EventConsumer() {
 		this.init();
 	}
+	
 	
 	public void subscribeMessage(String topic) {
 		try {
@@ -59,74 +63,81 @@ public class EventConsumer implements MqttCallback {
 		System.out.println("Message Arrived Topic: " + topic + "  Message: " + new String(message.getPayload()));
 		System.out.println("***********************************************************************");
 		System.out.println();
-		this.processMessage(topic, message);
-	}
-	
-	private void processMessage(String topic, MqttMessage message) throws Exception  {
-		
-		String hl7Message = new String(message.getPayload()); //get the message data is in json form
-		
-		HashMap<String, Object>  formatedHL7 = this.parseUtil.ADT(hl7Message);
-		
-		String msgControlID = (String) formatedHL7.get("mshControlID");//GEt the message control id from the message
-		String acknowledgment = "";
-		
-		if(this.parseUtil.isHL7SyntaxValid(hl7Message)) {
-			acknowledgment = this.createUtil.CreateACK(msgControlID,"AA"); //Create Application Accept ACK pasing the MessageControlID;
-		} else {
-			acknowledgment = this.createUtil.CreateACK(msgControlID,"AR"); //Create Application Reject ACK pasing the MessageControlID;
+		try {
+			this.processMessage(topic, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al procesar el mensaje");
 		}
-
-		this.handleMessage(topic, hl7Message); //Does all the database interaction necessary.
-	
-		EventProducer.getInstance().publishMessage("ACK", acknowledgment);
 	}
 	
-	private void handleMessage(String topic, String message) throws Exception {
+	private void processMessage(String topic, MqttMessage message)  {
+		String hl7Message = new String(message.getPayload());
+		try {
+			String acknowledgment = this.handleMessage(topic, hl7Message);
+			if(acknowledgment != "") {
+				EventProducer.getInstance().publishMessage("ACK", acknowledgment);
+				System.out.println("I published the ack!" + acknowledgment);
+			}
+		} catch ( HL7Exception | IOException e) {
+			System.out.println("ERROR WHILE HANDLINDG ADT EVENT: ");
+			e.printStackTrace();
+		}
+	}
+	
+	private String handleMessage(String topic, String message) throws HL7Exception, IOException {
+		String acknowledgment = "";
 		switch (topic) {
 		case "ADT-A01":
-			this.adtServices.ADT01Handler(message);
+			acknowledgment = this.adtServices.ADT01Handler(message);
 			break;
 		case "ADT-A02":
-			this.adtServices.ADT02Handler(message);
+			acknowledgment = this.adtServices.ADT02Handler(message);
 			break;
 		case "ADT-A03":
-			this.adtServices.ADT03Handler(message);
+			acknowledgment = this.adtServices.ADT03Handler(message);
 			break;
 		case "ADT-A04":
-			this.adtServices.ADT04Handler(message);
+			acknowledgment = this.adtServices.ADT04Handler(message);
 			break;
 		case "ADT-A05":
-			this.adtServices.ADT05Handler(message);
+			acknowledgment = this.adtServices.ADT05Handler(message);
 			break;
 		case "ADT-A08":
-			this.adtServices.ADT08Handler(message);
+			acknowledgment =  this.adtServices.ADT08Handler(message);
 			break;
 		case "ADT-A11":
-			this.adtServices.ADT11Handler(message);
+			acknowledgment = this.adtServices.ADT11Handler(message);
 			break;
 		case "ADT-A12":
-			this.adtServices.ADT12Handler(message);
+			acknowledgment = this.adtServices.ADT12Handler(message);
 			break;
 		case "ADT-A13":
-			this.adtServices.ADT13Handler(message);
+			acknowledgment = this.adtServices.ADT13Handler(message);
+			break;
+		case "ORM-O01":
+			acknowledgment = this.adtServices.ORMHandler(message);
+			break;	
+		case "OML-O21":
+			acknowledgment = this.adtServices.OMLHandler(message);
+			break;	
+		case "RDE-O11":
+			acknowledgment = this.adtServices.RDEHandler(message);
 			break;	
 		default:
 			break;
 		}
+		return acknowledgment;
 	}
 
 	
 	private void init() {
 		
-		this.createUtil = new Create();
 		this.parseUtil = new Parse();
-		this.adtServices = new ADTServices();
-		
 		this.connectionOptions = new MqttConnectOptions();
 		this.persistence = new MemoryPersistence();
 		try {
-			this.mqttClient = new MqttClient(mqttServer, clientId,persistence);
+			this.mqttClient = new MqttClient(mqttServer, MqttClient.generateClientId(), persistence);
 			this.connectionOptions.setCleanSession(true);
 			this.mqttClient.connect(this.connectionOptions);
 			this.mqttClient.setCallback(this);
@@ -139,13 +150,20 @@ public class EventConsumer implements MqttCallback {
 		try {
 			this.mqttClient.disconnect();
 		} catch (MqttException me) {
-			logger.error("ERROR", me);
+			logger.error("MQTT DISCONECCT ERROR", me);
 		}
 	}
 
 	@Override
 	public void connectionLost(Throwable cause) {
-		logger.info("Connection Lost");
+		Exception ex = new Exception(cause);
+		ex.printStackTrace();
+		try {
+			MessageListener.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

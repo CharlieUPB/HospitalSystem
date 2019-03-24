@@ -1,0 +1,25 @@
+<form [formGroup]="formSchedule">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput id="name" type="text" formControlName="codPatient" placeholder="Ingrese el codigo del Paciente">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Ingrese el codigo del Doctor"  formControlName="codDoctor" type="text">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Seleccione una fecha" formControlName="date" type="text">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Seleccione una hora"  formControlName="hour" type="text">
+    </mat-form-field>
+  </div>
+  <div  class = "button-container">
+    <button class = "primary" mat-button (click)="onSubmit(formSchedule.value)" [mat-dialog-close]="true">Guardar</button>
+  </div>
+  <div  class = "button-container">
+    <button class = "secondary" mat-button mat-dialog-close>Cancelar</button>
+  </div>
+  </form>

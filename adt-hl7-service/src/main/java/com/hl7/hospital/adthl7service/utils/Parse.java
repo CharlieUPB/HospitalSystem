@@ -3,25 +3,20 @@ package com.hl7.hospital.adthl7service.utils;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.Map;
-
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
-  import ca.uhn.hl7v2.model.GenericMessage;
-  import ca.uhn.hl7v2.model.Message;
-import ca.uhn.hl7v2.model.v22.segment.MSH;
-import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
-  import ca.uhn.hl7v2.parser.DefaultModelClassFactory;
-  import ca.uhn.hl7v2.parser.GenericModelClassFactory;
-  import ca.uhn.hl7v2.parser.PipeParser;
-  import ca.uhn.hl7v2.util.Terser;
+import ca.uhn.hl7v2.model.DataTypeException;
+import ca.uhn.hl7v2.model.GenericMessage;
+import ca.uhn.hl7v2.model.v22.message.ADT_A05;
+import ca.uhn.hl7v2.parser.GenericModelClassFactory;
+import ca.uhn.hl7v2.parser.PipeParser;
+import ca.uhn.hl7v2.util.Terser;
 import ca.uhn.hl7v2.validation.ValidationContext;
 import ca.uhn.hl7v2.validation.impl.ValidationContextFactory;
 
 
 public class Parse {
-	
 	
 	public String typeOfMessage(String messagep) throws HL7Exception {
 		String msg = "MSH|^~\\&|HIS|RIH|EKG|EKG|199904140038||ADT^A01||P|2.2\r"
@@ -36,8 +31,8 @@ public class Parse {
         context.setModelClassFactory(new GenericModelClassFactory());
         GenericMessage message = (GenericMessage) context.getPipeParser().parse(messagep);
         Terser t = new Terser(message);
-		return t.get("/MSH-8-1")+t.get("/MSH-8-2");
-		
+        System.out.println(t.get("/MSH-9-1")+t.get("/MSH-9-2"));
+		return t.get("/MSH-9-1")+t.get("/MSH-9-2");
 	}
 	
 	public HashMap<String, Object> ADT(String msg) throws HL7Exception {
@@ -61,12 +56,25 @@ public class Parse {
          * field by only its segment name, not a complex path 
          */
         Terser t = new Terser(message);
+        
         String name = t.get("/PID-5-2");
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-3");
+        String mshStringDate = t.get("/MSH-7");
         
-        int codPatient = Integer.parseInt(t.get("/PID-1"));
+        String evnCode = t.get("/EVN-1");
+        
+        HashMap<String, Integer> parsedMSHDate = new HashMap<String, Integer>();
+        try {
+        	System.out.println("LA FECHA DEL MSH ES: " + mshStringDate);
+        	parsedMSHDate = this.getMSHDate(mshStringDate);
+        } catch(DataTypeException e) {
+        	System.out.println("NO EXISTE FECHA EN EL MSH, ERR: " + e);
+        }
+        
+        int codPatient = Integer.parseInt(t.get("/PID-2")); //We use PATIENT ID as the "cod patient"
         int gender = 3;
         if (t.get("/PID-8").equals("F")) {
        	 gender = 0;
@@ -86,12 +94,13 @@ public class Parse {
         }
         
         
-        String birthDate = t.get("/PID-7");
+        String birthDate = t.get("/PID-25");
+        Date parsedBirthDate = this.parseStringToDate(birthDate);
         String phone = t.get("/PID-13");
         String cellPhone = t.get("/PID-14");
         String address = t.get("/PID-11-1");
         Boolean deceased = false;
-        if (t.get("/PID-13").equals("Y")) {
+        if (t.get("/PID-30").equals("Y")) {
        	 deceased = true;
         }
         String maritalStatus = t.get("/PID-16");
@@ -110,14 +119,26 @@ public class Parse {
      	}
         int codDoctor = 0;
         String nameDoctor = null;
-        String speciality = null;
+        String lastNameDoctor = null;
+        
         try {
         codDoctor = Integer.parseInt(t.get("/PV1-1"));
         nameDoctor = t.get("/PV1-7-3");
-        speciality = t.get("/PV1-7-7");
+        lastNameDoctor = t.get("/PV1-7-2");
         } catch (Exception e) {
     		System.out.println("El mensaje no tiene un componente PV1");
     	}
+        
+        // get Admit Date time; 
+        String hl7AdmitDate = null;
+        HashMap<String, Integer> parsedDate= new HashMap<String, Integer>();
+        
+        try {
+        	hl7AdmitDate = t.get("/PV1-44");
+        	parsedDate = this.getAdmitDate(hl7AdmitDate);
+        } catch(HL7Exception e) {
+        	System.out.println("El mensaje no tiene date, ERR: " + e);
+        }
       
         String diagnostic = null;
         try {
@@ -129,16 +150,17 @@ public class Parse {
 
  		
  	    HashMap<String, Object> map = new HashMap<>();
- 	    HashMap<String, String> mapdir = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
- 	    map.put("codPatient",codPatient);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
+ 	    map.put("evnCode", evnCode);
+ 	    map.put("codPatient",codPatient); //NOTE THIS WILL BE SET TO CI. NOT TO THE ENTITY PRIMARY KEY.
  	    map.put("name", name);
  	    map.put("lastName", lastName);
  	    map.put("gender", gender);
- 	    map.put("birthDate", birthDate);
+ 	    map.put("birthDate", parsedBirthDate);
  	    map.put("phone", phone);
  	    map.put("cellPhone", cellPhone);
- 	   map.put("address", address);
+ 	    map.put("address", address);
  	    map.put("deceased", deceased);
  	    map.put("maritalStatus", maritalStatus);
  	    map.put("nationality", nationality);
@@ -148,13 +170,121 @@ public class Parse {
  	    map.put("vecDate", vecDate);
  	    map.put("codDoctor", codDoctor);
  	    map.put("nameDoctor", nameDoctor);
- 	    map.put("speciality", speciality);
+ 	    map.put("lastNameDoctor", lastNameDoctor);
+ 	    map.put("admitYear", parsedDate.get("year"));
+ 	    map.put("admitMonth", parsedDate.get("month"));
+ 	    map.put("admitDay", parsedDate.get("day"));
+ 	    map.put("admitHour", parsedDate.get("hour"));
+ 	    map.put("admitMin", parsedDate.get("min"));
+ 	    map.put("mshYear", parsedMSHDate.get("mshYear"));
+ 	    map.put("mshMonth", parsedMSHDate.get("mshMonth"));
+ 	    map.put("mshDay", parsedMSHDate.get("mshDay"));
+ 	    map.put("mshHour", parsedMSHDate.get("mshHour"));
+ 	    map.put("mshMin", parsedMSHDate.get("mshMin"));
  	    map.put("diagnostic", diagnostic);
- 	    System.out.println(map.toString());
+ 	    System.out.println("El mensaje parseado corresponde a " + map.toString());
 	    return map;
 	}	
+
+	public HashMap<String, Object> getMSH(String hl7Message) throws HL7Exception {
+		HapiContext context = new DefaultHapiContext();
+        context.setModelClassFactory(new GenericModelClassFactory());
+
+        // The parser will always parse this as a "GenericMessage"
+       GenericMessage message = (GenericMessage) context.getPipeParser().parse(hl7Message);
+    
+        /* 
+         * A generic message has a flat structure, so you can ask for any
+         * field by only its segment name, not a complex path 
+         */
+        Terser t = new Terser(message);
+        String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-2");
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("mshControlID", mshControlID);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
+ 	    
+ 	    return map;
+	}
 	
-public Map<String, Object> ORU(String msg) throws HL7Exception {
+	public HashMap<String, Integer> getMSHDate(String hl7MSHDate) throws DataTypeException {
+		HashMap<String, Integer> date = new HashMap<>();
+		//This is date time of the hl7 message
+		int yearMSH = 0;
+		int monthMSH = 0;
+		int dayMSH = 0;
+		int hourMSH = 0;
+		int minMSH = 0;
+		
+		ADT_A05 adt = new ADT_A05();
+		
+		// getting msh date time in pretty format
+		adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().setValue(hl7MSHDate);
+		yearMSH = adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().getYear();
+		monthMSH = adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().getMonth();
+		dayMSH = adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().getDay();
+		hourMSH = adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().getHour();
+		minMSH = adt.getMSH().getDateTimeOfMessage().getTimeOfAnEvent().getMinute();
+		
+		date.put("mshYear", yearMSH);
+		date.put("mshMonth", monthMSH);
+		date.put("mshDay", dayMSH);
+		date.put("mshHour", hourMSH);
+		date.put("mshMin", minMSH);
+		
+		System.out.println("El mapa creado para los dates de msh es: " + date);
+		
+		return date;
+	}
+
+	
+	public HashMap<String, Integer> getAdmitDate(String hl7Date) throws DataTypeException {
+		HashMap<String, Integer> date = new HashMap<>();
+
+		//This is admit date time
+		int year = 0; 
+		int month = 0;
+		int day = 0;
+		int hour = 0;
+		int min = 0;
+		
+		ADT_A05 adt = new ADT_A05();
+		
+		// getting admit date time in pretty format
+		
+		adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().setValue(hl7Date);
+		year = adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().getYear();
+		month =  adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().getMonth();
+		day =  adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().getDay();
+		hour =  adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().getHour();
+		min =  adt.getPV1().getAdmitDateTime().getTimeOfAnEvent().getMinute();
+		
+		
+		date.put("year", year);
+		date.put("month", month);
+		date.put("day", day);
+		date.put("hour", hour);
+		date.put("min", min);
+		
+		return date;
+	}
+	
+	public Date parseStringToDate(String date) {
+		System.out.println("Date es: " + date);
+		String year = date.substring(0, 4);
+		String month = date.substring(4,6);
+		String day = date.substring(6, 8);
+		
+		String finalDate = year + "-" + month + "-" + day;
+		
+		Date sqlDate = java.sql.Date.valueOf(finalDate); //date should be like "2010-01-31"
+		
+		return sqlDate;
+	}
+	
+
+public HashMap<String, Object> ORU(String msg) throws HL7Exception {
 		
 		HapiContext context = new DefaultHapiContext();
         context.setModelClassFactory(new GenericModelClassFactory());
@@ -181,6 +311,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
+        String mshSendingApplication = t.get("/MSH-2");
         
         int codPatient = Integer.parseInt(t.get("/PID-1"));
         int gender = 3;
@@ -241,12 +372,10 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
        	} catch (Exception e) {
        		System.out.println("El mensaje no tiene un componente OBX");
        	}
-        
-
  		
  	    HashMap<String, Object> map = new HashMap<>();
- 	    HashMap<String, String> mapdir = new HashMap<>();
  	    map.put("mshControlID", mshControlID);
+ 	    map.put("mshSendingApplication", mshSendingApplication);
  	    map.put("codPatient",codPatient);
  	    map.put("name", name);
  	    map.put("lastName", lastName);
@@ -254,7 +383,7 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
  	    map.put("birthDate", birthDate);
  	    map.put("phone", phone);
  	    map.put("cellPhone", cellPhone);
- 	   map.put("address", address);
+ 	    map.put("address", address);
  	    map.put("deceased", deceased);
  	    map.put("maritalStatus", maritalStatus);
  	    map.put("nationality", nationality);
@@ -270,31 +399,6 @@ public Map<String, Object> ORU(String msg) throws HL7Exception {
 	    return map;
 	}
 
-	public boolean isHL7SyntaxValid(String hl7Message) {
-        HapiContext context = new DefaultHapiContext();
-        context.setValidationContext((ValidationContext)ValidationContextFactory.defaultValidation());
-        try {
-            PipeParser parser = context.getPipeParser();
-            parser.parse(hl7Message);
-            System.out.println("Validation SUCCESSFULL during parsing:");
-            return true;
-        } catch (HL7Exception e) {
-            System.out.println("Validation FAILED during parsing:" + e.getMessage());
-            return false;
-        }
-	}
-	
-	public Date parseStringToDate(String date) {
-		String year = date.substring(0, 4);
-		String month = date.substring(4,6);
-		String day = date.substring(6, 8);
-		
-		String finalDate = year + "-" + month + "-" + day;
-		
-		Date sqlDate = java.sql.Date.valueOf(finalDate); //date should be like "2010-01-31"
-		
-		return sqlDate;
-	}
 	
 
 }

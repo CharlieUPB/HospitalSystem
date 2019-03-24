@@ -1,0 +1,30 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  mat-form-field.txtarea {
+    min-height: 100px;
+    height: initial;
+    width: 100%;
+  }
+  
+  mat-form-field textarea {
+        height: 50px;
+   }
+  
+   .mat-slide-toggle {
+    padding: 10px;
+  }
+  
+  .button-container {
+      padding: 5px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+  }
+
+  .mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+    color: white;
+    background-color: #07075f;
+  }
