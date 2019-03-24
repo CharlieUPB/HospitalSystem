@@ -5,12 +5,14 @@ import { AppComponent } from './app/app.component';
 import {DoctorRegisterComponent} from './app/Components/doctor-register/doctor-register.component'
 import {AgendamientoRegisterComponent} from './app/Components/agendamiento-register/agendamiento-register.component'
 import {HistorialClinicoComponent} from './app/Components/historial-clinico/historial-clinico.component'
+import { PatientEventHistoryComponent } from './app/Components/patient-event-history/patient-event-history.component';
 
 const routes: Routes = [
   { path: 'registerpatient', component: PatientRegisterComponentComponent },
   { path: 'registerdoctor', component: DoctorRegisterComponent },
   { path: 'registerscheduling', component: AgendamientoRegisterComponent },
-  { path: 'clinicalhistory', component: HistorialClinicoComponent},
+  { path: 'clinicalhistory/:id', component: HistorialClinicoComponent},
+  { path: 'eventHistory/:id' , component: PatientEventHistoryComponent},
   { path: '', component: AppComponent }
 ];
 export const Routing = RouterModule.forRoot(routes);

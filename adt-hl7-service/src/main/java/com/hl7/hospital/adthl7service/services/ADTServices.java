@@ -76,6 +76,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A01");
 		ph.setDetails("A Patient ADMIT was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -133,6 +134,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A02");
 		ph.setDetails("A Patient TRANSFER was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -189,6 +191,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A03");
 		ph.setDetails("A Patient DISCHARGE was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -255,6 +258,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A04");
 		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -336,6 +340,7 @@ public class ADTServices {
 		ph.setDetails("A Patient PRE-ADMISSION was triggered to " + patient.getName() + " patient");
 		
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -436,6 +441,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A08");
 		ph.setDetails("A Patient UPDATE INFORMATION was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -501,6 +507,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A11");
 		ph.setDetails("A Patient CANCEL ADMIT was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -557,6 +564,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A12");
 		ph.setDetails("A Patient CANCEL TRANSFER was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -612,6 +620,7 @@ public class ADTServices {
 		ph.setAdtCode("ADT-A13");
 		ph.setDetails("A Patient CANCEL DISCHARGE was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
+		ph.setAcked(false);
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -636,6 +645,7 @@ public class ADTServices {
 
 		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
+	
 	public String RDEHandler (String message) throws HL7Exception, IOException {
 		HashMap<String, Object> parsedmessage = new HashMap<>();
 		parsedmessage = parse.getMSH(message);
@@ -661,6 +671,17 @@ public class ADTServices {
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
 		String ack = create.CreateACK(mshControlID,"AA","LABORATORY",sedingApp);
 		return ack;
+	}
+	
+	public String ackRcvHandler(String mshID) {
+		PatientHistory pHistory = this.patientHistoryService.findByMSHID(mshID);
+		if(pHistory == null) {
+			System.out.println("No se pudo actualizar el evento con ese id, porque no se lo encontro");
+		} else {
+			pHistory.setAcked(true);;
+			this.patientHistoryService.addPatientHistory(pHistory);
+		}
+		return "";
 	}
 	
 	private HashMap<String, Object> getMSHDateTime(HashMap<String, Object> parsedmessage) {

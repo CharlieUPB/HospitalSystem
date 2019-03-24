@@ -8,13 +8,18 @@ interface parseResult {
   data: string;
 }
 
+interface mshSegment {
+  mshControlID: string;
+  mshSendingApplication: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
 
-  apiURL: string = 'http://localhost:7000/api/v1/';
+  apiURL: string = 'http://localhost:7000/api/v1';
 
 
   constructor(private httpClient: HttpClient) { }
@@ -77,6 +82,10 @@ export class ApiService {
   
   public createRDE_O11(message: GenericMessage): Observable<parseResult> {
     return this.httpClient.post<parseResult>(`${this.apiURL}/rde/rde-o11`,message);
+  }
+
+  public getACKID(hl7message: any): Observable<mshSegment> {
+    return this.httpClient.post<mshSegment>(`${this.apiURL}/ack/`,hl7message);
   }
   
 }
