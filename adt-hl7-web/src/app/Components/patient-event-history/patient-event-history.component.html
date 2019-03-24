@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+    Lista de Eventos del paciente
+</mat-toolbar>
+
+<table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="MSHID">
+      <th mat-header-cell *matHeaderCellDef>Msh ID.</th>
+      <td mat-cell *matCellDef="let history"> {{history.mshID}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="ADT Code">
+      <th mat-header-cell *matHeaderCellDef> ADT Code </th>
+      <td mat-cell *matCellDef="let history"> {{history.adtCode}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Details">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let history"> {{history.details}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Event Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let history"> {{history.eventDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Event Time">
+        <th mat-header-cell *matHeaderCellDef> Time </th>
+        <td mat-cell *matCellDef="let history"> {{history.eventTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Acknowledge">
+        <th mat-header-cell *matHeaderCellDef> ACK </th>
+        <td mat-cell *matCellDef="let history"> 
+          <p [style.color]="history.acked ? 'green' : 'red'"> {{history.acked}} </p>
+        </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  

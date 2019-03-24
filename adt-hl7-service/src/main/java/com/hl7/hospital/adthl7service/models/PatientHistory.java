@@ -29,6 +29,8 @@ public class PatientHistory {
 	private Date eventDate;
 	private Time eventTime;
 	
+	private boolean acked;
+	
 	
 	public String getAdtCode() {
 		return adtCode;
@@ -70,5 +72,12 @@ public class PatientHistory {
 	public void setMshID(String mshID) {
 		this.mshID = mshID;
 	}
+	public boolean isAcked() {
+		return acked;
+	}
+	public void setAcked(boolean acked) {
+		this.acked = acked;
+	}
+	
 	
 }

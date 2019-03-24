@@ -10,6 +10,8 @@ import {MatRadioModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +22,10 @@ import {Routing} from '../app-routing.module';
 import { DoctorRegisterComponent } from './Components/doctor-register/doctor-register.component';
 import { AgendamientoRegisterComponent } from './Components/agendamiento-register/agendamiento-register.component';
 import { HistorialClinicoComponent } from './Components/historial-clinico/historial-clinico.component';
+import { DerivePharmacyComponent } from './Components/derive-pharmacy/derive-pharmacy.component';
+import { DeriveRadiographyComponent } from './Components/derive-radiography/derive-radiography.component';
+import { DeriveLaboratoryComponent } from './Components/derive-laboratory/derive-laboratory.component';
+import { PatientEventHistoryComponent } from './Components/patient-event-history/patient-event-history.component';
 
 import { Observable } from 'rxjs';
 
@@ -28,9 +34,6 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
-import { DerivePharmacyComponent } from './Components/derive-pharmacy/derive-pharmacy.component';
-import { DeriveRadiographyComponent } from './Components/derive-radiography/derive-radiography.component';
-import { DeriveLaboratoryComponent } from './Components/derive-laboratory/derive-laboratory.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -51,8 +54,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     HistorialClinicoComponent,
     DerivePharmacyComponent,
     DeriveRadiographyComponent,
-    DeriveLaboratoryComponent
-
+    DeriveLaboratoryComponent,
+    PatientEventHistoryComponent,
+    HistorialClinicoComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +72,11 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
+    MatListModule,
+    MatCardModule,
+    MatChipsModule,
+    MatTableModule,
+    MatToolbarModule,
     Routing
 
   ],
