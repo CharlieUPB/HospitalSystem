@@ -24,6 +24,7 @@ public class EventListener implements Runnable{
 			consumer.subscribeMessage("OML-O21");
 			consumer.subscribeMessage("ORM-O01");
 			consumer.subscribeMessage("RDE-O11");
+			consumer.subscribeMessage("ACK_RCV");
 		}
 		
 	}

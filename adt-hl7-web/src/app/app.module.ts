@@ -10,6 +10,8 @@ import {MatRadioModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material';
+import { MatListModule } from '@angular/material';
+import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +30,7 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
+import { PatientEventHistoryComponent } from './Components/patient-event-history/patient-event-history.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -45,8 +48,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     PatientRegisterComponentComponent,
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
-    HistorialClinicoComponent
-
+    HistorialClinicoComponent,
+    PatientEventHistoryComponent
+    HistorialClinicoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,11 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
+    MatListModule,
+    MatCardModule,
+    MatChipsModule,
+    MatTableModule,
+    MatToolbarModule,
     Routing
 
   ],
