@@ -1,4 +1,8 @@
-<table mat-table [dataSource]="histories" class="mat-elevation-z8">
+<mat-toolbar color="primary">
+    Lista de Eventos del paciente
+</mat-toolbar>
+
+<table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

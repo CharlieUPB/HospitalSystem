@@ -678,8 +678,10 @@ public class ADTServices {
 		if(pHistory == null) {
 			System.out.println("No se pudo actualizar el evento con ese id, porque no se lo encontro");
 		} else {
-			pHistory.setAcked(true);;
+			System.out.println("Actualizare el ack en la bd para: " + mshID);
+			pHistory.setAcked(true);
 			this.patientHistoryService.addPatientHistory(pHistory);
+			System.out.println("LISTA LA ACTUALIZACION " + mshID);
 		}
 		return "";
 	}

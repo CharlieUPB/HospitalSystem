@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material';
 import { MatListModule } from '@angular/material';
-import { MatCardModule, MatChipsModule, MatTableModule } from '@angular/material';
+import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -63,6 +63,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatCardModule,
     MatChipsModule,
     MatTableModule,
+    MatToolbarModule,
     Routing
 
   ],

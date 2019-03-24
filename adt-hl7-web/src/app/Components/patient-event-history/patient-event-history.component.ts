@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { PatientHistory } from 'src/models/Domain';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-patient-event-history',
@@ -16,7 +17,8 @@ export class PatientEventHistoryComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['MSHID', 'ADT Code', 'Details', 'Event Date', 'Event Time' , 'Acknowledge'];
   id: number;
   private sub: any;
-  histories: PatientHistory[] = [];
+  histories: PatientHistory[];
+  dataSource = new MatTableDataSource(this.histories);
 
   // mqtt
   private subscription: Subscription;
@@ -24,20 +26,22 @@ export class PatientEventHistoryComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private service: ApiService, private _mqttService: MqttService) {
     this.subscription = this._mqttService.observe('ACK').subscribe((message: IMqttMessage) => {
-      if(this.histories) {
+      this.service.getPatientHistoryByCI(this.id).subscribe((data: PatientHistory[]) => {
+        this.histories = [...data];
+        this.sortTable();
+        this.dataSource = new MatTableDataSource(this.histories);
         this.message = message.payload.toString();
-        this.service.getACKID({data: this.message})
-        .subscribe(
-          data => {
+        setTimeout(() => {
+          this.service.getACKID({data: this.message}).subscribe((data) => {
             this.histories.forEach((history: PatientHistory) => {
               if(history.mshID === data.mshControlID) {
                 history.acked = true;
                 this.unsafePublish("ACK_RCV",history.mshID);
               }
             })
-          }
-        )
-      }
+          });
+      }, 3000);
+      });
       
     });
   }
@@ -46,24 +50,22 @@ export class PatientEventHistoryComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
    });
-   this.loadHistories();
+   this.service.getPatientHistoryByCI(this.id).subscribe((data: PatientHistory[]) => {
+    this.histories = data;
+    this.sortTable();
+    this.dataSource = new MatTableDataSource(this.histories);
+   });
+  }
+
+  private sortTable() {
+    this.histories.sort((a: PatientHistory, b: PatientHistory) => {
+      return (this.getDate(a.eventDate,a.eventTime)).getTime() - (this.getDate(b.eventDate,b.eventTime)).getTime();
+    });
+    this.histories.reverse();
   }
 
   public unsafePublish(topic: string, message: string): void {
     this._mqttService.unsafePublish(topic, message, {qos: 0, retain: true});
-  }
-
-  private loadHistories() {
-    this.service.getPatientHistoryByCI(this.id)
-   .subscribe(
-     data => {
-       this.histories = data;
-       //This will sort by date
-       this.histories.sort((a: PatientHistory, b: PatientHistory) => {
-        return (this.getDate(a.eventDate,a.eventTime)).getTime() - (this.getDate(b.eventDate,b.eventTime)).getTime();
-      });
-     }
-   )
   }
 
   //This will cast "2010-03-12" and "10:30:00" strings to Date objects
@@ -72,8 +74,7 @@ export class PatientEventHistoryComponent implements OnInit, OnDestroy {
     let splitedTime = stringTime.split(":");
     return new Date(+splitedDate[0],+splitedDate[1],+splitedDate[2], +splitedTime[0], +splitedTime[1]);
   }
-
-
+  
   public ngOnDestroy() {
     this.subscription.unsubscribe();
   }
