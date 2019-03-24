@@ -751,6 +751,7 @@ public String CreateOML_O21(String SendingApplication, String PIDname, String PI
 		ACK ack = new ACK();
 		ack.initQuickstart("ACK", "ACK", "P");
 		MSH mshSegment = ack.getMSH();
+		mshSegment.getMsh10_MessageControlID().setValue(MSHControlID);
 		mshSegment.getSecurity().setValue("ACK");
 		
 		mshSegment.getSendingApplication().getNamespaceID().setValue(sendingApplication);

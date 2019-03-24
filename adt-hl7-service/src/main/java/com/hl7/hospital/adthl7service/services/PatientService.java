@@ -62,6 +62,16 @@ public class PatientService {
 		return patientRepository.findById(codPatient);
 	}
 	
+	public Patient getPatientByCI(int CI) {
+		Iterable<Patient> patients = patientRepository.findAll();
+		for(Patient p: patients) {
+			if(p.getCI() == CI) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	
 	public ArrayList<Patient> getPatientsByName(String name)
 	{

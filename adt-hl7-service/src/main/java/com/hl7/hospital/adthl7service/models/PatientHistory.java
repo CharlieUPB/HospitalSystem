@@ -18,11 +18,12 @@ public class PatientHistory {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codPatientHistory;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn
 	private Patient patientPH;
 	
 	private String adtCode;
+	private String mshID;
 	private String details;
 	
 	private Date eventDate;
@@ -62,6 +63,12 @@ public class PatientHistory {
 	}
 	public void setEventTime(Time eventTime) {
 		this.eventTime = eventTime;
+	}
+	public String getMshID() {
+		return mshID;
+	}
+	public void setMshID(String mshID) {
+		this.mshID = mshID;
 	}
 	
 }

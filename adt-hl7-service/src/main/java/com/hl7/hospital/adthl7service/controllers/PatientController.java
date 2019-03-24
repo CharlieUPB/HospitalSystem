@@ -28,15 +28,15 @@ public class PatientController {
 	}
 	
 	@RequestMapping(
-			value = "/{id}",
+			value = "/{CI}",
 			method = RequestMethod.GET)
-	public @ResponseBody Patient getPatientById(@PathVariable("id") String codPatient)
+	public @ResponseBody Patient getPatientById(@PathVariable("CI") int patientCI)
 	{
-		Optional<Patient> patientOptional = patientService.getPatientByID(Integer.parseInt(codPatient));
-		if(patientOptional.isPresent()) {
-			return patientOptional.get();
-		} else {
+		Patient patient = this.patientService.getPatientByCI(patientCI);
+		if(patient == null) {
 			throw new NotFoundException();
+		} else {
+			return patient;
 		}
 	}
 

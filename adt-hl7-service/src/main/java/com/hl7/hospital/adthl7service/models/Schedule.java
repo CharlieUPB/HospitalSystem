@@ -3,6 +3,7 @@ package com.hl7.hospital.adthl7service.models;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Schedule {
 	@JoinColumn
 	private Patient codPatient;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private MedicalStaff codDoctor;
 	private Date date;

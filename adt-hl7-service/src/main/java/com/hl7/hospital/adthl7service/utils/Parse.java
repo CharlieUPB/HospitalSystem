@@ -61,13 +61,14 @@ public class Parse {
         String lastName = t.get("/PID-5-1");
         
         String mshControlID = t.get("/MSH-10");
-        String mshSendingApplication = t.get("/MSH-2");
+        String mshSendingApplication = t.get("/MSH-3");
         String mshStringDate = t.get("/MSH-7");
         
         String evnCode = t.get("/EVN-1");
         
         HashMap<String, Integer> parsedMSHDate = new HashMap<String, Integer>();
         try {
+        	System.out.println("LA FECHA DEL MSH ES: " + mshStringDate);
         	parsedMSHDate = this.getMSHDate(mshStringDate);
         } catch(DataTypeException e) {
         	System.out.println("NO EXISTE FECHA EN EL MSH, ERR: " + e);
@@ -93,7 +94,8 @@ public class Parse {
         }
         
         
-        String birthDate = t.get("/PID-7");
+        String birthDate = t.get("/PID-25");
+        Date parsedBirthDate = this.parseStringToDate(birthDate);
         String phone = t.get("/PID-13");
         String cellPhone = t.get("/PID-14");
         String address = t.get("/PID-11-1");
@@ -117,12 +119,12 @@ public class Parse {
      	}
         int codDoctor = 0;
         String nameDoctor = null;
-        String speciality = null;
+        String lastNameDoctor = null;
         
         try {
         codDoctor = Integer.parseInt(t.get("/PV1-1"));
         nameDoctor = t.get("/PV1-7-3");
-        speciality = t.get("/PV1-7-7");
+        lastNameDoctor = t.get("/PV1-7-2");
         } catch (Exception e) {
     		System.out.println("El mensaje no tiene un componente PV1");
     	}
@@ -155,7 +157,7 @@ public class Parse {
  	    map.put("name", name);
  	    map.put("lastName", lastName);
  	    map.put("gender", gender);
- 	    map.put("birthDate", birthDate);
+ 	    map.put("birthDate", parsedBirthDate);
  	    map.put("phone", phone);
  	    map.put("cellPhone", cellPhone);
  	    map.put("address", address);
@@ -168,19 +170,19 @@ public class Parse {
  	    map.put("vecDate", vecDate);
  	    map.put("codDoctor", codDoctor);
  	    map.put("nameDoctor", nameDoctor);
- 	    map.put("speciality", speciality);
+ 	    map.put("lastNameDoctor", lastNameDoctor);
  	    map.put("admitYear", parsedDate.get("year"));
  	    map.put("admitMonth", parsedDate.get("month"));
  	    map.put("admitDay", parsedDate.get("day"));
  	    map.put("admitHour", parsedDate.get("hour"));
  	    map.put("admitMin", parsedDate.get("min"));
- 	    map.put("mshYear", parsedMSHDate.get("yearMSH"));
- 	    map.put("mshMonth", parsedMSHDate.get("monthMSH"));
- 	    map.put("mshDay", parsedMSHDate.get("dayMSH"));
- 	    map.put("mshHour", parsedMSHDate.get("hourMSH"));
- 	    map.put("mshMin", parsedMSHDate.get("minMSH"));
+ 	    map.put("mshYear", parsedMSHDate.get("mshYear"));
+ 	    map.put("mshMonth", parsedMSHDate.get("mshMonth"));
+ 	    map.put("mshDay", parsedMSHDate.get("mshDay"));
+ 	    map.put("mshHour", parsedMSHDate.get("mshHour"));
+ 	    map.put("mshMin", parsedMSHDate.get("mshMin"));
  	    map.put("diagnostic", diagnostic);
- 	    System.out.println(map.toString());
+ 	    System.out.println("El mensaje parseado corresponde a " + map.toString());
 	    return map;
 	}	
 
@@ -231,6 +233,8 @@ public class Parse {
 		date.put("mshHour", hourMSH);
 		date.put("mshMin", minMSH);
 		
+		System.out.println("El mapa creado para los dates de msh es: " + date);
+		
 		return date;
 	}
 
@@ -266,23 +270,8 @@ public class Parse {
 		return date;
 	}
 	
-
-	public boolean isHL7SyntaxValid(String hl7Message) {
-//        HapiContext context = new DefaultHapiContext();
-//        context.setValidationContext((ValidationContext)ValidationContextFactory.defaultValidation());
-//        try {
-//            PipeParser parser = context.getPipeParser();
-//            parser.parse(hl7Message);
-//            System.out.println("Validation SUCCESSFULL during parsing:");
-//            return true;
-//        } catch (HL7Exception e) {
-//            System.out.println("Validation FAILED during parsing: " + e.getMessage());
-//            return false;
-//        }
-		return true;
-	}
-	
 	public Date parseStringToDate(String date) {
+		System.out.println("Date es: " + date);
 		String year = date.substring(0, 4);
 		String month = date.substring(4,6);
 		String day = date.substring(6, 8);

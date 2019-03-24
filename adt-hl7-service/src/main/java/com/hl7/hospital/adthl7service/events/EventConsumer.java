@@ -63,7 +63,12 @@ public class EventConsumer implements MqttCallback {
 		System.out.println("Message Arrived Topic: " + topic + "  Message: " + new String(message.getPayload()));
 		System.out.println("***********************************************************************");
 		System.out.println();
-		this.processMessage(topic, message);
+		try {
+			this.processMessage(topic, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al procesar el mensaje");
+		}
 	}
 	
 	private void processMessage(String topic, MqttMessage message)  {
@@ -72,6 +77,7 @@ public class EventConsumer implements MqttCallback {
 			String acknowledgment = this.handleMessage(topic, hl7Message);
 			if(acknowledgment != "") {
 				EventProducer.getInstance().publishMessage("ACK", acknowledgment);
+				System.out.println("I published the ack!" + acknowledgment);
 			}
 		} catch ( HL7Exception | IOException e) {
 			System.out.println("ERROR WHILE HANDLINDG ADT EVENT: ");
