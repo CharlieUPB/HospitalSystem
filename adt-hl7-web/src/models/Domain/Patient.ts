@@ -1,21 +1,25 @@
+import { HealthInsurance } from './HealthInsurance';
+
 export interface Patient {
     cod : number;
 	name: string;
 	lastName: string;
 	gender: Gender ;
 	birthDate: Date;
-	phone: string;
-	cellPhone: string;
-	address: string;
+	phone: string | null;
+	cellPhone: string | null;
+	address: string | null;
 	deceased: Decesased;
-	maritalStatus: MaritalStatus;
+	maritalStatus: MaritalStatus | null;
 	nationality: string;
 	city: string;
+	codSecure: HealthInsurance;
+	CI: number;
 }
 
 export enum Gender {
-    male,
     female,
+    male,
     other,
 }
 

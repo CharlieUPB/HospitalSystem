@@ -1,5 +1,5 @@
 export interface In1 {
-    id: string;
-    insuranceCompanyName: string;
-    insuranceExpirationDate: string;
+    ID: string;
+    insuranceCompName: string;
+    insuranceExpDate: string;
 }

@@ -6,6 +6,4 @@ export interface MedicalStaff {
     lastName: string;
     gender: Gender;
     specality: string;
-    diagnostics: Diagnostic[];
-    schedules: Schedule[];
 }

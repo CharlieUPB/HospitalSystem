@@ -2,8 +2,8 @@ import { Patient , MedicalStaff} from './';
 
 export interface Schedule {
     cod: number;
-    patient: Patient;
-    medicalStaff: MedicalStaff;
-    date: Date;
-    hour: Date;
+    codPatient: Patient;
+    codMedicalStaff: MedicalStaff;
+    date: string;
+    hour: string;
 }

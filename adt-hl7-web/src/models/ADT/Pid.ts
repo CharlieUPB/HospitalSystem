@@ -1,7 +1,7 @@
 import { Gender, Decesased, MaritalStatus } from '../Domain/'
 
 export interface Pid {
-   ID: string;
+   CI: string;
    name: string;
    lastName: string;
    birthDate: string;

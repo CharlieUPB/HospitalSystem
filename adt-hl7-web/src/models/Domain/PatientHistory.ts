@@ -5,5 +5,8 @@ export interface PatientHistory {
     cod: string;
     patient: Patient;
     adtCode: ADT;
+    mshID: string;
     details: string;
+    eventDate: string;
+    eventTime: string;
 }   
