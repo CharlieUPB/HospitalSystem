@@ -49,7 +49,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
     HistorialClinicoComponent,
-    PatientEventHistoryComponent
+    PatientEventHistoryComponent,
     HistorialClinicoComponent,
   ],
   imports: [
