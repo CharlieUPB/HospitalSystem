@@ -66,12 +66,6 @@ public class MedicalStaff {
 		return this.speciality;
 	}
 	
-	
-	
-	public void setCod(int cod)
-	{
-		this.cod = cod;
-	}
 	public void setName(String name)
 	{
 		this.name = name;

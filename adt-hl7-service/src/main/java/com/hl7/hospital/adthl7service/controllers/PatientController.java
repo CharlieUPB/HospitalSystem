@@ -2,22 +2,22 @@ package com.hl7.hospital.adthl7service.controllers;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.hl7.hospital.adthl7service.models.Diagnostic;
+import com.hl7.hospital.adthl7service.errors.NotFoundException;
 import com.hl7.hospital.adthl7service.models.Patient;
-import com.hl7.hospital.adthl7service.services.DiagnosticService;
 import com.hl7.hospital.adthl7service.services.PatientService;
 
 @RestController
 @RequestMapping(path = "/patients")
 public class PatientController {
 
-	PatientService patientService = new PatientService();
+	@Autowired
+	PatientService patientService;
 	
 	@RequestMapping(
 			value = "/",
@@ -27,13 +27,17 @@ public class PatientController {
 		return patientService.getAllPatients();
 	}
 	
-	
 	@RequestMapping(
-			value = "/",
+			value = "/{CI}",
 			method = RequestMethod.GET)
-	public @ResponseBody Optional<Patient> getPatientById(@RequestParam("id") String codPatient)
+	public @ResponseBody Patient getPatientById(@PathVariable("CI") int patientCI)
 	{
-		return patientService.getPatientByID(Integer.parseInt(codPatient));
+		Patient patient = this.patientService.getPatientByCI(patientCI);
+		if(patient == null) {
+			throw new NotFoundException();
+		} else {
+			return patient;
+		}
 	}
 
 }
