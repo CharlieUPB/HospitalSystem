@@ -14,12 +14,16 @@ import { AppComponent } from './app.component';
 import { PatientRegisterComponentComponent } from './Components/patient-register-component/patient-register-component.component';
 import {Routing} from '../app-routing.module';
 import { DoctorRegisterComponent } from './Components/doctor-register/doctor-register.component';
+import { AgendamientoRegisterComponent } from './Components/agendamiento-register/agendamiento-register.component';
+import { HistorialClinicoComponent } from './Components/historial-clinico/historial-clinico.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientRegisterComponentComponent,
-    DoctorRegisterComponent
+    DoctorRegisterComponent,
+    AgendamientoRegisterComponent,
+    HistorialClinicoComponent
   ],
   imports: [
     BrowserModule,

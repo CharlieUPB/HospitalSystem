@@ -24,7 +24,7 @@ export class DoctorRegisterComponent implements OnInit {
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: [''],
-      speciality: ['', Validators.required],
+      speciality  : ['', Validators.required],
       parent: ['', Validators.required]
     });
   }
