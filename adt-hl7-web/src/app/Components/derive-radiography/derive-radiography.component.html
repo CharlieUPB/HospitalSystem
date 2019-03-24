@@ -108,6 +108,48 @@
       <mat-form-field>
         <input matInput placeholder="Vencimiento del Seguro" formControlName="insuranceExpDate" type="text">
       </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Observation Id" formControlName="obxid" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Posible Diagnostico" formControlName="obxdiagnostic" type="text">
+      </mat-form-field>
+
+
+      <mat-form-field>
+            <input matInput placeholder="Observation Request ID" formControlName="obrid" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+              <input matInput placeholder="Nombre de la observacion" formControlName="obrnamespaceid" type="text">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Entidad que lo identifica" formControlName="obrentityidentifier" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+            <input matInput placeholder="Estudios Requeridos" formControlName="obrdiagnostic" type="text">
+      </mat-form-field>
+
+
+      <mat-form-field>
+          <input matInput placeholder="ORC ID" formControlName="orcid" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+            <input matInput placeholder="ORC Order Control" formControlName="orcordercontrol" type="text">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="ORC Placer Group Number" formControlName="orcplacergroupnumber" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput placeholder="Datos Adicionales de los estudios requeridos" formControlName="orcdiagnostic" type="text">
+      </mat-form-field>
+
+
     </div>
     <div  class = "button-container">
       <button class = "primary" mat-button (click)="onSubmit(formPatient.value)">Guardar</button>

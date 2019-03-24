@@ -22,6 +22,10 @@ import {Routing} from '../app-routing.module';
 import { DoctorRegisterComponent } from './Components/doctor-register/doctor-register.component';
 import { AgendamientoRegisterComponent } from './Components/agendamiento-register/agendamiento-register.component';
 import { HistorialClinicoComponent } from './Components/historial-clinico/historial-clinico.component';
+import { DerivePharmacyComponent } from './Components/derive-pharmacy/derive-pharmacy.component';
+import { DeriveRadiographyComponent } from './Components/derive-radiography/derive-radiography.component';
+import { DeriveLaboratoryComponent } from './Components/derive-laboratory/derive-laboratory.component';
+import { PatientEventHistoryComponent } from './Components/patient-event-history/patient-event-history.component';
 
 import { Observable } from 'rxjs';
 
@@ -30,7 +34,6 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
-import { PatientEventHistoryComponent } from './Components/patient-event-history/patient-event-history.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -49,6 +52,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
     HistorialClinicoComponent,
+    DerivePharmacyComponent,
+    DeriveRadiographyComponent,
+    DeriveLaboratoryComponent,
     PatientEventHistoryComponent,
     HistorialClinicoComponent,
   ],

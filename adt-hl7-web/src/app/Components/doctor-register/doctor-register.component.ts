@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Gender, MedicalStaff } from '../../../models/Domain';
 
 @Component({
   selector: 'app-doctor-register',
@@ -7,8 +8,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./doctor-register.component.css']
 })
 export class DoctorRegisterComponent implements OnInit {
-
-  formPatient : FormGroup;
+  doctor : MedicalStaff = {cod: null,name: null,lastName: null,gender: null,specality: null};
+  formDoctor : FormGroup;
+  genderSelected: Gender;
 
 
   constructor(
@@ -20,17 +22,25 @@ export class DoctorRegisterComponent implements OnInit {
   }
 
   createPatientForm() {
-    this.formPatient = this.fb.group({
+    this.formDoctor = this.fb.group({
+      cod: ['',Validators.required],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: [''],
-      speciality  : ['', Validators.required],
-      parent: ['', Validators.required]
+      speciality  : ['', Validators.required]
     });
   }
 
-  onSubmit(formPatient) {
+  selectedGenderOption(event: any) {
+    this.genderSelected = event.value;
+  }
 
+  onSubmit(formDoctor) {
+    this.doctor.cod = formDoctor.cod;
+    this.doctor.name = formDoctor.name;
+    this.doctor.lastName = formDoctor.lastName;
+    this.doctor.specality = formDoctor.speciality;
+    this.doctor.gender = this.genderSelected;
   }
 
 }

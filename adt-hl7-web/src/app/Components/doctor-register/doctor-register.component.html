@@ -1,5 +1,9 @@
-<form [formGroup]="formPatient">
+<form [formGroup]="formDoctor">
   <div class="example-container">
+      <mat-form-field>
+          <input matInput id="cod" type="number" formControlName="cod" placeholder="Codigo del Doctor">
+      </mat-form-field>
+    
     <mat-form-field>
       <input matInput id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
     </mat-form-field>
@@ -9,11 +13,10 @@
     </mat-form-field>
   
     <mat-form-field>
-      <mat-select required placeholder="Genero">
+      <mat-select required placeholder="Genero" formControlName="gender" (selectionChange)="selectedGenderOption($event)">
         <mat-option value=1>Masculino</mat-option>
-        <mat-option value=2>Femenino</mat-option>
-        <mat-option value=3>Desconocido</mat-option>
-        <mat-option value=4>Otro</mat-option>
+        <mat-option value=0>Femenino</mat-option>
+        <mat-option value=2>Otro</mat-option>
       </mat-select>
     </mat-form-field>
   
@@ -22,9 +25,6 @@
     </mat-form-field>
   </div>
   <div  class = "button-container">
-    <button class = "primary" mat-button (click)="onSubmit(formPatient.value)" [mat-dialog-close]="true">Guardar</button>
-  </div>
-  <div  class = "button-container">
-    <button class = "secondary" mat-button mat-dialog-close>Cancelar</button>
+    <button class = "primary" mat-button (click)="onSubmit(formDoctor.value)">Guardar</button>
   </div>
   </form>
