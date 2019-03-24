@@ -28,6 +28,9 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
+import { DerivePharmacyComponent } from './Components/derive-pharmacy/derive-pharmacy.component';
+import { DeriveRadiographyComponent } from './Components/derive-radiography/derive-radiography.component';
+import { DeriveLaboratoryComponent } from './Components/derive-laboratory/derive-laboratory.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -45,7 +48,10 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     PatientRegisterComponentComponent,
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
-    HistorialClinicoComponent
+    HistorialClinicoComponent,
+    DerivePharmacyComponent,
+    DeriveRadiographyComponent,
+    DeriveLaboratoryComponent
 
   ],
   imports: [
