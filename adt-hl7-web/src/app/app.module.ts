@@ -40,7 +40,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppComponent,
 
     NavbarComponentComponent,
-    InicioComponentComponent
+    InicioComponentComponent,
 
     PatientRegisterComponentComponent,
     DoctorRegisterComponent,

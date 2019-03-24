@@ -9,11 +9,10 @@
       </mat-form-field>
     
       <mat-form-field>
-        <mat-select required placeholder="Genero">
+        <mat-select required placeholder="Genero" formControlName="lastName" (selectionChange)="selectedGenderOption($event)">
           <mat-option value=1>Masculino</mat-option>
-          <mat-option value=2>Femenino</mat-option>
-          <mat-option value=3>Desconocido</mat-option>
-          <mat-option value=4>Otro</mat-option>
+          <mat-option value=0>Femenino</mat-option>
+          <mat-option value=2>Otro</mat-option>
         </mat-select>
       </mat-form-field>
     
@@ -28,17 +27,22 @@
       <mat-form-field>
         <input matInput placeholder="Direccion"  formControlName="address" type="text">
       </mat-form-field>
-    
-      <div>
-        <label>Fallecido</label>
-        <mat-radio-group>
-          <mat-radio-button value=true>Si</mat-radio-button>
-          <mat-radio-button value=false>No</mat-radio-button>
-        </mat-radio-group>
-      </div>
-    
+
       <mat-form-field>
-        <input matInput placeholder="Estado Civil"  formControlName="maritalStatus" type="text">
+        <mat-select required placeholder="¿Fallecido?" formControlName="deceased" (selectionChange)="selectedDeceasedOption($event)">
+          <mat-option value="YES">Si</mat-option>
+          <mat-option value="NO">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+       <mat-form-field>
+        <mat-select required placeholder="Estado Civil" formControlName="maritalStatus" (selectionChange)="selectedMaritalStatusOption($event)">
+          <mat-option value="Separated">Separada/o</mat-option>
+          <mat-option value="Divorced">Divorciada/o</mat-option>
+          <mat-option value="Married">Casada/o</mat-option>
+          <mat-option value="Single">Soltera/o</mat-option>
+          <mat-option value="Widowed">Viuda/o</mat-option>
+        </mat-select>
       </mat-form-field>
     
       <mat-form-field>
@@ -48,11 +52,64 @@
       <mat-form-field>
         <input matInput placeholder="Ciudad"  formControlName="city" type="text">
       </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Fecha de nacimiento del Paciente"  formControlName="birthDate" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Carnet de Identidad del Paciente"  formControlName="ci" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Patient Visit ID"  formControlName="pvid" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre del doctor"  formControlName="attendingDoctorName" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Apellido del Doctor"  formControlName="attendingLastDoctorName" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Tipo de Paciente"  formControlName="patientClass" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Año"  formControlName="admitDateYear" type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Mes"  formControlName="admitDateMonth" type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Dia"  formControlName="admitDateDay" type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Hora"  formControlName="admitDateHour" type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Minuto"  formControlName="admitDateMin" type="number">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Codigo de Seguro" formControlName="inid" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Nombre del Seguro" formControlName="insuranceCompName" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Vencimiento del Seguro" formControlName="insuranceExpDate" type="text">
+      </mat-form-field>
     </div>
     <div  class = "button-container">
-      <button class = "primary" mat-button (click)="onSubmit(formPatient.value)" [mat-dialog-close]="true">Guardar</button>
-    </div>
-    <div  class = "button-container">
-      <button class = "secondary" mat-button mat-dialog-close>Cancelar</button>
+      <button class = "primary" mat-button (click)="onSubmit(formPatient.value)">Guardar</button>
     </div>
     </form>
