@@ -12,6 +12,7 @@ import { PatientEventHistoryComponent } from './app/Components/patient-event-his
 import { InicioComponentComponent } from './app/Components/inicio-component/inicio-component.component';
 import { PatientListComponent } from './app/Components/patient-list/patient-list.component';
 import { DoctorListComponent } from './app/Components/doctor-list/doctor-list.component';
+import { ScheduleComponent } from './app/Components/schedule/schedule.component';
 
 const routes: Routes = [
   { path: 'registerpatient', component: PatientRegisterComponentComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'eventHistory/:id' , component: PatientEventHistoryComponent},
   { path: 'patients' , component: PatientListComponent},
   { path: 'doctors', component: DoctorListComponent},
+  { path: 'schedule', component: ScheduleComponent },
   {path: 'home', component: InicioComponentComponent},
   { path: '', component: InicioComponentComponent }
 ];
