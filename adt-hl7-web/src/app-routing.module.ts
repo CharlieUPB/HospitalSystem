@@ -13,6 +13,7 @@ import { InicioComponentComponent } from './app/Components/inicio-component/inic
 import { PatientListComponent } from './app/Components/patient-list/patient-list.component';
 import { DoctorListComponent } from './app/Components/doctor-list/doctor-list.component';
 import { DoctorWorkStationComponent } from './app/Components/doctor-work-station/doctor-work-station.component';
+import { ScheduleComponent } from './app/Components/schedule/schedule.component';
 
 const routes: Routes = [
   { path: 'registerpatient', component: PatientRegisterComponentComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'doctorWorkStation/:scheduleID' , component: DoctorWorkStationComponent},
   { path: 'patients' , component: PatientListComponent},
   { path: 'doctors', component: DoctorListComponent},
+  { path: 'schedule', component: ScheduleComponent },
   {path: 'home', component: InicioComponentComponent},
   { path: '', component: InicioComponentComponent }
 ];
