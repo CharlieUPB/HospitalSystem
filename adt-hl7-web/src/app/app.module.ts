@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
-import { AppComponent } from './app.component';
 import { ScheduleComponent } from './Components/schedule/schedule.component';
 import { MatFormFieldModule, 
         MatAutocompleteModule,
@@ -45,16 +44,7 @@ import { MatFormFieldModule,
 import { FormsModule } from "@angular/forms";
 
 import { HttpClientModule } from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material';
-import {MatSelectModule} from '@angular/material/select';
-import {MatRadioModule} from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '@angular/material';
-
 
 import { AppComponent } from './app.component';
 import { NavbarComponentComponent } from './Components/navbar-component/navbar-component.component';
@@ -90,7 +80,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     AppComponent,
 
     ScheduleComponent,
-    CreateScheduleComponentComponent
+    CreateScheduleComponentComponent,
     NavbarComponentComponent,
     InicioComponentComponent,
     PatientRegisterComponentComponent,
