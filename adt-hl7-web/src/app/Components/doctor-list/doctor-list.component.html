@@ -1,0 +1,14 @@
+<h2 style="margin-top: 80px; margin-left: 8%;" >Doctores
+    <button type="button" class="btn btn-info" style=" white-space: normal; margin-left: 80%; margin-bottom:2%; margin-right: 8%" 
+      mat-raised-button (click)="openDoctorRegistry()">
+        Registrar Doctor
+      </button>  
+</h2>
+<div *ngIf="doctors"> 
+    <div class="card" style="margin-top: 2%; margin-left: 8%; margin-right: 8%" *ngFor="let doctor of doctors">
+        <h4 style="margin-left:5% ;margin-top:2%" >{{doctor.name}} {{doctor.lastName}}</h4>
+        <p style="margin-left:5%">Codigo Doctor: {{doctor.cod}}</p>
+        <p style="margin-left:5%">Especialidad: {{doctor.specality}}</p>
+        <p style="margin-left:5%">Genero: {{doctor.gender}}</p>
+      </div>
+</div>

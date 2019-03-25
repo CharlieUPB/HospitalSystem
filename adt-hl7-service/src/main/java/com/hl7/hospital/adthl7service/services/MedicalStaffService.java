@@ -29,11 +29,9 @@ public class MedicalStaffService {
 	}
 	
 	
-	public String addNewMedicalStaff(MedicalStaff medicalStaffCreatedCreated)
+	public MedicalStaff addNewMedicalStaff(MedicalStaff medicalStaffCreatedCreated)
 	{
-		medicalStaffRepository.save(medicalStaffCreatedCreated);
-		
-		return "Saved";
+		return medicalStaffRepository.save(medicalStaffCreatedCreated);
 	}
 	
 	

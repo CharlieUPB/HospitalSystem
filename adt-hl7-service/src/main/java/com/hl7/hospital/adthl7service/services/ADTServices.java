@@ -62,6 +62,7 @@ public class ADTServices {
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
 		
+		
 		int CI = (int)parsedmessage.get("codPatient");
 		Patient patient = this.patientService.getPatientByCI(CI);
 		
@@ -77,6 +78,7 @@ public class ADTServices {
 		ph.setDetails("A Patient ADMIT was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -85,6 +87,7 @@ public class ADTServices {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al obtener la fecha del MSH");
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
 		ph.setMshID(mshControlID);
@@ -119,7 +122,6 @@ public class ADTServices {
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
 		
-		
 		int CI = (int)parsedmessage.get("codPatient");
 		Patient patient = this.patientService.getPatientByCI(CI);
 		
@@ -135,6 +137,7 @@ public class ADTServices {
 		ph.setDetails("A Patient TRANSFER was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -143,6 +146,7 @@ public class ADTServices {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al obtener la fecha del MSH");
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
 		ph.setMshID(mshControlID);
@@ -154,10 +158,7 @@ public class ADTServices {
 			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
-		
 		// insertamos en la base de datos, los datos del paciente
-		
-		
 		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 	}
 	
@@ -176,6 +177,7 @@ public class ADTServices {
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
 		int CI = (int)parsedmessage.get("codPatient");
 		Patient patient = this.patientService.getPatientByCI(CI);
@@ -192,6 +194,7 @@ public class ADTServices {
 		ph.setDetails("A Patient DISCHARGE was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -200,6 +203,7 @@ public class ADTServices {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al obtener la fecha del MSH");
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
 		ph.setMshID(mshControlID);
@@ -226,11 +230,17 @@ public class ADTServices {
 		parsedmessage = parse.ADT(message);
 		
 		String evnCode = (String) parsedmessage.get("evnCode");
+		String ack = "";
 		
 		if( !(evnCode.equals("A04")) ) {
 			System.out.println("***** ENTRASTE A UN TOPICO ADT-04 PERO EL CAMPO EVN INDICA: " + evnCode);
-			return "";
+			return ack;
 		}
+		
+		String mshControlID = (String) parsedmessage.get("mshControlID");
+		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		
+		ack = create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
 		Patient patient = new Patient();
 		HealthInsurance health = new HealthInsurance();
@@ -249,7 +259,13 @@ public class ADTServices {
 		patient.setCity((String)parsedmessage.get("city"));
 		
 		health.setNameOrganization((String)parsedmessage.get("nameOrganization"));
-		health.setVecDate(parse.parseStringToDate((String)parsedmessage.get("vecDate")));
+		try {
+			health.setVecDate(parse.parseStringToDate((String)parsedmessage.get("vecDate")));
+		} catch (Exception e) {
+			e.printStackTrace();
+			ack = create.CreateACK(mshControlID,"AR","HIS",sedingApp);
+		}
+		
 		patient.setCodSecure(health);
 		
 		//insertamos en la base de datos, el registro del evento
@@ -259,6 +275,7 @@ public class ADTServices {
 		ph.setDetails("A Patient REGISTRATION was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -267,32 +284,30 @@ public class ADTServices {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al obtener la fecha del MSH");
+			ack = create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
-		
-		String mshControlID = (String) parsedmessage.get("mshControlID");
-		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
 		
 		ph.setMshID(mshControlID);
 	
 		//we generate ack based on transactions and other information
+		
+		
+		try {
+			patientService.addNewPatient(patient);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ack = create.CreateACK(mshControlID,"AE","HIS",sedingApp);
+		}
 				
 		try {
 			patientHistoryService.addPatientHistory(ph);
 			//insertamos en la base de datos, los datos del paciente -- Deberia insertar health insurance tambien
 		} catch (Exception e) {
 			e.printStackTrace();
-			return create.CreateACK(mshControlID,"AE","HIS",sedingApp);
-		}
-		
-		try {
-			patientService.addNewPatient(patient);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return create.CreateACK(mshControlID,"AE","HIS",sedingApp);
+			ack = create.CreateACK(mshControlID,"AE","HIS",sedingApp);
 		}
 
-		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
-		
+		return ack;
 	}
 	
 	
@@ -312,6 +327,7 @@ public class ADTServices {
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
+		
 		
 		int CI = (int)parsedmessage.get("codPatient");
 		Patient patient = this.patientService.getPatientByCI(CI);
@@ -341,6 +357,7 @@ public class ADTServices {
 		
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -349,6 +366,7 @@ public class ADTServices {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error al obtener la fecha del MSH");
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
 		ph.setMshID(mshControlID);
@@ -382,6 +400,7 @@ public class ADTServices {
 		} catch (Exception e) {
 			System.out.println("No se pudo agendar porque las fechas estan mal");
 			e.printStackTrace();
+			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 	
 		//insertamos en la base de datos,el agendamiento
@@ -416,7 +435,7 @@ public class ADTServices {
 		HealthInsurance health = new HealthInsurance();
 		
 		if(patient == null) {
-			System.out.println("No se puede admitir a un paciente no registrado");
+			System.out.println("No se puede actualizar la informacion de un paciente no registrado");
 			return create.CreateACK(mshControlID,"AR","HIS",sedingApp);
 		}
 		
@@ -442,6 +461,7 @@ public class ADTServices {
 		ph.setDetails("A Patient UPDATE INFORMATION was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -508,6 +528,7 @@ public class ADTServices {
 		ph.setDetails("A Patient CANCEL ADMIT was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 		
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -565,6 +586,7 @@ public class ADTServices {
 		ph.setDetails("A Patient CANCEL TRANSFER was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -621,6 +643,7 @@ public class ADTServices {
 		ph.setDetails("A Patient CANCEL DISCHARGE was triggered to " + patient.getName() + " patient");
 		ph.setPatientPH(patient);
 		ph.setAcked(false);
+		ph.setAckType("NONE");
 				
 		try {
 			HashMap<String, Object> mshDate = this.getMSHDateTime(parsedmessage);
@@ -673,13 +696,19 @@ public class ADTServices {
 		return ack;
 	}
 	
-	public String ackRcvHandler(String mshID) {
+	//This message contains {MSHID}-{ACKTYPE}
+	
+	public String ackRcvHandler(String message) {
+		String[] parts = message.split("-");
+		String mshID = parts[0];
+		String ackType = parts[1];
 		PatientHistory pHistory = this.patientHistoryService.findByMSHID(mshID);
 		if(pHistory == null) {
 			System.out.println("No se pudo actualizar el evento con ese id, porque no se lo encontro");
 		} else {
 			System.out.println("Actualizare el ack en la bd para: " + mshID);
 			pHistory.setAcked(true);
+			pHistory.setAckType(ackType);
 			this.patientHistoryService.addPatientHistory(pHistory);
 			System.out.println("LISTA LA ACTUALIZACION " + mshID);
 		}

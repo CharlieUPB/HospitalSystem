@@ -1,30 +1,29 @@
-<form [formGroup]="formDoctor">
-  <div class="example-container">
+<h2 style="margin-top: 80px; margin-left: 8%;" >Registrar Doctor</h2>
+<div style="margin-top: 2%; margin-left: 8%; margin-right: 8%">
+  <form [formGroup]="formDoctor">
+    <div class="example-container">
       <mat-form-field>
-          <input matInput id="cod" type="number" formControlName="cod" placeholder="Codigo del Doctor">
+        <input matInput id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
       </mat-form-field>
     
-    <mat-form-field>
-      <input matInput id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput type="text" placeholder="Apellido del Doctor"  formControlName="lastName">
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-select required placeholder="Genero" formControlName="gender" (selectionChange)="selectedGenderOption($event)">
-        <mat-option value=1>Masculino</mat-option>
-        <mat-option value=0>Femenino</mat-option>
-        <mat-option value=2>Otro</mat-option>
-      </mat-select>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Especialidad" type="text"  formControlName="speciality">
-    </mat-form-field>
-  </div>
-  <div  class = "button-container">
-    <button class = "primary" mat-button (click)="onSubmit(formDoctor.value)">Guardar</button>
-  </div>
-  </form>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Apellido del Doctor"  formControlName="lastName">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select required placeholder="Genero" formControlName="gender" (selectionChange)="selectedGenderOption($event)">
+          <mat-option value=1>Masculino</mat-option>
+          <mat-option value=0>Femenino</mat-option>
+          <mat-option value=2>Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput placeholder="Especialidad" type="text"  formControlName="speciality">
+      </mat-form-field>
+    </div>
+    <div  class = "button-container">
+      <button class = "primary" mat-button (click)="onSubmit(formDoctor.value)">Guardar</button>
+    </div>
+    </form>
+</div>

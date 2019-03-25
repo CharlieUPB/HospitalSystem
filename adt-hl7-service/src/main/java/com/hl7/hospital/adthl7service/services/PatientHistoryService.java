@@ -38,11 +38,11 @@ public class PatientHistoryService {
 		return null;
 	}
 	
-	public ArrayList<PatientHistory> findByPatient(int id) {
-		ArrayList<PatientHistory> found = new ArrayList<PatientHistory>();
+	public ArrayList<PatientHistory> findByPatientCI(int CI) {
 		Iterable<PatientHistory> all = this.patientHistoryRepository.findAll();
+		ArrayList<PatientHistory> found = new ArrayList<PatientHistory>();
 		for (PatientHistory patientHistory : all) {
-			if (patientHistory.getPatientPH().getCod() == id) {
+			if (patientHistory.getPatientPH().getCI() == CI) {
 				found.add(patientHistory);
 			}
 		}

@@ -5,7 +5,7 @@ export interface Patient {
 	name: string;
 	lastName: string;
 	gender: Gender ;
-	birthDate: Date;
+	birthDate: string;
 	phone: string | null;
 	cellPhone: string | null;
 	address: string | null;

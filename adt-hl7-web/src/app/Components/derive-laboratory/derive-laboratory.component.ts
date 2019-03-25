@@ -28,7 +28,7 @@ export class DeriveLaboratoryComponent implements OnInit {
   orc : Orc={ID: "",diagnostic: "", orcOrderControl: "",placerGroupNumber: ""};
   pid : Pid={CI: "",name: "",lastName: "",birthDate: "",gender:null,phoneNumber: "",phoneBusiness: "",address: "",deathIndicator: null,maritalStatus: null,nationality: "",city: ""};
   pv1 : Pv1={ID: "",attendingDoctorName: "",attendingDoctorLastName: "",patientClass: "",admitDateYear: null,admitDateMonth: null,admitDateDay: null,admitDateHour: null,admitDateMin: null};
-  msg :  GenericMessage={Msh: null,in1: null,Obr: null,Obx: null,Orc: null,Pid: null,Pv1: null};
+  msg :  GenericMessage={Msh: null,In1: null,Obr: null,Obx: null,Orc: null,Pid: null,Pv1: null , Evn: "O21"};
   genderSelected : number;
   deceasedSelected : Decesased;
   maritalStatusSelected : MaritalStatus;
@@ -132,7 +132,7 @@ export class DeriveLaboratoryComponent implements OnInit {
     this.msg.Orc = this.orc;
     this.msg.Pid = this.pid;
     this.msg.Pv1 = this.pv1;
-    this.msg.in1 = this.in;
+    this.msg.In1 = this.in;
 
     this.obx.ID = formPatient.obxid;
     this.obx.diagnostic = formPatient.obxdiagnostic;

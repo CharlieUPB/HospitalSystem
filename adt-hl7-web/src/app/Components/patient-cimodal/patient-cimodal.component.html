@@ -1,0 +1,13 @@
+<h1 style="margin-left:24%;" mat-dialog-title>Reporte Paciente</h1>
+<div mat-dialog-content>
+  <p>Ingresa el carnet de identidad del paciente</p>
+  <mat-form-field style="margin-left:20%;">
+    <input style="text-align: center" matInput [(ngModel)]="CI">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button type="button" class="btn btn-info" style=" white-space: normal; margin-left: 40%; margin-bottom:2%; margin-right: 50%" 
+    mat-raised-button cdkFocusInitial (click)="onOkClick()">
+      Ok
+    </button> 
+</div>

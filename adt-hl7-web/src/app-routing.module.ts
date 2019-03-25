@@ -10,17 +10,21 @@ import {DeriveLaboratoryComponent} from './app/Components/derive-laboratory/deri
 import {DerivePharmacyComponent} from './app/Components/derive-pharmacy/derive-pharmacy.component'
 import { PatientEventHistoryComponent } from './app/Components/patient-event-history/patient-event-history.component';
 import { InicioComponentComponent } from './app/Components/inicio-component/inicio-component.component';
+import { PatientListComponent } from './app/Components/patient-list/patient-list.component';
+import { DoctorListComponent } from './app/Components/doctor-list/doctor-list.component';
 
 const routes: Routes = [
   { path: 'registerpatient', component: PatientRegisterComponentComponent },
+  { path: 'registerpatient/:id', component: PatientRegisterComponentComponent },
   { path: 'registerdoctor', component: DoctorRegisterComponent },
   { path: 'registerscheduling', component: AgendamientoRegisterComponent },
-  { path: 'clinicalhistory', component: HistorialClinicoComponent},
   { path: 'deriveradiography', component: DeriveRadiographyComponent},
   { path: 'derivelaboratory', component: DeriveLaboratoryComponent},
   { path: 'derivepharmacy', component: DerivePharmacyComponent},  
   { path: 'clinicalhistory/:id', component: HistorialClinicoComponent},
   { path: 'eventHistory/:id' , component: PatientEventHistoryComponent},
+  { path: 'patients' , component: PatientListComponent},
+  { path: 'doctors', component: DoctorListComponent},
   {path: 'home', component: InicioComponentComponent},
   { path: '', component: InicioComponentComponent }
 ];

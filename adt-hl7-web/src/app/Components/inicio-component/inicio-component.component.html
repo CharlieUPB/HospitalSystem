@@ -25,7 +25,7 @@
                         <div class="card-body">
                           <div class="btn-group">
                               <img class="img" src="/assets/Images/doctor.png" style="margin-left:10%">
-                              <button type="button" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Doctores</button>
+                              <button type="button" (click)="goToDoctors()" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Doctores</button>
                           </div>    
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                           <div class="card-body">
                             <div class="btn-group">
                                 <img class="img" src="/assets/Images/paciente.png" style="margin-left:10%; margin-top:5%">
-                                <button type="button" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Pacientes</button>
+                                <button type="button" (click)="goToPatients()" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Pacientes</button>
                             </div>    
                           </div>
                       </div>
@@ -130,7 +130,7 @@
                           <div class="card-body">
                             <div class="btn-group">
                                 <img class="img" src="/assets/Images/reportes.png" style="margin-left:10%; margin-top:6%">
-                                <button type="button" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Reportes</button>
+                                <button (keyup.enter)="openPatientCIModal()" (click)="openPatientCIModal()" type="button" class="btn btn-secondary" style="margin-left: 50%; margin-top: 10%">Reportes</button>
                             </div>    
                           </div>
                       </div>

@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material';
 import { MatListModule } from '@angular/material';
-import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule} from '@angular/material';
+import { MatCardModule, MatChipsModule, MatTableModule, MatToolbarModule, MatSnackBarModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -26,6 +26,8 @@ import { DerivePharmacyComponent } from './Components/derive-pharmacy/derive-pha
 import { DeriveRadiographyComponent } from './Components/derive-radiography/derive-radiography.component';
 import { DeriveLaboratoryComponent } from './Components/derive-laboratory/derive-laboratory.component';
 import { PatientEventHistoryComponent } from './Components/patient-event-history/patient-event-history.component';
+import { PatientListComponent } from './Components/patient-list/patient-list.component';
+import { DoctorListComponent} from './Components/doctor-list/doctor-list.component';
 
 import { Observable } from 'rxjs';
 
@@ -34,6 +36,8 @@ import {
   MqttModule,
   IMqttServiceOptions
 } from 'ngx-mqtt';
+import { ConfirmModalComponent } from './Components/confirm-modal/confirm-modal.component';
+import { PatientCIModalComponent } from './Components/patient-cimodal/patient-cimodal.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -47,7 +51,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 
     NavbarComponentComponent,
     InicioComponentComponent,
-
+    PatientListComponent,
     PatientRegisterComponentComponent,
     DoctorRegisterComponent,
     AgendamientoRegisterComponent,
@@ -57,6 +61,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DeriveLaboratoryComponent,
     PatientEventHistoryComponent,
     HistorialClinicoComponent,
+    DoctorListComponent,
+    ConfirmModalComponent,
+    PatientCIModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,9 +84,13 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     MatChipsModule,
     MatTableModule,
     MatToolbarModule,
+    MatSnackBarModule,
     Routing
 
   ],
+  entryComponents: [
+    ConfirmModalComponent,
+    PatientCIModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

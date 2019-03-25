@@ -6,21 +6,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class GenericMessage {
 	
-	@JsonProperty(value = "in1")
+	@JsonProperty(value = "In1")
 	private In1Model in1Model;
-	@JsonProperty(value = "msh")
+	@JsonProperty(value = "Msh")
 	private MshModel mshModel;
-	@JsonProperty(value = "obr")
+	@JsonProperty(value = "Obr")
 	private ObrModel obrModel;
-	@JsonProperty(value = "obx")
+	@JsonProperty(value = "Obx")
 	private ObxModel obxModel;
-	@JsonProperty(value = "orc")
+	@JsonProperty(value = "Orc")
 	private OrcModel orcModel;
-	@JsonProperty(value = "pid")
+	@JsonProperty(value = "Pid")
 	private PidModel pidModel;
-	@JsonProperty(value = "pv1")
+	@JsonProperty(value = "Pv1")
 	private Pv1Model pv1Model;
-	@JsonProperty(value = "evn")
+	@JsonProperty(value = "Evn")
 	private String evn;
 
 	public In1Model getIn1Model() {

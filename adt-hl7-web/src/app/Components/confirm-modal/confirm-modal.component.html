@@ -1,0 +1,14 @@
+<h1 style="margin-left:34%;" mat-dialog-title>Confirmar</h1>
+<div mat-dialog-content>
+  <p>Esta seguro que desea enviar la informacion ?</p>
+</div>
+<div mat-dialog-actions>
+    <button type="button" class="btn btn-info" style=" margin-left: 10% ; white-space: normal;" 
+    mat-raised-button (click)="onCancelClick()">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-info" style=" margin-left: 20% ; white-space: normal;" 
+    mat-raised-button cdkFocusInitial (click)="onOkClick()">
+      SI
+    </button>
+</div>

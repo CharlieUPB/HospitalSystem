@@ -30,6 +30,7 @@ public class PatientHistory {
 	private Time eventTime;
 	
 	private boolean acked;
+	private String ackType;
 	
 	
 	public String getAdtCode() {
@@ -77,6 +78,12 @@ public class PatientHistory {
 	}
 	public void setAcked(boolean acked) {
 		this.acked = acked;
+	}
+	public String getAckType() {
+		return ackType;
+	}
+	public void setAckType(String ackType) {
+		this.ackType = ackType;
 	}
 	
 	

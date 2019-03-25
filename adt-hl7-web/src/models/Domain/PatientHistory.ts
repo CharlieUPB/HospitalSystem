@@ -10,4 +10,5 @@ export interface PatientHistory {
     eventDate: string;
     eventTime: string;
     acked: boolean;
+    ackType: string;
 }   
