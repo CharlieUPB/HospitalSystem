@@ -2,12 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@angular/material';
 import { CreateScheduleComponentComponent } from '../create-schedule-component/create-schedule-component.component';
+import { Schedule } from 'src/models/Domain';
+import { ApiService } from 'src/app/api.service';
 
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-schedule',
@@ -16,9 +13,8 @@ export interface DialogData {
 })
 export class ScheduleComponent implements OnInit {
 
-  animal: string;
-  name: string;
-  
+  citas: Schedule[];
+
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   dayNames = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
@@ -33,10 +29,13 @@ export class ScheduleComponent implements OnInit {
   serializedDate = new FormControl((new Date()).toISOString());
 
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private service: ApiService) { }
   
 
   ngOnInit() {
+    this.service.getScheduleByDate(`${this.year}${this.date.value.getMonth + 1}${this.day}`).subscribe((data: Schedule[]) => {
+      this.citas = data;
+    });
   }
 
   openDialog(): void {
@@ -53,7 +52,7 @@ export class ScheduleComponent implements OnInit {
 
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
