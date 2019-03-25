@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Crear Nuevo Agendamiento</h2>
+
+<div mat-dialog-content>
+  <mat-form-field>
+      <div class="form-group">
+
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Codigo Paciente</label>
+          <input type="text" class="form-control" placeholder="codigo paciente" id="inputDefault" [(ngModel)]="data.animal" style="margin-left:30%">
+
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Codigo Doctor</label>
+          <input type="text" class="form-control" placeholder="codigo paciente" id="inputDefault" [(ngModel)]="data.animal" style="margin-left:30%">
+
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Fecha</label>
+          <mat-form-field style="margin-left:30%">
+              <input matInput [matDatepicker]="picker3" [value]="date.value" disabled style="color:rgb(90, 90, 90); font-size: 90%">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Hora</label>
+          <input [ngxTimepicker]="picker" style="margin-left:30%">
+          <ngx-material-timepicker #picker></ngx-material-timepicker>
+
+      </div>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="btn btn-info" style="margin-left:40%">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial class="btn btn-info" style="margin-left:2%">Guardar</button>
+</div>
