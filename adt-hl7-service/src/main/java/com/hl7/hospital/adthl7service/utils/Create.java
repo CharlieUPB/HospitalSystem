@@ -627,7 +627,6 @@ public String CreateADT_ORM01(String SendingApplication, String PIDname, String 
 	          ORC orc = adt.getORDER(0).getORC();
 	          orc.getOrderControl().setValue(ORCOrderControl);
 	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
-	          
 
 	          HapiContext context = new DefaultHapiContext();
 	          Parser parser = context.getPipeParser();
@@ -675,13 +674,6 @@ public String CreateRDE_011(String SendingApplication, String PIDname, String PI
 	          ORC orc = adt.getORDER(0).getORC();
 	          orc.getOrderControl().setValue(ORCOrderControl);
 	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
-	          
-	          adt.getORDER().getORDER_DETAIL().getRXO().getRequestedGiveUnits().getCe1_Identifier().setValue("Paracetamol");
-	          adt.getORDER().getORDER_DETAIL().getRXO().getRequestedGiveAmountMinimum().setValue("200 gr");
-	          
-	          adt.getORDER().getORDER_DETAIL().getRXR().getAdministrationMethod().getIdentifier().setValue("inyeccion");
-	          adt.getORDER().getORDER_DETAIL().getRXR().getAdministrationMethod().getText().setValue("Inyectar 200 gr cada 3 hrs");
-
 	          HapiContext context = new DefaultHapiContext();
 	          Parser parser = context.getPipeParser();
 	          String encodedMessage = parser.encode(adt);
@@ -729,8 +721,7 @@ public String CreateOML_O21(String SendingApplication, String PIDname, String PI
 	          orc.getOrderControl().setValue(ORCOrderControl);
 	          orc.getPlacerGroupNumber().getEi1_EntityIdentifier().setValue(ORCPlacerGroup);
 	          
-	          adt.getORDER_GENERAL().getORDER().getOBSERVATION_REQUEST().getOBR().getRelevantClinicalInfo().setValue("Necesita una dosis alta");
-	          adt.getORDER_GENERAL().getORDER().getOBSERVATION_REQUEST().getCONTAINER_2().getSAC().getTreatment().getText().setValue("Prueba de sangre");
+	          adt.getORDER_GENERAL().getORDER().getOBSERVATION_REQUEST().getOBR().getRelevantClinicalInfo().setValue(diagnostic);
 
 	          HapiContext context = new DefaultHapiContext();
 	          Parser parser = context.getPipeParser();
