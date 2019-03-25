@@ -34,7 +34,7 @@ public class PatientHistoryController {
 			method = RequestMethod.GET)
 	public @ResponseBody ArrayList<PatientHistory> getPatientHistoryById(@PathVariable("id") String codPatient)
 	{
-		return patientHistoryService.findByPatient(Integer.parseInt(codPatient));
+		return patientHistoryService.findByPatientCI(Integer.parseInt(codPatient));
 	}
 	
 	

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Gender, MedicalStaff } from '../../../models/Domain';
+import { DataToConfirm } from 'src/models/ADT';
+import { MatDialog } from '@angular/material';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-doctor-register',
@@ -14,16 +17,17 @@ export class DoctorRegisterComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    public dialog: MatDialog
+    ) { }
+
+  
 
   ngOnInit() {
     this.createPatientForm();
   }
-
   createPatientForm() {
     this.formDoctor = this.fb.group({
-      cod: ['',Validators.required],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       gender: [''],
@@ -36,11 +40,20 @@ export class DoctorRegisterComponent implements OnInit {
   }
 
   onSubmit(formDoctor) {
-    this.doctor.cod = formDoctor.cod;
     this.doctor.name = formDoctor.name;
     this.doctor.lastName = formDoctor.lastName;
     this.doctor.specality = formDoctor.speciality;
     this.doctor.gender = this.genderSelected;
+
+    let dataToConfirmModal : DataToConfirm = {
+      medical: this.doctor,
+    };
+
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      width: '380px',
+      data: dataToConfirmModal,
+      });
+
   }
 
 }

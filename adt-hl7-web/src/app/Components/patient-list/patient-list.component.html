@@ -1,0 +1,23 @@
+<h2 style="margin-top: 80px; margin-left: 8%;" >Pacientes
+    <button type="button" class="btn btn-info" style=" white-space: normal; margin-left: 80%; margin-bottom:2%; margin-right: 8%" 
+    mat-raised-button (click)="openPatientRegistry()">
+      Registrar Paciente
+    </button>  
+</h2>
+<div *ngIf="patients"> 
+    <div class="card" style="margin-top: 2%; margin-left: 8%; margin-right: 8%" *ngFor="let patient of patients">
+        <h4 style="margin-left:5% ;margin-top:2%" >{{patient.name}} {{patient.lastName}}</h4>
+        <p style="margin-left:5%">Carnet de Identidad: {{patient.ci}}</p>
+        <p style="margin-left:5%">Seguro Medico: {{patient.codSecure.nameOrganization}}</p>
+        <p style="margin-left:5%">Vencimiento Seguro Medico: {{patient.codSecure.vecDate}}</p>
+        <p style="margin-left:5%">Fallecido: {{patient.deceased ? 'YES' : 'NO'}}</p>
+        <div mat-dialog-actions style="margin-bottom: 3%; margin-left: 25%">
+            <button type="button" class="btn btn-info" style=" margin-left: 10% ; white-space: normal;" mat-raised-button (click)="goToPatientUpdate(patient.ci)">
+              Actualizar
+          </button>
+          <button type="button" class="btn btn-info" style=" margin-left: 20% ; white-space: normal;" mat-raised-button cdkFocusInitial (click)="goToEventHistory(patient.ci)">
+            Ver Eventos
+          </button>
+        </div>
+      </div>
+</div>

@@ -60,7 +60,7 @@ public class ScheduleService {
 		
 		for (Schedule s : schedules) 
 		{
-			if (s.getDate() == date)
+			if (s.getDate().equals(date))
 			{
 				schedulesByDate.add(s);
 			}	

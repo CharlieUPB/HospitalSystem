@@ -36,7 +36,8 @@ export class PatientEventHistoryComponent implements OnInit, OnDestroy {
             this.histories.forEach((history: PatientHistory) => {
               if(history.mshID === data.mshControlID) {
                 history.acked = true;
-                this.unsafePublish("ACK_RCV",history.mshID);
+                history.ackType = data.ackType;
+                this.unsafePublish("ACK_RCV", `${data.mshControlID}-${data.ackType}`);
               }
             })
           });

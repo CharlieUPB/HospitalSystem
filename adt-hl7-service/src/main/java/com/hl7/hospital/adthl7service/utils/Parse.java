@@ -3,6 +3,11 @@ package com.hl7.hospital.adthl7service.utils;
 
 import java.sql.Date;
 import java.util.HashMap;
+
+import ca.uhn.hl7v2.parser.*;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.v24.message.ACK;
+
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
@@ -111,9 +116,9 @@ public class Parse {
         String nameOrganization = null;
         String vecDate = null;
         try {
-        codSecure = Integer.parseInt(t.get("/IN1-1"));
         nameOrganization = t.get("/IN1-4");
         vecDate = t.get("/IN1-13");
+        codSecure = Integer.parseInt(t.get("/IN1-1"));
         } catch (Exception e) {
      		System.out.println("El mensaje no tiene un componente IN-1");
      	}
@@ -122,9 +127,9 @@ public class Parse {
         String lastNameDoctor = null;
         
         try {
-        codDoctor = Integer.parseInt(t.get("/PV1-1"));
         nameDoctor = t.get("/PV1-7-3");
         lastNameDoctor = t.get("/PV1-7-2");
+        codDoctor = Integer.parseInt(t.get("/PV1-1"));
         } catch (Exception e) {
     		System.out.println("El mensaje no tiene un componente PV1");
     	}
@@ -137,7 +142,7 @@ public class Parse {
         	hl7AdmitDate = t.get("/PV1-44");
         	parsedDate = this.getAdmitDate(hl7AdmitDate);
         } catch(HL7Exception e) {
-        	System.out.println("El mensaje no tiene date, ERR: " + e);
+        	System.out.println("El mensaje no tiene date DE ADMIT, ERR: " + e);
         }
       
         String diagnostic = null;
@@ -283,6 +288,22 @@ public class Parse {
 		return sqlDate;
 	}
 	
+	public String getAckType(String ackMessage) {
+		String ackType = "";
+		PipeParser pipeParser = new PipeParser();
+        try {
+            Message message = pipeParser.parse(ackMessage);
+            if (message instanceof ACK) {
+                ACK ack = (ACK) message;
+                ackType = ack.getMSA().getAcknowledgementCode().getValue();
+                System.out.println("El tipo de ack del que me hiciste request es: " + ackType);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo obtener el ack type");
+        }       
+		return ackType;
+	}
 
 public HashMap<String, Object> ORU(String msg) throws HL7Exception {
 		

@@ -125,6 +125,7 @@ public class EventConsumer implements MqttCallback {
 			acknowledgment = this.adtServices.RDEHandler(message);
 			break;
 		case "ACK_RCV":
+			System.out.println("RECIBI EL FEED BACK DEL ACK");
 			acknowledgment = this.adtServices.ackRcvHandler(message);
 			break;	
 		default:

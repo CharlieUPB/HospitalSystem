@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { PatientCIModalComponent } from '../patient-cimodal/patient-cimodal.component';
 
 @Component({
   selector: 'app-inicio-component',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  goToPatients() {
+    this.router.navigateByUrl('/patients');
+  }
+  goToDoctors() {
+    this.router.navigateByUrl('/doctors');
+  }
+  openPatientCIModal() {
+    const dialogRef = this.dialog.open(PatientCIModalComponent, {
+      width: '350px'
+    });
   }
 
 }

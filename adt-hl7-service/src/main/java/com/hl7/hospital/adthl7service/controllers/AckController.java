@@ -24,10 +24,15 @@ public class AckController {
 	@RequestMapping(
 			value = "/",
 			method = RequestMethod.POST)
-	public HashMap<String, Object> getPatientById(@RequestBody Message mshhl7)
+	public HashMap<String, Object> getACKID(@RequestBody Message mshhl7)
 	{
 		try {
-			return this.parseUtil.getMSH(mshhl7.getData());
+			HashMap<String, Object> msh = this.parseUtil.getMSH(mshhl7.getData());
+			String ackType = this.parseUtil.getAckType(mshhl7.getData());
+			HashMap<String, Object> response = new HashMap<String, Object>();
+			response.put("mshControlID", msh.get("mshControlID"));
+			response.put("ackType", ackType);
+			return response;
 		} catch (HL7Exception e) {
 			e.printStackTrace();
 			System.out.println("No se pudo obtener el msh segment del ack");
