@@ -14,7 +14,7 @@ export interface Patient {
 	nationality: string;
 	city: string;
 	codSecure: HealthInsurance;
-	CI: number;
+	ci: number;
 }
 
 export enum Gender {

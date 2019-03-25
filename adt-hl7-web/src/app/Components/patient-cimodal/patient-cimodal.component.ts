@@ -12,14 +12,19 @@ export class PatientCIModalComponent implements OnInit {
   CI: string;
 
   constructor(private router: Router, public dialogRef: MatDialogRef<PatientCIModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { }
+    @Inject(MAT_DIALOG_DATA) public data: string) { }
 
   ngOnInit() {
   }
 
   onOkClick() {
     this.dialogRef.close();
-    this.router.navigateByUrl( `/eventHistory/${this.CI}`);
+    if(this.data === "reportes") {
+      this.router.navigateByUrl( `/eventHistory/${this.CI}`);
+    } else if (this.data === "diagnosticos") {
+      this.router.navigateByUrl( `/clinicalhistory/${this.CI}`);
+    }
+    
   }
 
 }

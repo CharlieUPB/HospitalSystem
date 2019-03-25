@@ -21,9 +21,10 @@ export class InicioComponentComponent implements OnInit {
   goToDoctors() {
     this.router.navigateByUrl('/doctors');
   }
-  openPatientCIModal() {
+  openPatientCIModal(destination: string) {
     const dialogRef = this.dialog.open(PatientCIModalComponent, {
-      width: '350px'
+      width: '350px',
+      data: destination,
     });
   }
 

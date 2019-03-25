@@ -100,7 +100,7 @@ public class Parse {
         
         
         String birthDate = t.get("/PID-25");
-        Date parsedBirthDate = this.parseStringToDate(birthDate);
+        Date parsedBirthDate = java.sql.Date.valueOf(birthDate);
         String phone = t.get("/PID-13");
         String cellPhone = t.get("/PID-14");
         String address = t.get("/PID-11-1");
@@ -280,9 +280,11 @@ public class Parse {
 		String year = date.substring(0, 4);
 		String month = date.substring(4,6);
 		String day = date.substring(6, 8);
-		
+		System.out.println("year: " + year);
+		System.out.println("month: " + month);
+		System.out.println("day: " + day);
 		String finalDate = year + "-" + month + "-" + day;
-		
+		System.out.println("Fecha luce como: " + finalDate);
 		Date sqlDate = java.sql.Date.valueOf(finalDate); //date should be like "2010-01-31"
 		
 		return sqlDate;

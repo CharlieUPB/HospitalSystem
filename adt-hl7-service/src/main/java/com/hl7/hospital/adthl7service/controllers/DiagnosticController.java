@@ -1,5 +1,6 @@
 package com.hl7.hospital.adthl7service.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,14 @@ public class DiagnosticController {
 	public @ResponseBody Iterable<Diagnostic> getAllDiagnostics()
 	{
 		return diagServ.getAllDiagnostics();
+	}
+	
+	@RequestMapping(
+			value = "/patient/{ci}",
+			method = RequestMethod.GET)
+	public @ResponseBody ArrayList<Diagnostic> getDiagnosticbyPatientCI(@PathVariable("ci") int ciPatient)
+	{
+		return this.diagServ.findByPatientCI(ciPatient);
 	}
 	
 	

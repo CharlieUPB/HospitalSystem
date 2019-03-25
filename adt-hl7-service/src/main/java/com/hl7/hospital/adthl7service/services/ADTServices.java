@@ -177,7 +177,6 @@ public class ADTServices {
 		
 		String mshControlID = (String) parsedmessage.get("mshControlID");
 		String sedingApp = (String) parsedmessage.get("mshSendingApplication");
-		return create.CreateACK(mshControlID,"AA","HIS",sedingApp);
 		
 		int CI = (int)parsedmessage.get("codPatient");
 		Patient patient = this.patientService.getPatientByCI(CI);

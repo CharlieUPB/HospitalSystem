@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.MedicalStaff;
 import com.hl7.hospital.adthl7service.models.Patient;
+import com.hl7.hospital.adthl7service.models.PatientHistory;
 import com.hl7.hospital.adthl7service.repositories.DiagnosticRepository;
 
 @Service
@@ -49,21 +50,15 @@ public class DiagnosticService {
 		return diagnosticRepository.findById(codDiagnostic);
 	}
 	
-	
-	public ArrayList<Diagnostic> getDiagnosticsForPatientID(int codPatient)
-	{
-		ArrayList<Diagnostic> patientDiagnostics = new ArrayList<Diagnostic>();
-		Iterable<Diagnostic> diagnostics = diagnosticRepository.findAll();
-		
-		for (Diagnostic d : diagnostics) 
-		{
-			if (d.getPatient().getCod() == codPatient)
-			{
-				patientDiagnostics.add(d);
-			}	
+	public ArrayList<Diagnostic> findByPatientCI(int CI) {
+		Iterable<Diagnostic> all = this.diagnosticRepository.findAll();
+		ArrayList<Diagnostic> found = new ArrayList<Diagnostic>();
+		for (Diagnostic patientDiagnostic : all) {
+			if (patientDiagnostic.getPatient().getCI() == CI) {
+				found.add(patientDiagnostic);
+			}
 		}
-		
-		return patientDiagnostics;
+		return found;
 	}
 	
 	
