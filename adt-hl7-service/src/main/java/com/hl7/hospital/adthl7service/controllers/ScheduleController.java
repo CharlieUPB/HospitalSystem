@@ -34,11 +34,25 @@ public class ScheduleController {
 		return scheduleService.getAllSchedules();
 	}
 	
+	@RequestMapping(
+			value = "/{id}",
+			method = RequestMethod.GET)
+	public @ResponseBody Schedule getScheduleById(@PathVariable("id") int scheduleID)
+	{
+		Optional<Schedule> schp = scheduleService.getScheduleByID(scheduleID);
+		if(schp.isPresent()) {
+			return schp.get();
+		} else {
+			throw new NotFoundException();
+		}
+		
+	}
+	
 	
 	@RequestMapping(
-			value = "/{date}",
+			value = "/date/{date}",
 			method = RequestMethod.GET)
-	public @ResponseBody ArrayList<Schedule> getScheduleById(@PathVariable("date") String date)
+	public @ResponseBody ArrayList<Schedule> getScheduleByDate(@PathVariable("date") String date)
 	{
 		return scheduleService.getScheduleByDate(parseUtil.parseStringToDate(date));
 		

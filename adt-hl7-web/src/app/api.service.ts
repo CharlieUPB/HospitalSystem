@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Schedule, Patient, PatientHistory, MedicalStaff } from '../models/Domain';
+import { Schedule, Patient, PatientHistory, MedicalStaff, Diagnostic } from '../models/Domain';
 import { Observable } from 'rxjs';
 import { GenericMessage } from '../models/ADT';
 import { ParseResult, MshSegment } from '../models/ADT/'
@@ -22,13 +22,13 @@ export class ApiService {
   public getScheduleAll(): Observable<Schedule[]> {
     return this.httpClient.get<Schedule[]>(`${this.apiURL}/schedules/`);
   }
-  public getScheduleByCI(CI: number): Observable<Schedule[]> {
-    return this.httpClient.get<Schedule[]>(`${this.apiURL}/schedules/${CI}`);
-    
+
+  public getScheduleByID(id: number): Observable<Schedule> {
+    return this.httpClient.get<Schedule>(`${this.apiURL}/schedules/${id}`);
   }
-  
+
   public getScheduleByDate(date: string): Observable<Schedule[]> {
-    return this.httpClient.get<Schedule[]>(`${this.apiURL}/schedules/${date}`);
+    return this.httpClient.get<Schedule[]>(`${this.apiURL}/schedules/date/${date}`);
   }
 
   //Patients
@@ -47,6 +47,10 @@ export class ApiService {
     return this.httpClient.post<MedicalStaff>(`${this.apiURL}/medicalStaff/`,med);
   }
 
+  public getMedicalByID(id: number): Observable<MedicalStaff> {
+    return this.httpClient.get<MedicalStaff>(`${this.apiURL}/medicalStaff/${id}`);
+  }
+
   //Patient Event History
 
   public getPatientHistoryAll(): Observable<PatientHistory[]> {
@@ -55,6 +59,12 @@ export class ApiService {
 
   public getPatientHistoryByCI(CI: number): Observable<PatientHistory[]> {
     return this.httpClient.get<PatientHistory[]>(`${this.apiURL}/patientHistories/${CI}`);
+  }
+
+  //Diagnostics 
+
+  public getDiagnosticsByPatientCI(CI: number): Observable<Diagnostic[]> {
+    return this.httpClient.get<Diagnostic[]>(`${this.apiURL}/diagnostics/patient/${CI}`);
   }
 
   //ADTS

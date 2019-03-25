@@ -10,7 +10,8 @@ export { MshSegment, ParseResult } from './ParseResponse';
 export { DataToConfirm } from './DataToConfirm'; 
 
 export type EVENT_TOPICS = "ADT-A01" | "ADT-A02" | "ADT-A03" |"ADT-A04"
-                 | "ADT-A05" | "ADT-A08" | "ADT-A11" | "ADT-A12" | "ADT-A13" | "ACK"
+                 | "ADT-A05" | "ADT-A08" | "ADT-A11" | "ADT-A12" | "ADT-A13"
+                 | "OML-O21" | "RDE-O11" | "ORM-O01"  | "ACK"
 
 export type ADT = "A01" | "A02" | "A03" |"A04"
     | "A05" | "A08" | "A11" | "A12" | "A13" | "O11" | "O21" | "O01"

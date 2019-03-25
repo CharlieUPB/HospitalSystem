@@ -1,0 +1,29 @@
+<h2 style="margin-top: 80px; margin-left: 35%;" > Bienvenido Dr. {{doctor.name}} {{doctor.lastName}}</h2>
+<div style="margin-top: 60px; margin-left: 8%;" > 
+    <h4> Cita con {{patient.name}} {{patient.lastName}}</h4>
+</div>
+
+<div style="margin-top: 20px; margin-left: 8%;" > 
+<h6> Fecha: {{schedule.date}}</h6>
+<h6> Hora: {{schedule.hour}} </h6>
+</div>
+
+<div class="form-group"  style="margin-top: 8%; margin-left: 8%; margin-right: 8%">
+    <label for="exampleTextarea">Escribir Diagnostico</label>
+    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+</div>
+
+<div mat-dialog-actions style=" margin-top: 8%; margin-bottom: 3%; margin-left: 10%">
+    <button type="button" class="btn btn-info" style=" margin-left: 10% ; white-space: normal;"
+     mat-raised-button (click)="handleSendEvent('ADT-A02')">
+      Transferir
+    </button>
+    <button type="button" class="btn btn-info" style=" margin-left: 20% ; white-space: normal;" 
+    mat-raised-button cdkFocusInitial (click)="handleSendEvent('OML-O21')">
+      Ordenar Laboratorio
+    </button>
+    <button type="button" class="btn btn-info" style=" margin-left: 20% ; white-space: normal;" 
+    mat-raised-button cdkFocusInitial (click)="handleSendEvent('RDE-O11')">
+      Solicitud a Farmacia
+    </button>
+</div>

@@ -1,3 +1,8 @@
-<p>
-  historial-clinico works!
-</p>
+<h2 style="margin-top: 80px; margin-left: 8%;" >Historial Clinico de {{patient.name}}
+</h2>
+<div *ngIf="diagnostics"> 
+    <div class="card" style="margin-top: 2%; margin-left: 8%; margin-right: 8%" *ngFor="let diagnostic of diagnostics">
+        <h4 style="margin-left:5% ;margin-top:2%" >Diagnosticado por: {{diagnostic.doctor.name}} {{diagnostic.doctor.lastName}}</h4>
+        <p style="margin-left:5%">Descripcion: {{diagnostic.description}}</p>
+      </div>
+</div>
