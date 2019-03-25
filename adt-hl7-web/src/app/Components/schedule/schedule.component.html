@@ -1,0 +1,59 @@
+<div>
+  <div style="margin-top: 5%; margin-bottom:2%">
+     <mat-form-field style="margin-left:10%">
+          <input matInput [matDatepicker]="picker3" [value]="date.value" disabled style="color:black; font-size: 150%">
+          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+          <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <button type="button" class="btn btn-info" style="margin-left: 80%" mat-raised-button (click)="openDialog()">Nuevo</button>
+  </div>
+
+  <div style="margin-left: 10%; margin-right: 10%">
+      <table class="table table-hover">
+          <thead>
+            <tr class="table-secondary">
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>
+              <th scope="col">Descripcion</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr>
+              <th scope="row">
+                  <div class="card border-secondary mb-3" style="max-width: 50%;">
+                      <div class="card-body">
+                        <h3 align ="center">{{day}}</h3>
+                        <h6 align ="center">{{dayName}}</h6>
+                        <h6 align ="center">{{month}},  {{year}}</h6>
+                      </div>
+                  </div>
+              </th>
+              <td>
+                  <div class="card border-secondary mb-3" style="max-width: 100%;">
+                      <div class="card-body">
+                        <h5 class="card-title" align ="center">{{hour}}:{{minute}}</h5>
+                      </div>
+                  </div>
+              </td>
+              <td>
+                  <div class="card border-secondary mb-3" style="max-width: 100%;">
+                      <div class="card-body">
+                        <h6 class="card-title">Descripcion de la consulta medica.</h6>
+                        <button type="button" class="btn btn-info" style="margin-left: 60%">Admitir</button>
+                        <button type="button" class="btn btn-info" style="margin-left: 2%">Cancelar</button>
+                      </div>
+                  </div>
+              </td>
+            </tr>
+          </tbody>
+      </table> 
+
+      <mat-form-field style="margin-left:80%">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Doctor" style="font-size:110%">
+      </mat-form-field>
+
+  </div>
+    
+</div>
