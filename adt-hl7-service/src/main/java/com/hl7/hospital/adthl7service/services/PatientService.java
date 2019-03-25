@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.hl7.hospital.adthl7service.models.Diagnostic;
 import com.hl7.hospital.adthl7service.models.HealthInsurance;
 import com.hl7.hospital.adthl7service.models.Patient;
 import com.hl7.hospital.adthl7service.repositories.PatientRepository;
 
+@Service
 public class PatientService {
 	
-	@Autowired 
-	
+	@Autowired
 	private PatientRepository patientRepository;
 
 	
@@ -50,6 +50,9 @@ public class PatientService {
 	
 	public Iterable<Patient> getAllPatients()
 	{
+		if(patientRepository == null ) {
+			System.out.println("YA FUISTE CHOQUITOOOO");
+		}
 		return patientRepository.findAll();
 	}
 	
@@ -57,6 +60,16 @@ public class PatientService {
 	public Optional<Patient> getPatientByID(int codPatient)
 	{
 		return patientRepository.findById(codPatient);
+	}
+	
+	public Patient getPatientByCI(int CI) {
+		Iterable<Patient> patients = patientRepository.findAll();
+		for(Patient p: patients) {
+			if(p.getCI() == CI) {
+				return p;
+			}
+		}
+		return null;
 	}
 	
 	
