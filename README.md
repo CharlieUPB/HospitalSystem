@@ -19,18 +19,9 @@ Del mismo modo si se ingresa a la sección de reportes, utilizando únicamente e
 ![Image description](https://i.imgur.com/iKwB7hN.png)
 Finalmente en la sección de Agendamiento se puede visualizar, la lista de citas por fecha. Donde se puede seleccionar la fecha para poder ver todas las citas registradas en el agendamiento del hospital.
 ![Image description](https://i.imgur.com/aPaMuYD.png)
+
 Asi mismo se puede crear un nuevo agendamiento simplemente ingresando los datos del doctor, paciente, fecha y hora en la que se realizara el agendamiento.
 ![Image description](https://i.imgur.com/xuuRGPc.png)
-
-
-
-
-
-
-
-
-
-
 
 
 Por ultimo el sistema por dentro funciona en tiempo real, por lo que ejecuta acciones que actualizan la información y datos en tiempo real. Por ejemplo si se genera una agendamiento o derivación, automáticamente se genera el ACK desde la parte receptora y solo si se recibe dicho ACK se procede a almacenar la información en la base de datos.
