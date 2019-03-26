@@ -1,3 +1,5 @@
+Nota: Para ver la version final cambiar a la rama (branch) dev.
+
 El presente programa es una aplicación web que permite ser utilizada por cualquier navegador o móvil. Del mismo modo es totalmente responsive adaptando sus dimensiones para celulares, computadoras y tablets.
 Esta es la pagina de inicio que se muestra del programa:
 ![Image description](https://i.imgur.com/lkaUX7B.png)
