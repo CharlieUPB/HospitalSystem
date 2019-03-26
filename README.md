@@ -21,6 +21,7 @@ Finalmente en la sección de Agendamiento se puede visualizar, la lista de citas
 ![Image description](https://i.imgur.com/aPaMuYD.png)
 
 Asi mismo se puede crear un nuevo agendamiento simplemente ingresando los datos del doctor, paciente, fecha y hora en la que se realizara el agendamiento.
+
 ![Image description](https://i.imgur.com/xuuRGPc.png)
 
 
