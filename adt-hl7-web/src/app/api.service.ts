@@ -37,6 +37,10 @@ export class ApiService {
     return this.httpClient.get<Patient[]>(`${this.apiURL}/patients/`);
   }
 
+  public getPatientByCI(ci: string): Observable<Patient> {
+    return this.httpClient.get<Patient>(`${this.apiURL}/patients/${ci}`);
+  }
+
   //Medicals
 
   public getMedicalAll(): Observable<MedicalStaff[]> {
@@ -47,7 +51,7 @@ export class ApiService {
     return this.httpClient.post<MedicalStaff>(`${this.apiURL}/medicalStaff/`,med);
   }
 
-  public getMedicalByID(id: number): Observable<MedicalStaff> {
+  public getMedicalByID(id: string): Observable<MedicalStaff> {
     return this.httpClient.get<MedicalStaff>(`${this.apiURL}/medicalStaff/${id}`);
   }
 

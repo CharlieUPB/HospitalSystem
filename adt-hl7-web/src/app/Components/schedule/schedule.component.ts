@@ -4,6 +4,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource } from '@a
 import { CreateScheduleComponentComponent } from '../create-schedule-component/create-schedule-component.component';
 import { Schedule } from 'src/models/Domain';
 import { ApiService } from 'src/app/api.service';
+import * as moment  from 'moment';
+import { AgendamientoRegisterComponent } from '../agendamiento-register/agendamiento-register.component';
 
 
 @Component({
@@ -20,42 +22,45 @@ export class ScheduleComponent implements OnInit {
   dayNames = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
   
   date = new FormControl(new Date());
-  day = this.date.value.getDate();
-  dayName = this.dayNames[this.date.value.getDay()];
-  month = this.monthNames[this.date.value.getMonth()];
-  year = this.date.value.getFullYear();
-  hour = this.date.value.getHours();
-  minute = this.date.value.getMinutes();
-  serializedDate = new FormControl((new Date()).toISOString());
-
+  parsedDate: string;
+  dataSource = new MatTableDataSource(this.citas);
+  day: string;
+  month: string;
+  year: string;
 
   constructor(public dialog: MatDialog, private service: ApiService) { }
   
 
   ngOnInit() {
-    this.service.getScheduleByDate(`${this.year}${this.date.value.getMonth + 1}${this.day}`).subscribe((data: Schedule[]) => {
+    this.parsedDate = moment(this.date.value).format('DD/MM/YYYY')
+    let splited = this.parsedDate.split('/');
+    this.day = splited[0];
+    this.month = splited[1];
+    this.year = splited[2];
+    console.log(`${this.day} ${this.month} ${this.year}`);
+    this.service.getScheduleByDate(`${this.year}${this.month}${this.day}`).subscribe((data: Schedule[]) => {
       this.citas = data;
+      this.dataSource = new MatTableDataSource(this.citas);
+    });
+  }
+
+  loadSchedules() {
+    this.parsedDate = moment(this.date.value).format('DD/MM/YYYY')
+    let splited = this.parsedDate.split('/');
+    this.day = splited[0];
+    this.month = splited[1];
+    this.year = splited[2];
+    console.log(`${this.day} ${this.month} ${this.year}`);
+    this.service.getScheduleByDate(`${this.year}${this.month}${this.day}`).subscribe((data: Schedule[]) => {
+      this.citas = data;
+      this.dataSource = new MatTableDataSource(this.citas);
     });
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateScheduleComponentComponent, {
+    const dialogRef = this.dialog.open(AgendamientoRegisterComponent, {
       width: '350px',
-      data: {name: this.name, animal: this.animal}
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
-
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

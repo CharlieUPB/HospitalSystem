@@ -1,7 +1,7 @@
 <div>
   <div style="margin-top: 5%; margin-bottom:2%">
      <mat-form-field style="margin-left:10%">
-          <input matInput [matDatepicker]="picker3" [value]="date.value" disabled style="color:black; font-size: 150%">
+          <input [formControl]="date" matInput [matDatepicker]="picker3" [value]="date.value" disabled style="color:black; font-size: 150%" (dateChange)="loadSchedules($event)" >
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3 disabled="false"></mat-datepicker>
       </mat-form-field>
@@ -20,12 +20,12 @@
           </thead>
   
           <div *ngIf="citas">
-              <tbody *ngFor="let cita of citas">
+              <tbody *ngFor="let cita of dataSource.data">
                   <tr>
                     <th scope="row">
                         <div class="card border-secondary mb-3" style="max-width: 50%;">
                             <div class="card-body">
-                              <h3 align ="center">{{day}}</h3>
+                              <h3 align ="center">{{cita.date}}</h3>
                               <h6 align ="center">{{dayName}}</h6>
                               <h6 align ="center">{{month}},  {{year}}</h6>
                             </div>
@@ -34,7 +34,7 @@
                     <td>
                         <div class="card border-secondary mb-3" style="max-width: 100%;">
                             <div class="card-body">
-                              <h5 class="card-title" align ="center">{{hour}}:{{minute}}</h5>
+                              <h5 class="card-title" align ="center">{{cita.hour}}</h5>
                             </div>
                         </div>
                     </td>
@@ -52,11 +52,6 @@
           </div>
           
       </table> 
-
-      <mat-form-field style="margin-left:80%">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Doctor" style="font-size:110%">
-      </mat-form-field>
-
   </div>
     
 </div>

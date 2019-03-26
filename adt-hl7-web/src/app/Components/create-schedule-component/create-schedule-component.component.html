@@ -1,31 +1,38 @@
 <h2 mat-dialog-title>Crear Nuevo Agendamiento</h2>
 
 <div mat-dialog-content>
-  <mat-form-field>
+    <form [formGroup]="formSchedule">
       <div class="form-group">
 
+          <mat-form-field>
           <label class="col-form-label" for="inputDefault" style="margin-left:30%">Codigo Paciente</label>
-          <input type="text" class="form-control" placeholder="codigo paciente" id="inputDefault" [(ngModel)]="citaMedica.codPatient" style="margin-left:30%">
-
-          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Codigo Doctor</label>
-          <input type="text" class="form-control" placeholder="codigo paciente" id="inputDefault" [(ngModel)]="citaMedica.codMedicalStaff" style="margin-left:30%">
-
-          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Fecha</label>
-          <mat-form-field style="margin-left:30%">
-              <input matInput [matDatepicker]="picker3" [value]="date.value" disabled style="color:rgb(90, 90, 90); font-size: 90%" [(ngModel)]="citaMedica.date">
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+          <input type="text" class="form-control" placeholder="codigo paciente" id="inputDefault"  formControlName="ci" style="margin-left:30%">
           </mat-form-field>
 
-          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Hora</label [(ngModel)]="citaMedica.hour">
-          <input [ngxTimepicker]="picker" style="margin-left:30%">
-          <ngx-material-timepicker #picker></ngx-material-timepicker>
+          <mat-form-field>
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Codigo Doctor</label>
+          <input type="text" class="form-control" placeholder="codigo doctor" id="inputDefault" formControlName="codDoctor" style="margin-left:30%">
+          </mat-form-field>
+
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Fecha</label>
+          <!-- <mat-form-field style="margin-left:30%">
+              <input (dateChange)="dateChanged($event)" [formControl]="date" matInput [matDatepicker]="picker3" disabled style="color:rgb(90, 90, 90); font-size: 90%">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+          </mat-form-field> -->
+          <mat-form-field>
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Hora</label>
+          <input type="text" class="form-control" placeholder="Hora" id="inputDefault" formControlName="hour" style="margin-left:30%">
+        </mat-form-field>
+        <mat-form-field>
+          <label class="col-form-label" for="inputDefault" style="margin-left:30%">Minuto</label>
+          <input type="text" class="form-control" placeholder="Minutos" id="inputDefault" formControlName="min" style="margin-left:30%">
+        </mat-form-field>
 
       </div>
-  </mat-form-field>
+    </form>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" class="btn btn-info" style="margin-left:40%">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial class="btn btn-info" style="margin-left:2%">Guardar</button>
+  <button mat-button (click)="onSave()" cdkFocusInitial class="btn btn-info" style="margin-left:2%">Guardar</button>
 </div>

@@ -23,7 +23,7 @@ public class Schedule {
 	@JoinColumn
 	private Patient codPatient;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn
 	private MedicalStaff codDoctor;
 	private Date date;
