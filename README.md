@@ -15,6 +15,16 @@ Si se selecciona la opción registrar paciente, se abre un formulario en el cual
 ![Image description](https://i.imgur.com/29VKdVp.png)
 Si se selecciona la opción eventos, automáticamente se muestra el historial de eventos relacionados al paciente.
 ![Image description](https://i.imgur.com/iKwB7hN.png)
+Si se elige la opción diagnóstico, se abre un menú en el cual se puede diagnosticar a un paciente determinado así como derivarlo a estudios correspondientes en el RIS, LIS o farmacia. Así como también transferir al paciente.
+
+![Image description](https://i.imgur.com/QpQEZEO.png)
+![Image description](https://i.imgur.com/eEjmA9w.png)
+![Image description](https://i.imgur.com/X1MAdpM.png)
+
+Una vez transferido el paciente, la información se guarda automáticamente en el historial clínico del paciente correspondiente.
+
+![Image description](https://i.imgur.com/KnHqK4K.png)
+
 Del mismo modo si se ingresa a la sección de reportes, utilizando únicamente el código del paciente también se puede ver el historial clínico del mismo.
 ![Image description](https://i.imgur.com/iKwB7hN.png)
 Finalmente en la sección de Agendamiento se puede visualizar, la lista de citas por fecha. Donde se puede seleccionar la fecha para poder ver todas las citas registradas en el agendamiento del hospital.
