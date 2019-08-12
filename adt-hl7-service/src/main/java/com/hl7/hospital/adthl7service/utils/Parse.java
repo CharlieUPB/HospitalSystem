@@ -422,6 +422,20 @@ public HashMap<String, Object> ORU(String msg) throws HL7Exception {
 	    return map;
 	}
 
+public String getDiagnostic(String msg) throws HL7Exception {
+	HapiContext context = new DefaultHapiContext();
+    context.setModelClassFactory(new GenericModelClassFactory());
+    GenericMessage message = (GenericMessage) context.getPipeParser().parse(msg);
+    Terser t = new Terser(message);
+    String diagnostic = null;
+    try {
+      	 diagnostic=t.get("/OBR-13");
+      	} catch (Exception e) {
+      		System.out.println("El mensaje no tiene un componente OBR");
+      	}
+	return diagnostic;
+}
+
 	
 
 }
